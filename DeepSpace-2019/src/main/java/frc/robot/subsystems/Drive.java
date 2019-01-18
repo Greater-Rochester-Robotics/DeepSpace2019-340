@@ -16,7 +16,7 @@ import frc.robot.RobotMap;
 import frc.robot.commands.DriveXOne;
 
 /**
- * <h>Drive</h>
+ * <h1>Drive</h1>
  * Moves the robot between two places. Always uses the Xbox ONE controller
  * command unless explicitly told otherwise
  */
@@ -43,7 +43,6 @@ public class Drive extends Subsystem {
 	}
 
 	/**
-	 * TODO: adjust for circumference
 	 * @return left encoder raw count
 	 */
 	public int getLeftEncoder() {
@@ -51,7 +50,6 @@ public class Drive extends Subsystem {
 	}
 
 	/**
-	 * TODO: adjust for circumference
 	 * @return right encoder raw count
 	 */
 	public int getRightEncoder() {
