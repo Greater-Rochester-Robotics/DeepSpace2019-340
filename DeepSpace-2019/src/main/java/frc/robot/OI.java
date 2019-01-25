@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.DPad;
+import frc.robot.commands.KaChunkerToggle;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -60,5 +61,6 @@ public class OI {
 
 	public OI() {
 		//TODO: wait until Chase tells me what to put here. NO TOUCHIES
+		driverX.whenPressed(new KaChunkerToggle());
 	}
 }

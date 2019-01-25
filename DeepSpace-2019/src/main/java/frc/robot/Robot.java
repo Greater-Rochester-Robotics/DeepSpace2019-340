@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.DriveXOne;
 import frc.robot.subsystems.Drive;
+import frc.robot.subsystems.KaChunker;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -23,7 +24,8 @@ import frc.robot.subsystems.Drive;
  * project.
  */
 public class Robot extends TimedRobot {
-  public static Drive drive = new Drive();
+  public static Drive drive;
+  public static KaChunker kaChunker;
   public static OI oi;
 
   Command m_autonomousCommand;
@@ -35,6 +37,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+	drive = new Drive();
+	kaChunker = new KaChunker();
 	oi = new OI();
 	m_chooser.setDefaultOption("Default Auto", new DriveXOne());
 	// chooser.addOption("My Auto", new MyAutoCommand());
