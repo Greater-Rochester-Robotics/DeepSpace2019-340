@@ -63,4 +63,29 @@ public class OI {
 		//TODO: wait until Chase tells me what to put here. NO TOUCHIES
 		driverX.whenPressed(new KaChunkerToggle());
 	}
+
+	public enum Axis {
+		LEFT_X(0),
+		LEFT_Y(1),
+		LEFT_TRIGGER(2),
+		RIGHT_TRIGGER(3),
+		RIGHT_X(4),
+		RIGHT_Y(5);
+
+		private int axis;
+		private Axis (int axis) {
+			this.axis=axis;
+		}
+		public int getAxis(){
+			return axis;
+		}
+	}
+
+	public double getDriverAxis(Axis axis) {
+		return(driver.getRawAxis(axis.getAxis()) <-.1 || driver.getRawAxis(axis.getAxis()) >.1 ) ? driver.getRawAxis(axis.getAxis()) : 0 ;
+	}
+
+	public double getCoDriverAxis(Axis axis) {
+		return(coDriver.getRawAxis(axis.getAxis()) <-.1 || coDriver.getRawAxis(axis.getAxis()) >.1 ) ? coDriver.getRawAxis(axis.getAxis()) : 0 ;
+	}
 }
