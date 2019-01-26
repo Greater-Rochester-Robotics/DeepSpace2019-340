@@ -10,25 +10,31 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.RobotMap;
 
 /**
  * Add your docs here.
  */
-public class CIntake extends Subsystem {
-
+public class C extends Subsystem {
+	private static DigitalInput sensor; //Sensor type not yet determined
 	private static TalonSRX talonUp, talonDown;
 
-	public CIntake(){
-		talonUp = new TalonSRX(42);
-		talonDown = new TalonSRX(19);
+	public C() {
+		sensor = new DigitalInput(RobotMap.C_CARGO_SENSOR_PORT);
+		talonUp = new TalonSRX(RobotMap.C_SRX_TOP_ID);
+		talonDown = new TalonSRX(RobotMap.C_SRX_BOTTOM_ID);
 	}
 	
-	public void setSpeed(double speed){
+	public void setSpeed(double speed) {
 		talonUp.set(ControlMode.Velocity, speed);
 		talonDown.set(ControlMode.Velocity, speed);
 	}
-	/* sets speed for both talonSRX's with the same variable*/
+	
+	public boolean hasCargo() {
+		return sensor.get();
+	}
 
 	@Override
 	public void initDefaultCommand() {}

@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.RobotMap;
 
 /**
  * This is a representation of the ka-chunker.<br>
@@ -22,7 +23,7 @@ public class KaChunker extends Subsystem {
 	 * Instantiate the solenoid on channel 0
 	 */
 	public KaChunker() {
-		solenoid = new Solenoid(0);
+		solenoid = new Solenoid(RobotMap.KACHUNKER_SOLENOID_CHANNEL);
 	}
 
 	/**

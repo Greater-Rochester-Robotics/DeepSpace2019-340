@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.DPad;
-import frc.robot.commands.KaChunkerToggle;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -61,7 +60,6 @@ public class OI {
 
 	public OI() {
 		//TODO: wait until Chase tells me what to put here. NO TOUCHIES
-		driverX.whenPressed(new KaChunkerToggle());
 	}
 
 	public enum Axis {
@@ -73,19 +71,20 @@ public class OI {
 		RIGHT_Y(5);
 
 		private int axis;
-		private Axis (int axis) {
-			this.axis=axis;
+
+		private Axis(int axis) {
+			this.axis = axis;
 		}
-		public int getAxis(){
+		public int getAxis() {
 			return axis;
 		}
 	}
 
 	public double getDriverAxis(Axis axis) {
-		return(driver.getRawAxis(axis.getAxis()) <-.1 || driver.getRawAxis(axis.getAxis()) >.1 ) ? driver.getRawAxis(axis.getAxis()) : 0 ;
+		return(driver.getRawAxis(axis.getAxis()) <-.1 || driver.getRawAxis(axis.getAxis()) >.1 ) ? driver.getRawAxis(axis.getAxis()) : 0;
 	}
 
 	public double getCoDriverAxis(Axis axis) {
-		return(coDriver.getRawAxis(axis.getAxis()) <-.1 || coDriver.getRawAxis(axis.getAxis()) >.1 ) ? coDriver.getRawAxis(axis.getAxis()) : 0 ;
+		return(coDriver.getRawAxis(axis.getAxis()) <-.1 || coDriver.getRawAxis(axis.getAxis()) >.1 ) ? coDriver.getRawAxis(axis.getAxis()) : 0;
 	}
 }
