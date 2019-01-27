@@ -24,10 +24,35 @@ public class RobotMap {
 	/* Talons */
 	public static final int DRIVE_TALON_LEFT_CHANNEL = 0;
 	public static final int DRIVE_TALON_RIGHT_CHANNEL = 1;
+	public static final int ELEVATOR_TALON_CHANNEL = 2;
+
+	///////////////
+	// DIO PORTS //
+	///////////////
 
 	/* Encoders */
-	public static final int DRIVE_ENCODER_LEFT_CHANNEL_A = 2;
-	public static final int DRIVE_ENCODER_LEFT_CHANNEL_B = 3;
-	public static final int DRIVE_ENCODER_RIGHT_CHANNEL_A = 4;
-	public static final int DRIVE_ENCODER_RIGHT_CHANNEL_B = 5;
+	public static final int DRIVE_ENCODER_LEFT_CHANNEL_A = 0;
+	public static final int DRIVE_ENCODER_LEFT_CHANNEL_B = 1;
+	public static final int DRIVE_ENCODER_RIGHT_CHANNEL_A = 2;
+	public static final int DRIVE_ENCODER_RIGHT_CHANNEL_B = 3;
+	public static final int ELEVATOR_ENCODER_CHANNEL_A = 4;
+	public static final int ELEVATOR_ENCODER_CHANNEL_B = 5;
+
+	/* Sensors */
+	public static final int C_CARGO_SENSOR_PORT = 6;
+
+	////////////////////////
+	// PNEUMATIC CHANNELS //
+	////////////////////////
+
+	/* Solenoids */
+	public static final int KACHUNKER_SOLENOID_CHANNEL = 0;
+
+	/////////////
+	// CAN IDs //
+	/////////////
+
+	/* TalonSRXs */
+	public static final int C_SRX_TOP_ID = 0;
+	public static final int C_SRX_BOTTOM_ID = 1;
 }

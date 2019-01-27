@@ -13,7 +13,9 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.DriveXOne;
+import frc.robot.subsystems.C;
 import frc.robot.subsystems.Drive;
+import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.KaChunker;
 
 /**
@@ -24,9 +26,11 @@ import frc.robot.subsystems.KaChunker;
  * project.
  */
 public class Robot extends TimedRobot {
-  public static Drive drive;
-  public static KaChunker kaChunker;
-  public static OI oi;
+	public static C c;
+	public static Drive drive;
+	public static Elevator elevator;
+	public static KaChunker kaChunker;
+	public static OI oi;
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -37,7 +41,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+	c = new C();
 	drive = new Drive();
+	elevator = new Elevator();
 	kaChunker = new KaChunker();
 	oi = new OI();
 	m_chooser.setDefaultOption("Default Auto", new DriveXOne());
