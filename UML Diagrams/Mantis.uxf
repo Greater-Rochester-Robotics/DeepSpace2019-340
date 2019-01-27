@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <help_text/>
+  <zoom_level>9</zoom_level>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>423</x>
+      <y>243</y>
+      <w>153</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+button pressed</panel_attributes>
+    <additional_attributes>150.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>738</x>
+      <y>234</y>
+      <w>171</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+contact with platform</panel_attributes>
+    <additional_attributes>170.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1071</x>
+      <y>144</y>
+      <w>225</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+robot is level(arm is all the way down)</panel_attributes>
+    <additional_attributes>180.0;120.0;150.0;20.0;90.0;20.0;10.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>306</x>
+      <y>234</y>
+      <w>1215</w>
+      <h>243</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+center of gravity is on level 3</panel_attributes>
+    <additional_attributes>110.0;250.0;10.0;220.0;10.0;170.0;1300.0;190.0;1330.0;10.0;1240.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>585</x>
+      <y>450</y>
+      <w>144</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+supported by platform</panel_attributes>
+    <additional_attributes>140.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>558</x>
+      <y>216</y>
+      <w>189</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>MantisArmsDown
+--
+elevatorTilt:(back)
+elevatorPosition:(down)
+intakeConfig:(TBD)
+stinger:(up)
+- armWinch:(down)
+armWheels:(off)
+driveBase:(neutral)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>891</x>
+      <y>216</y>
+      <w>189</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>RobotLift
+--
+elevatorTilt:(back)
+elevatorPosition:(down)
+intakeConfig:(TBD)
+- stinger:(down)
+- armWinch:(down more)
+armWheels:(off)
+driveBase:(neutral)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1233</x>
+      <y>207</y>
+      <w>189</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>MantisWheelsForward
+--
+elevatorTilt:(back)
+elevatorPosition:(down)
+intakeConfig:(TBD)
+stinger:(down)
+- armWinch:(down relaxed)
+- armWheels:(forward)
+driveBase:(neutral)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>405</x>
+      <y>423</y>
+      <w>189</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>DriveBaseForward
+--
+elevatorTilt:(back)
+elevatorPosition:(down)
+intakeConfig:(TBD)
+stinger:(down)
+armWinch:(down relaxed)
+- armWheels:(off)
+- driveBase:(forward)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>711</x>
+      <y>423</y>
+      <w>189</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>MantisStingerUp
+--
+elevatorTilt:(back)
+elevatorPosition:(down)
+intakeConfig:(TBD)
+- stinger:(up)
+armWinch:(down relaxed)
+- armWheels:(off)
+- driveBase:(neutral)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>243</x>
+      <y>216</y>
+      <w>189</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>ReadyState
+--
+elevatorTilt:(back)
+elevatorPosition:(down)
+intakeConfig:(TBD)
+stinger:(up)
+armWinch:(up)
+armWheels:(off)
+driveBase:(neutral)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>477</x>
+      <y>621</y>
+      <w>153</w>
+      <h>135</h>
+    </coordinates>
+    <panel_attributes>Mantis Subsystem
+--
+Outputs
+- Stinger pneumatic
+- Arm motors 
+--
+Inputs
+- Arm lower limit
+- Arm encoder</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1728</x>
+      <y>81</y>
+      <w>189</w>
+      <h>171</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Stereotype&gt;&gt;
+Package::FatClass
+{Some Properties}
+--
+-id: Long
+_-ClassAttribute: Long_
+--
+#Operation(i: int): int
+/+AbstractOperation()/
+--
+Responsibilities
+-- Resp1
+*-- Resp2*</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>666</x>
+      <y>630</y>
+      <w>198</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>Drive Subsystem
+--
+Outputs
+- Left Drive Motor
+- Left Mantis Drive Motor
+- Right Drive Motor
+- Right Mantis Drive Motor
+--
+Inputs
+- Left Drive encoder
+- Right Drive Encoder
+- Fwd CG sensor
+- Bkwd CG sensor</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>909</x>
+      <y>639</y>
+      <w>153</w>
+      <h>117</h>
+    </coordinates>
+    <panel_attributes>Elevator
+--
+Outputs
+- Elevator motor
+- Elevator Pivot
+--
+Inputs
+- Elevator encoder
+- Lower Elevator Limit</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1089</x>
+      <y>630</y>
+      <w>153</w>
+      <h>117</h>
+    </coordinates>
+    <panel_attributes>Cargo Intake
+--
+Outputs
+- IntakeWheels
+- Cargo Pivot
+--
+Inputs
+- Cargo sensor</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1269</x>
+      <y>639</y>
+      <w>153</w>
+      <h>117</h>
+    </coordinates>
+    <panel_attributes>Hatch Intake
+(Kachunka)
+--
+Outputs
+- Intake pneumatics
+--
+Inputs
+- Hatch sensor</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
