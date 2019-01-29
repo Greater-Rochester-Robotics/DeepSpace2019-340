@@ -35,6 +35,8 @@ public class Drive extends Subsystem {
 		encRight = new Encoder(RobotMap.DRIVE_ENCODER_RIGHT_CHANNEL_A, RobotMap.DRIVE_ENCODER_RIGHT_CHANNEL_B);
 
 		imu = new ADIS16448_IMU(ADIS16448_IMU.Axis.kY); //The parameter here is the axis the IMU interprets as being yaw. This will depend on how the RIO is oriented
+
+		talonLeft.setInverted(true); //Negate all speeds to the left side
 	}
 
 	@Override

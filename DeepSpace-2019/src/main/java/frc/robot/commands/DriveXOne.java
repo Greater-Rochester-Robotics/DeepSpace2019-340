@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.OI.Axis;
 
 /**
  * An example command.  You can replace me with your own command.
@@ -29,7 +30,7 @@ public class DriveXOne extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-
+		Robot.drive.arcadeDrive(Robot.oi.getDriverAxis(Axis.LEFT_Y), Robot.oi.getDriverAxis(Axis.LEFT_X));
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
