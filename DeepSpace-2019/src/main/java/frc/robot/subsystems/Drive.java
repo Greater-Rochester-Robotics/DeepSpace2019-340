@@ -27,6 +27,10 @@ public class Drive extends Subsystem {
 	private static Encoder encLeft, encRight; //TODO: adjust for circumference
 	private static ADIS16448_IMU imu;
 
+	/**
+	 * Set up the Talons and encoders with the ports specified
+	 * in {@code RobotMap}, and the IMU with the Y-axis as yaw
+	 */
 	public Drive() {
 		talonLeft = new Talon(RobotMap.DRIVE_TALON_LEFT_CHANNEL);
 		talonRight = new Talon(RobotMap.DRIVE_TALON_RIGHT_CHANNEL);

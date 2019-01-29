@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
 /**
+ * <h1>KaChunker</h1>
  * This is a representation of the ka-chunker.<br>
  * Hatch holder and dropper.<br>
  * It's got a solenoid. Connected to a piston. What else do you want?
@@ -20,7 +21,8 @@ public class KaChunker extends Subsystem {
 	private static Solenoid solenoid;
 
 	/**
-	 * Instantiate the solenoid on channel 0
+	 * Instantiate the solenoid on channel specified
+	 * in {@code RobotMap}
 	 */
 	public KaChunker() {
 		solenoid = new Solenoid(RobotMap.KACHUNKER_SOLENOID_CHANNEL);

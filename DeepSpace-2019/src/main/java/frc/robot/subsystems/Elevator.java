@@ -7,6 +7,9 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -22,6 +25,8 @@ public class Elevator extends Subsystem {
 	private static Talon winch;
 	private static Encoder enc;
 
+	private static TalonSRX srxTest; //STRICTLY FOR TESTING; VARIABLE IS VOLATILE
+
 	/**
 	 * Makes the ports given the not-so-magic
 	 * numbers in robotmap
@@ -29,6 +34,8 @@ public class Elevator extends Subsystem {
 	public Elevator() {
 		winch = new Talon(RobotMap.ELEVATOR_TALON_CHANNEL);
 		enc = new Encoder(RobotMap.ELEVATOR_ENCODER_CHANNEL_A, RobotMap.ELEVATOR_ENCODER_CHANNEL_B);
+
+		srxTest = new TalonSRX(0); //STRICTLY FOR TESTING
 	}
 
 	/**
@@ -51,6 +58,11 @@ public class Elevator extends Subsystem {
 	 */
 	public double getSpeed() {
 		return winch.get();
+	}
+
+	/* TESTING PURPOSES */
+	public void test(double spd) {
+		srxTest.set(ControlMode.PercentOutput, spd);
 	}
 
 	@Override
