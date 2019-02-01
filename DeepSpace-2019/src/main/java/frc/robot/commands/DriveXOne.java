@@ -12,43 +12,30 @@ import frc.robot.Robot;
 import frc.robot.OI.Axis;
 
 /**
- * An example command.  You can replace me with your own command.
+ * Drives the robot via Arcade Drive on
+ * the driver's Xbox ONE controller
  */
 public class DriveXOne extends Command {
 
+	/**
+	 * Continuously drive the robot via Arcade Drive
+	 */
 	public DriveXOne() {
-		// Use requires() here to declare subsystem dependencies
 		requires(Robot.drive);
 	}
 
-	// Called just before this Command runs the first time
-	@Override
-	protected void initialize() {
-
-	}
-
-	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		Robot.drive.arcadeDrive(Robot.oi.getDriverAxis(Axis.LEFT_Y), Robot.oi.getDriverAxis(Axis.LEFT_X));
+		Robot.drive.arcadeDrive(Robot.oi.getDriverAxis(Axis.LEFT_Y), Robot.oi.getDriverAxis(Axis.LEFT_X)); //Poll driver's left axes to drive
 	}
 
-	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-		return false;
+		return false; //Never finish. There's no reason to
 	}
 
-	// Called once after isFinished returns true
 	@Override
 	protected void end() {
-		
-	}
-
-	// Called when another command which requires one or more of the same
-	// subsystems is scheduled to run
-	@Override
-	protected void interrupted() {
-		
+		Robot.drive.setDriveBoth(0); //Stop moving if this command ends for some reason (e.g. interrupt for climb)
 	}
 }

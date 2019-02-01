@@ -10,24 +10,25 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
+/**
+ * Toggles the ka-chunker. Fairly self-descriptive
+ */
 public class KaChunkerToggle extends Command {
-  public KaChunkerToggle() {
-    requires(Robot.kaChunker);
-  }
 
-  // Called just before this Command runs the first time
-  @Override
-  protected void initialize() {
-	if(Robot.kaChunker.isForward()) {
-		Robot.kaChunker.setBackward();
-	} else {
-		Robot.kaChunker.setForward();
+	/**
+	 * Check the ka-chunker's state, then invert it
+	 */
+	public KaChunkerToggle() {
+		requires(Robot.kaChunker);
 	}
-  }
 
-  // Make this return true when this Command no longer needs to run execute()
-  @Override
-  protected boolean isFinished() {
-    return true;
-  }
+  	@Override
+	protected void initialize() {
+		Robot.kaChunker.set(!Robot.kaChunker.isForward()); //Set to the opposite of the current state
+	}
+
+	@Override
+	protected boolean isFinished() {
+		return true;
+	}
 }

@@ -11,19 +11,30 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.OI.Axis;
 
+/**
+ * Move the elevator via co-driver's left
+ * stick on their Xbox ONE controller<br>
+ * <br>
+ * This class and/or {@link frc.robot.subsystems.Elevator} may become
+ * a lot more complex, provided this alone isn't sufficient
+ */
 public class ElevatorStick extends Command {
+
+	/**
+	 * Continuously set the elevator winch's speed based on co-driver input
+	 */
 	public ElevatorStick() {
 		requires(Robot.elevator);
 	}
 
 	@Override
 	protected void execute() {
-		Robot.elevator.setSpeed(Robot.oi.getCoDriverAxis(Axis.LEFT_Y));
+		Robot.elevator.setSpeed(Robot.oi.getCoDriverAxis(Axis.LEFT_Y)); //Poll co-driver's left Y axis to raise/lower elevator
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return false;
+		return false; //Never finish. Why would we?
 	}
 
 	@Override

@@ -25,6 +25,7 @@ public class RobotMap {
 	public static final int DRIVE_TALON_LEFT_CHANNEL = 0;
 	public static final int DRIVE_TALON_RIGHT_CHANNEL = 1;
 	public static final int ELEVATOR_TALON_CHANNEL = 2;
+	public static final int MANTIS_TALON_CHANNEL = 3;
 
 	///////////////
 	// DIO PORTS //
@@ -47,6 +48,7 @@ public class RobotMap {
 
 	/* Solenoids */
 	public static final int KACHUNKER_SOLENOID_CHANNEL = 0;
+	public static final int MANTIS_SOLENOID_CHANNEL = 1;
 
 	/////////////
 	// CAN IDs //

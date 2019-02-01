@@ -23,24 +23,24 @@ import frc.robot.commands.DriveXOne;
 public class Drive extends Subsystem {
 	private double leftSpeed, rightSpeed; //Makes math easier for fancy drive modes
 
-	private static Talon talonLeft, talonRight;
-	private static Encoder encLeft, encRight; //TODO: adjust for circumference
 	private static ADIS16448_IMU imu;
+	private static Encoder encLeft, encRight; //TODO: adjust for circumference
+	private static Talon talonLeft, talonRight;
 
 	/**
 	 * Set up the Talons and encoders with the ports specified
-	 * in {@code RobotMap}, and the IMU with the Y-axis as yaw
+	 * in {@link RobotMap}, and the IMU with the Y-axis as yaw
 	 */
 	public Drive() {
-		talonLeft = new Talon(RobotMap.DRIVE_TALON_LEFT_CHANNEL);
-		talonRight = new Talon(RobotMap.DRIVE_TALON_RIGHT_CHANNEL);
+		imu = new ADIS16448_IMU(ADIS16448_IMU.Axis.kY); //The parameter here is the axis the IMU interprets as being yaw. This will depend on how the RIO is oriented
 
 		encLeft = new Encoder(RobotMap.DRIVE_ENCODER_LEFT_CHANNEL_A, RobotMap.DRIVE_ENCODER_LEFT_CHANNEL_B);
 		encRight = new Encoder(RobotMap.DRIVE_ENCODER_RIGHT_CHANNEL_A, RobotMap.DRIVE_ENCODER_RIGHT_CHANNEL_B);
 
-		imu = new ADIS16448_IMU(ADIS16448_IMU.Axis.kY); //The parameter here is the axis the IMU interprets as being yaw. This will depend on how the RIO is oriented
+		talonLeft = new Talon(RobotMap.DRIVE_TALON_LEFT_CHANNEL);
+		talonRight = new Talon(RobotMap.DRIVE_TALON_RIGHT_CHANNEL);
 
-		talonLeft.setInverted(true); //Negate all speeds to the left side
+		talonLeft.setInverted(true); //Negate all speeds to the left side to account for mirrored axes
 	}
 
 	@Override

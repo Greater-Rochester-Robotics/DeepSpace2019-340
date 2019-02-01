@@ -17,6 +17,7 @@ import frc.robot.subsystems.C;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.KaChunker;
+import frc.robot.subsystems.Mantis;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -29,6 +30,7 @@ public class Robot extends TimedRobot {
 	public static C c;
 	public static Drive drive;
 	public static Elevator elevator;
+	public static Mantis mantis;
 	public static KaChunker kaChunker;
 	public static OI oi;
 
@@ -44,6 +46,7 @@ public class Robot extends TimedRobot {
 	c = new C();
 	drive = new Drive();
 	elevator = new Elevator();
+	mantis = new Mantis();
 	kaChunker = new KaChunker();
 	oi = new OI();
 	m_chooser.setDefaultOption("Default Auto", new DriveXOne());

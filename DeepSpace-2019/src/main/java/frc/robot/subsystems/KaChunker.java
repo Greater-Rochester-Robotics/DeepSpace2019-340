@@ -29,10 +29,18 @@ public class KaChunker extends Subsystem {
 	}
 
 	/**
+	 * Set the piston direction
+	 * @param isForward {@code true} for forward, {@code false} for backward
+	 */
+	public void set(boolean isForward) {
+		solenoid.set(isForward);
+	}
+
+	/**
 	 * Set the piston forward
 	 */
 	public void setForward() {
-		solenoid.set(true); //True means forward
+		solenoid.set(true);
 	}
 
 	/**

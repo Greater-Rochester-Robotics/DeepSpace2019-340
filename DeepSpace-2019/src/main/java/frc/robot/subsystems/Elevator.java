@@ -7,9 +7,6 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -19,23 +16,26 @@ import frc.robot.commands.ElevatorStick;
 /**
  * <h1>Elevator</h1>
  * Moves the claw and hatchy-boi up and down.<br>
- * Programmed assuming TalonSR and Encoder
+ * Programmed assuming TalonSR and encoder; subject to change<br>
+ * <br>
+ * Always uses the Xbox ONE controller unless told otherwise
  */
 public class Elevator extends Subsystem {
-	private static Talon winch;
 	private static Encoder enc;
-
-	private static TalonSRX srxTest; //STRICTLY FOR TESTING; VARIABLE IS VOLATILE
+	private static Talon winch;
 
 	/**
 	 * Makes the ports given the not-so-magic
 	 * numbers in robotmap
 	 */
 	public Elevator() {
-		winch = new Talon(RobotMap.ELEVATOR_TALON_CHANNEL);
 		enc = new Encoder(RobotMap.ELEVATOR_ENCODER_CHANNEL_A, RobotMap.ELEVATOR_ENCODER_CHANNEL_B);
+		winch = new Talon(RobotMap.ELEVATOR_TALON_CHANNEL);
+	}
 
-		srxTest = new TalonSRX(0); //STRICTLY FOR TESTING
+	@Override
+	public void initDefaultCommand() {
+		setDefaultCommand(new ElevatorStick());
 	}
 
 	/**
@@ -58,15 +58,5 @@ public class Elevator extends Subsystem {
 	 */
 	public double getSpeed() {
 		return winch.get();
-	}
-
-	/* TESTING PURPOSES */
-	public void test(double spd) {
-		srxTest.set(ControlMode.PercentOutput, spd);
-	}
-
-	@Override
-	public void initDefaultCommand() {
-		setDefaultCommand(new ElevatorStick());
 	}
 }
