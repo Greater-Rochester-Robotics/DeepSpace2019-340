@@ -13,7 +13,7 @@ import frc.robot.RobotMap;
 
 public class ManualCIntakeIn extends Command {
   public ManualCIntakeIn() {
-	  requires(Robot.c);
+	  requires(Robot.manipulatorWithKaChunker);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -21,7 +21,7 @@ public class ManualCIntakeIn extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-	  Robot.c.setSpeed(RobotMap.C_INTAKE);
+	  Robot.manipulatorWithKaChunker.setCSpeed(RobotMap.C_INTAKE);
   }
 
   // Called repeatedly when this Command is scheduled to run

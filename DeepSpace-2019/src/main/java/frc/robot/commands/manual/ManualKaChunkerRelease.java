@@ -12,7 +12,7 @@ import frc.robot.Robot;
 
 public class ManualKaChunkerRelease extends Command {
   public ManualKaChunkerRelease() {
-	  requires(Robot.kaChunker);
+	  requires(Robot.manipulatorWithKaChunker);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -20,7 +20,7 @@ public class ManualKaChunkerRelease extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-	  Robot.kaChunker.release();
+	  Robot.manipulatorWithKaChunker.setKachunker(true);
   }
 
   // Called repeatedly when this Command is scheduled to run

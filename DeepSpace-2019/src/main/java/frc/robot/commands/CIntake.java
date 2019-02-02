@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 /**
  * Use the C to intake cargo<br>
@@ -21,21 +22,21 @@ public class CIntake extends Command {
 	 * Step 2: intake
 	 */
 	public CIntake() {
-		requires(Robot.c);
+		requires(Robot.manipulatorWithKaChunker);
 	}
 
 	@Override
 	protected void initialize() {
-		Robot.c.setSpeed(1); //Roll wheels inward the instant this command begins
+		Robot.manipulatorWithKaChunker.setCSpeed(RobotMap.C_INTAKE); //Roll wheels inward the instant this command begins
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return Robot.c.hasCargo(); //Continue rolling until interrupt or cargo acquisition
+		return Robot.manipulatorWithKaChunker.hasCargo(); //Continue rolling until interrupt or cargo acquisition
 	}
 
 	@Override
 	protected void end() {
-		Robot.c.setSpeed(0); //On interrupt or cargo acquisition, stop the wheels
+		Robot.manipulatorWithKaChunker.setCSpeed(RobotMap.C_STOP); //On interrupt or cargo acquisition, stop the wheels
 	}
 }

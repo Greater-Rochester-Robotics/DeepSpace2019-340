@@ -19,12 +19,12 @@ public class KaChunkerToggle extends Command {
 	 * Check the ka-chunker's state, then invert it
 	 */
 	public KaChunkerToggle() {
-		requires(Robot.kaChunker);
+		requires(Robot.manipulatorWithKaChunker);
 	}
 
   	@Override
 	protected void initialize() {
-		Robot.kaChunker.set(!Robot.kaChunker.isGrabbed()); //Set to the opposite of the current state
+		Robot.manipulatorWithKaChunker.toggleKachunker();; //Set to the opposite of the current state
 	}
 
 	@Override
