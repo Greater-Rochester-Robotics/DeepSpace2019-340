@@ -62,37 +62,37 @@ public class ManipulatorWithKaChunker extends Subsystem {
 	/**
 	 * @return {@code true} if ka-chunker is forward
 	 */
-	public boolean isKachunkerForward() {
+	public boolean isKachunkerGrabbing() {
 		return kaChunker.get();
 	}
 
 	/**
 	 * Set the ka-chunker's state
-	 * @param isForward {@code true} for forward, {@code false} for backward
+	 * @param isGrabbing {@code true} for grab, {@code false} for drop
 	 */
-	public void setKachunker(boolean isForward) {
-		kaChunker.set(isForward);
+	public void setKachunker(boolean isGrabbing) {
+		kaChunker.set(isGrabbing);
 	}
 
 	/**
-	 * Flick the ka-chunker forward
+	 * Grab with the ka-chunker
 	 */
-	public void setKachunkerForward() {
+	public void setKachunkerGrab() {
 		setKachunker(true);
 	}
 
 	/**
-	 * Flick the ka-chunker backward
+	 * Drop with the ka-chunker
 	 */
-	public void setKachunkerBackward() {
+	public void setKachunkerDrop() {
 		setKachunker(false);
 	}
 
 	/**
-	 * Set the ka-chunker to whichever direction it currently isn't
+	 * Set the ka-chunker to whichever state it currently isn't
 	 */
 	public void toggleKachunker() {
-		setKachunker(!isKachunkerForward());
+		setKachunker(!isKachunkerGrabbing());
 	}
 
 	///////////
