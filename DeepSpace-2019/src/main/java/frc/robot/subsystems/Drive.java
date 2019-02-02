@@ -8,6 +8,8 @@
 package frc.robot.subsystems;
 
 import com.analog.adis16448.frc.ADIS16448_IMU;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Talon;
@@ -21,11 +23,14 @@ import frc.robot.commands.DriveXOne;
  * command unless explicitly told otherwise
  */
 public class Drive extends Subsystem {
-	private double leftSpeed, rightSpeed; //Makes math easier for fancy drive modes
+	private double leftSpeed, rightSpeed; //Makes math easier for fancy drive 
+	private double mantisLSpeed, mantisRSpeed; //See above
 
 	private static ADIS16448_IMU imu;
 	private static Encoder encLeft, encRight; //TODO: adjust for circumference
 	private static Talon talonLeft, talonRight;
+
+	private static TalonSRX mantisLeft, mantisRight;
 
 	/**
 	 * Set up the Talons and encoders with the ports specified
@@ -41,6 +46,9 @@ public class Drive extends Subsystem {
 		talonRight = new Talon(RobotMap.DRIVE_TALON_RIGHT_CHANNEL);
 
 		talonLeft.setInverted(true); //Negate all speeds to the left side to account for mirrored axes
+
+		mantisLeft = new TalonSRX(RobotMap.DRIVE_MANTIS_SRX_LEFT_ID);
+		mantisRight = new TalonSRX(RobotMap.DRIVE_MANTIS_SRX_RIGHT_ID);
 	}
 
 	@Override
@@ -180,6 +188,41 @@ public class Drive extends Subsystem {
 	}
 
 	/**
+	 * Set mantis left wheel's speed
+	 * @param speed percentage [-1,1]
+	 */
+	public void setMantisLeft(double speed) {
+		mantisLeft.set(ControlMode.PercentOutput, speed);
+	}
+
+	/**
+	 * Set mantis right wheel's speed
+	 * @param speed percentage [-1,1]
+	 */
+	public void setMantisRight(double speed) {
+		mantisRight.set(ControlMode.PercentOutput, speed);
+	}
+
+	/**
+	 * Set mantis both wheels' speeds
+	 * @param speed percentage [-1,1]
+	 */
+	public void setMantisBoth(double speed) {
+		setMantisLeft(speed);
+		setMantisRight(speed);
+	}
+
+	/**
+	 * Set mantis both wheels' speeds, indepentently
+	 * @param lSpeed left wheel percentage [-1,1]
+	 * @param rSpeed right wheel percentage [-1,1]
+	 */
+	public void setMantisBoth(double lSpeed, double rSpeed) {
+		setMantisLeft(lSpeed);
+		setMantisRight(rSpeed);
+	}
+
+	/**
      * One joystick drive mode. One stick axis speeds forward/backwards, the other adds rotation on robot yaw axis
      * @param moveValue forward/backward speed, as a percentage of max forward speed
      * @param rotateValue rotation speed, as a percentage of max rightward rotation speed
@@ -204,6 +247,34 @@ public class Drive extends Subsystem {
 		}
 
 		setDriveBoth(leftSpeed, rightSpeed);
+	}
+
+	/**
+     * One joystick drive mode for mantis wheels. One stick axis speeds forward/backwards,
+	 * the other adds rotation on robot yaw axis
+     * @param moveValue forward/backward speed, as a percentage of max forward speed
+     * @param rotateValue rotation speed, as a percentage of max rightward rotation speed
+     */
+    public void mantisArcadeDrive(double moveValue, double rotateValue) {
+		if(moveValue > 0.0) {
+		    if(rotateValue > 0.0) {
+		    	mantisLSpeed = moveValue - rotateValue;
+		    	mantisRSpeed = Math.max(moveValue, rotateValue);
+		    } else {
+		    	mantisLSpeed = Math.max(moveValue, -rotateValue);
+		    	mantisRSpeed = moveValue + rotateValue;
+		    }
+		} else {
+		    if(rotateValue > 0.0) {
+		    	mantisLSpeed = -Math.max(-moveValue, rotateValue);
+		    	mantisRSpeed = moveValue + rotateValue;
+		    } else {
+				mantisLSpeed = moveValue - rotateValue;
+		    	mantisRSpeed = -Math.max(-moveValue, -rotateValue);
+		    }
+		}
+
+		setMantisBoth(mantisLSpeed, mantisRSpeed);
 	}
 
 	/**

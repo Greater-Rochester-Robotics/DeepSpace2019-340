@@ -24,7 +24,7 @@ import frc.robot.RobotMap;
  */
 public class Mantis extends Subsystem {
 	private static Solenoid stinger; //Controls the piston at the back of the bot
-	private static Talon winch; //Throws the mantis arms down
+	private static Talon arm; //Throws the mantis arms down
 
 	/**
 	 * Assign the stinger and winch their channel/port
@@ -32,14 +32,25 @@ public class Mantis extends Subsystem {
 	 */
 	public Mantis() {
 		stinger = new Solenoid(RobotMap.MANTIS_SOLENOID_CHANNEL);
-		winch = new Talon(RobotMap.MANTIS_TALON_CHANNEL);
+		arm = new Talon(RobotMap.MANTIS_TALON_CHANNEL);
 	}
 
-	/////////////////////////////////
-	// THE REMAINDER OF THIS CLASS //
-	// WILL BE WRITTEN AT A LATER  //
-	// DATE, POSSIBLY 2019-02-02   //
-	/////////////////////////////////
+	/**
+	 * Set the speed at which the arm is winched<br>
+	 * Positive up, negative down
+	 * @param speed percentage [-1, 1]
+	 */
+	public void setArmSpeed(double speed) {
+		arm.set(speed);
+	}
+
+	/**
+	 * Flick the piston
+	 * @param isForward {@code true} if stringer should extend
+	 */
+	public void setPiston(boolean isForward) {
+		stinger.set(isForward);
+	}
 
 	@Override
 	public void initDefaultCommand() {}
