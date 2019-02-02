@@ -49,6 +49,8 @@ public class RobotMap {
 	/* Solenoids */
 	public static final int KACHUNKER_SOLENOID_CHANNEL = 0;
 	public static final int MANTIS_SOLENOID_CHANNEL = 1;
+	public static final int ELEVATOR_SOLENOID_LEFT = 2;
+	public static final int ELEVATOR_SOLENOID_RIGHT = 3;
 
 	/////////////
 	// CAN IDs //
@@ -57,4 +59,18 @@ public class RobotMap {
 	/* TalonSRXs */
 	public static final int C_SRX_TOP_ID = 0;
 	public static final int C_SRX_BOTTOM_ID = 1;
+
+	/////////////////////
+	// SPEED VARIABLES //
+	/////////////////////
+
+	/* C speed */
+	public static final double C_INTAKE = 1.0;
+	public static final double C_STOP = 0.0;
+	public static final double C_OUTTAKE = -1.0;
+	
+	/* Elevator speed */
+	public static final double ELEVATOR_UP_SPEED = 1.0;
+	public static final double ELEVATOR_DOWN_SPEED = -1.0;
+	public static final double ELEVATOR_STOP = 0.0;
 }

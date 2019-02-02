@@ -30,30 +30,30 @@ public class KaChunker extends Subsystem {
 
 	/**
 	 * Set the piston direction
-	 * @param isForward {@code true} for forward, {@code false} for backward
+	 * @param isGrabbed {@code true} for forward, {@code false} for backward
 	 */
-	public void set(boolean isForward) {
-		solenoid.set(isForward);
+	public void set(boolean isGrabbed) {
+		solenoid.set(isGrabbed);
 	}
 
 	/**
 	 * Set the piston forward
 	 */
-	public void setForward() {
+	public void grab() {
 		solenoid.set(true);
 	}
 
 	/**
 	 * Set the piston backward
 	 */
-	public void setBackward() {
+	public void release() {
 		solenoid.set(false);
 	}
 
 	/**
 	 * @return whether the piston is forward
 	 */
-	public boolean isForward() {
+	public boolean isGrabbed() {
 		return solenoid.get();
 	}
 

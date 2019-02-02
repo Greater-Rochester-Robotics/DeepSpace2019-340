@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.commands.ElevatorStick;
+import edu.wpi.first.wpilibj.Solenoid;
 
 /**
  * <h1>Elevator</h1>
@@ -23,7 +24,7 @@ import frc.robot.commands.ElevatorStick;
 public class Elevator extends Subsystem {
 	private static Encoder enc;
 	private static Talon winch;
-
+	private static Solenoid leftTilt, rightTilt;
 	/**
 	 * Makes the ports given the not-so-magic
 	 * numbers in robotmap
@@ -31,6 +32,8 @@ public class Elevator extends Subsystem {
 	public Elevator() {
 		enc = new Encoder(RobotMap.ELEVATOR_ENCODER_CHANNEL_A, RobotMap.ELEVATOR_ENCODER_CHANNEL_B);
 		winch = new Talon(RobotMap.ELEVATOR_TALON_CHANNEL);
+		leftTilt = new Solenoid(RobotMap.ELEVATOR_SOLENOID_LEFT);
+		rightTilt = new Solenoid(RobotMap.ELEVATOR_SOLENOID_RIGHT);
 	}
 
 	@Override
@@ -59,4 +62,21 @@ public class Elevator extends Subsystem {
 	public double getSpeed() {
 		return winch.get();
 	}
+
+	/**
+	 *  Tilts the Elevator forward
+	 */
+	public void tiltForward(){
+		leftTilt.set(true);
+		rightTilt.set(true);
+	}
+
+	/**
+	 *  Tilts the Elevator backward
+	 */
+	public void tiltBackward(){
+		leftTilt.set(false);
+		rightTilt.set(false);
+	}
+
 }
