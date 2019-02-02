@@ -55,6 +55,8 @@ public class RobotMap {
 	/////////////
 
 	/* TalonSRXs */
-	public static final int C_SRX_TOP_ID = 0;
-	public static final int C_SRX_BOTTOM_ID = 1;
+	public static final int C_SRX_TOP_ID = 1;
+	public static final int C_SRX_BOTTOM_ID = 2;
+	public static final int DRIVE_MANTIS_SRX_LEFT_ID = 3;
+	public static final int DRIVE_MANTIS_SRX_RIGHT_ID = 4;
 }
