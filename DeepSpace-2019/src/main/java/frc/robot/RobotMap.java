@@ -40,28 +40,28 @@ public class RobotMap {
 	public static final int ELEVATOR_ENCODER_CHANNEL_B = 5;
 
 	/* Sensors */
-	public static final int C_CARGO_SENSOR_PORT = 6;
+	public static final int MANIPULATOR_CARGO_SENSOR_PORT = 6;
 
 	////////////////////////
 	// PNEUMATIC CHANNELS //
 	////////////////////////
 
 	/* Solenoids */
-	public static final int KACHUNKER_SOLENOID_CHANNEL = 0;
-	public static final int MANTIS_SOLENOID_CHANNEL = 1;
-	public static final int ELEVATOR_SOLENOID_LEFT = 2;
-	public static final int ELEVATOR_SOLENOID_RIGHT = 3;
+	public static final int ELEVATOR_SOLENOID_LEFT = 0;
+	public static final int ELEVATOR_SOLENOID_RIGHT = 1;
+	public static final int MANIPULATOR_KACHUNKER_SOLENOID_CHANNEL = 2;
+	public static final int MANIPULATOR_WRIST_SOLENOID_CHANNEL = 3;
+	public static final int MANTIS_SOLENOID_CHANNEL = 4;
 
 	/////////////
 	// CAN IDs //
 	/////////////
 
 	/* TalonSRXs */
-	public static final int C_SRX_TOP_ID = 1;
-	public static final int C_SRX_BOTTOM_ID = 2;
-	
-	public static final int DRIVE_MANTIS_SRX_LEFT_ID = 3;
-	public static final int DRIVE_MANTIS_SRX_RIGHT_ID = 4;
+	public static final int DRIVE_MANTIS_SRX_LEFT_ID = 1;
+	public static final int DRIVE_MANTIS_SRX_RIGHT_ID = 2;
+	public static final int MANIPULATOR_C_SRX_TOP_ID = 3;
+	public static final int MANIPULATOR_C_SRX_BOTTOM_ID = 4;
 
 	/////////////////////
 	// SPEED VARIABLES //
