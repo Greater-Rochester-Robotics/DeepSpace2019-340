@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -25,7 +26,7 @@ import frc.robot.RobotMap;
 public class Mantis extends Subsystem {
 	private static Solenoid stinger; //Controls the piston at the back of the bot
 	private static Talon arm; //Throws the mantis arms down
-
+	private static DigitalInput front, back, down; //front, back, and down sensors for mantis driving on
 	/**
 	 * Assign the stinger and winch their channel/port
 	 * given {@link RobotMap}
@@ -33,6 +34,9 @@ public class Mantis extends Subsystem {
 	public Mantis() {
 		stinger = new Solenoid(RobotMap.MANTIS_SOLENOID_CHANNEL);
 		arm = new Talon(RobotMap.MANTIS_TALON_CHANNEL);
+		front = new DigitalInput(RobotMap.MANTIS_FRONT_CHANNEL);
+		back = new DigitalInput(RobotMap.MANTIS_BACK_CHANNEL);
+		down = new DigitalInput(RobotMap.MANTIS_ARM_DOWN_SWITCH);
 	}
 
 	/**
@@ -54,4 +58,28 @@ public class Mantis extends Subsystem {
 
 	@Override
 	public void initDefaultCommand() {}
+
+	/**
+	 * Returns whether or not the Mantis down arm is all the way down.
+	 * @return True if the arm is down.
+	 */
+	public boolean isDown() {
+		return down.get();
+	}
+
+	/**
+	 * Returns whether or not the front sensor can see the ground.
+	 * @return False if the front is on the ground.
+	 */
+	public boolean isFrontHigh() {
+		return front.get();
+	}
+
+	/**
+	 * Returns whether or not the back sensor can see the ground.
+	 * @return False if the back is on the ground.
+	 */
+	public boolean isBackHigh() {
+		return back.get();
+	}
 }
