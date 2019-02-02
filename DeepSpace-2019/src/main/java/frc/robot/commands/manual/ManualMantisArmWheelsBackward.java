@@ -9,10 +9,11 @@ package frc.robot.commands.manual;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
-public class ManualElevatorTiltForward extends Command {
-  public ManualElevatorTiltForward() {
-	requires(Robot.elevator);
+public class ManualMantisArmWheelsBackward extends Command {
+  public ManualMantisArmWheelsBackward() {
+	  requires(Robot.drive);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -20,7 +21,7 @@ public class ManualElevatorTiltForward extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-	Robot.elevator.tiltForward();
+	  Robot.drive.setMantisBoth(RobotMap.MANTIS_WHEELS_BACKWARDS);
   }
 
   // Called repeatedly when this Command is scheduled to run
