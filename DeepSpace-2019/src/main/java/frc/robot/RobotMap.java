@@ -85,4 +85,6 @@ public class RobotMap {
 	public static final double MANTIS_WHEELS_FORWARD = 1.0;
 	public static final double MANTIS_WHEELS_STOP = 0.0;
 	public static final double MANTIS_WHEELS_BACKWARDS = -1.0;
+
+	public static final double ZERO_SPEED = 0.0;
 }

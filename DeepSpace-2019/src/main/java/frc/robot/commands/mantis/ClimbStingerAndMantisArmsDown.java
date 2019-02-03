@@ -11,18 +11,16 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
-public class ClimbMantisArmsDown extends Command {
-  public ClimbMantisArmsDown() {
+public class ClimbStingerAndMantisArmsDown extends Command {
+  public ClimbStingerAndMantisArmsDown() {
     requires(Robot.mantis);
-
+    // Use requires() here to declare subsystem dependencies
+    // eg. requires(chassis);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    if(!Robot.mantis.isDown()){
-     Robot.mantis.setArmSpeed(RobotMap.MANTIS_ARM_DOWN);
-    }
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -30,19 +28,20 @@ public class ClimbMantisArmsDown extends Command {
   protected void execute() {
     if(!Robot.mantis.isDown()){
       Robot.mantis.setArmSpeed(RobotMap.MANTIS_ARM_DOWN);
+      
     }
+    Robot.mantis.setPiston(true);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return (Robot.mantis.isDown() || Robot.mantis.isFrontHigh() || Robot.mantis.isBackHigh()); 
+    return (!Robot.mantis.isBackHigh());
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    
   }
 
   // Called when another command which requires one or more of the same
