@@ -18,8 +18,10 @@ import frc.robot.RobotMap;
 public class CRelease extends Command {
 	
 	/**
-	 * Step 1: take the C<br>
-	 * Step 2: release
+	 * Step 1: wrist goes up
+	 * Step 2: take the C<br>
+	 * Step 3: release
+	 * Step 4: stop release
 	 */
 	public CRelease() {
 		requires(Robot.manipulatorWithKaChunker);
@@ -27,6 +29,7 @@ public class CRelease extends Command {
 
 	@Override
 	protected void initialize() {
+		Robot.manipulatorWithKaChunker.setWristUp();
 		Robot.manipulatorWithKaChunker.setCSpeed(RobotMap.C_OUTTAKE); //Roll wheels outward the instant this command begins
 	}
 

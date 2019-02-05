@@ -7,12 +7,18 @@
 
 package frc.robot.subsystems;
 
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANDigitalInput.LimitSwitchPolarity;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.commands.ElevatorStick;
 import edu.wpi.first.wpilibj.Solenoid;
+import com.revrobotics.*;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 
 /**
  * <h1>Elevator</h1>
@@ -25,6 +31,8 @@ public class Elevator extends Subsystem {
 	private static Encoder enc;
 	private static Talon winch;
 	private static Solenoid leftTilt, rightTilt;
+	private static CANSparkMax elevatorA, elevatorB, elevatorC;
+	private static CANDigitalInput reverseLimit;
 	/**
 	 * Makes the ports given the not-so-magic
 	 * numbers in robotmap
@@ -34,6 +42,15 @@ public class Elevator extends Subsystem {
 		winch = new Talon(RobotMap.ELEVATOR_TALON_CHANNEL);
 		leftTilt = new Solenoid(RobotMap.ELEVATOR_SOLENOID_LEFT);
 		rightTilt = new Solenoid(RobotMap.ELEVATOR_SOLENOID_RIGHT);
+		elevatorA = new CANSparkMax(RobotMap.ELEVATOR_A_MOTOR_CAN_ID, MotorType.kBrushless);
+		elevatorB = new CANSparkMax(RobotMap.ELEVATOR_B_MOTOR_CAN_ID, MotorType.kBrushless);
+		elevatorC = new CANSparkMax(RobotMap.ELEVATOR_C_MOTOR_CAN_ID, MotorType.kBrushless);
+		reverseLimit = elevatorA.getReverseLimitSwitch(LimitSwitchPolarity.kNormallyClosed);
+
+		elevatorB.follow(elevatorA);
+		elevatorC.follow(elevatorA);
+
+		reverseLimit.enableLimitSwitch(true);
 	}
 
 	@Override

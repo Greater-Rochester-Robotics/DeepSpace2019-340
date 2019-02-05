@@ -62,6 +62,9 @@ public class RobotMap {
 	public static final int DRIVE_MANTIS_SRX_RIGHT_ID = 2;
 	public static final int MANIPULATOR_C_SRX_TOP_ID = 3;
 	public static final int MANIPULATOR_C_SRX_BOTTOM_ID = 4;
+	public static final int ELEVATOR_A_MOTOR_CAN_ID = 5;
+	public static final int ELEVATOR_B_MOTOR_CAN_ID = 6;
+	public static final int ELEVATOR_C_MOTOR_CAN_ID = 7;
 
 	/////////////////////
 	// SPEED VARIABLES //
