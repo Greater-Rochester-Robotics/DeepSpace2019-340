@@ -41,7 +41,9 @@ public class RobotMap {
 
 	/* Sensors */
 	public static final int MANIPULATOR_CARGO_SENSOR_PORT = 6;
-
+	public static final int MANTIS_FRONT_CHANNEL = 7;
+	public static final int MANTIS_BACK_CHANNEL = 8;
+	public static final int MANTIS_ARM_DOWN_SWITCH = 9;
 	////////////////////////
 	// PNEUMATIC CHANNELS //
 	////////////////////////
@@ -86,4 +88,6 @@ public class RobotMap {
 	public static final double MANTIS_WHEELS_FORWARD = 1.0;
 	public static final double MANTIS_WHEELS_STOP = 0.0;
 	public static final double MANTIS_WHEELS_BACKWARDS = -1.0;
+
+	public static final double ZERO_SPEED = 0.0;
 }
