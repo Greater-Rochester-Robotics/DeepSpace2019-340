@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
+//FIXME: test this
 public class RetractStinger extends Command {
   public RetractStinger() {
     requires(Robot.mantis);
@@ -21,7 +22,7 @@ public class RetractStinger extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.mantis.setPiston(false);
+    Robot.mantis.setStinger(false);
   }
 
   // Called repeatedly when this Command is scheduled to run

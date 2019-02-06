@@ -28,9 +28,9 @@ public class ClimbStingerAndMantisArmsDown extends Command {
   protected void execute() {
     if(!Robot.mantis.isDown()){
       Robot.mantis.setArmSpeed(RobotMap.MANTIS_ARM_DOWN);
-      
-    }
-    Robot.mantis.setPiston(true);
+	}
+	
+    Robot.mantis.setStinger(true);
   }
 
   // Make this return true when this Command no longer needs to run execute()

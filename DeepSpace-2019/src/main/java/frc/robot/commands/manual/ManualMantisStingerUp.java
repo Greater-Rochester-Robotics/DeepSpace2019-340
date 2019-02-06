@@ -10,6 +10,7 @@ package frc.robot.commands.manual;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
+//FIXME: test this
 public class ManualMantisStingerUp extends Command {
   public ManualMantisStingerUp() {
 	  requires(Robot.mantis);
@@ -20,7 +21,7 @@ public class ManualMantisStingerUp extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-	Robot.mantis.setPiston(false);
+	Robot.mantis.setStinger(false);
   }
 
   // Called repeatedly when this Command is scheduled to run
