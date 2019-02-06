@@ -44,16 +44,23 @@ public class RobotMap {
 	public static final int MANTIS_FRONT_CHANNEL = 7;
 	public static final int MANTIS_BACK_CHANNEL = 8;
 	public static final int MANTIS_ARM_DOWN_SWITCH = 9;
+
 	////////////////////////
 	// PNEUMATIC CHANNELS //
 	////////////////////////
 
 	/* Solenoids */
-	public static final int ELEVATOR_SOLENOID_LEFT = 0;
-	public static final int ELEVATOR_SOLENOID_RIGHT = 1;
-	public static final int MANIPULATOR_KACHUNKER_SOLENOID_CHANNEL = 2;
-	public static final int MANIPULATOR_WRIST_SOLENOID_CHANNEL = 3;
-	public static final int MANTIS_SOLENOID_CHANNEL = 4;
+	public static final int KACHUNKER_SOLENOID_GRAB_CHANNEL = 0;
+	public static final int KACHUNKER_SOLENOID_DROP_CHANNEL = 1;
+	public static final int WRIST_SOLENOID_DOWN_CHANNEL = 2;
+	public static final int WRIST_SOLENOID_UP_CHANNEL = 3;
+	public static final int DISC_BRAKE_SOLENOID_RELEASE_CHANNEL = 4;
+	public static final int STINGER_SOLENOID_DROP_CHANNEL = 5;
+
+	//TODO: get official numbers
+	public static final int ELEVATOR_TILT_SOLENOID_FORWARD_CHANNEL = 98;
+	public static final int ELEVATOR_TILT_SOLENOID_BACKWARD_CHANNEL = 99;
+	//Will we need more? Say, stinger up for instance
 
 	/////////////
 	// CAN IDs //
