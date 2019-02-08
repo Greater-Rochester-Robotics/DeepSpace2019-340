@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
-
 /**
  * Use the C to intake cargo<br>
  * It's not impossible to imagine this will have some PID at some point
@@ -19,11 +18,9 @@ import frc.robot.RobotMap;
 public class CIntake extends Command {
 
 	/**
-	 * Step 1: wrist goes down
-	 * Step 2: take the C<br>
-	 * Step 3: intake
-	 * Step 4: wrist goes up
-	 * Step 5: stop intake
+	 * Step 1: take the C<br>
+	 * Step 2: intake<br>
+	 * Step 3: stop intake
 	 */
 	public CIntake() {
 		requires(Robot.manipulatorWithKaChunker);
@@ -31,7 +28,6 @@ public class CIntake extends Command {
 
 	@Override
 	protected void initialize() {
-		Robot.manipulatorWithKaChunker.setWristDown();
 		Robot.manipulatorWithKaChunker.setCSpeed(RobotMap.C_INTAKE); //Roll wheels inward the instant this command begins
 	}
 
@@ -42,7 +38,6 @@ public class CIntake extends Command {
 
 	@Override
 	protected void end() {
-		Robot.manipulatorWithKaChunker.setWristUp();
 		Robot.manipulatorWithKaChunker.setCSpeed(RobotMap.C_STOP); //On interrupt or cargo acquisition, stop the wheels
 	}
 }

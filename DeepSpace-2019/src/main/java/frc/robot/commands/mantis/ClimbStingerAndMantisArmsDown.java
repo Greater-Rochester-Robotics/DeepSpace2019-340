@@ -11,6 +11,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
+/**
+ * TODO: this could use a rework
+ */
 public class ClimbStingerAndMantisArmsDown extends Command {
   public ClimbStingerAndMantisArmsDown() {
     requires(Robot.mantis);
@@ -42,12 +45,6 @@ public class ClimbStingerAndMantisArmsDown extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-  }
-
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
-  @Override
-  protected void interrupted() {
-    Robot.mantis.setArmSpeed(RobotMap.ZERO_SPEED);
+	Robot.mantis.setArmSpeed(RobotMap.ZERO_SPEED);
   }
 }

@@ -60,6 +60,7 @@ public class RobotMap {
 	//TODO: get official numbers
 	public static final int ELEVATOR_TILT_SOLENOID_FORWARD_CHANNEL = 98;
 	public static final int ELEVATOR_TILT_SOLENOID_BACKWARD_CHANNEL = 99;
+	
 	//Will we need more? Say, stinger up for instance
 
 	/////////////

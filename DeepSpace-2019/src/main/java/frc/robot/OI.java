@@ -81,10 +81,10 @@ public class OI {
 	}
 
 	public double getDriverAxis(Axis axis) {
-		return(driver.getRawAxis(axis.getAxis()) <-.1 || driver.getRawAxis(axis.getAxis()) >.1 ) ? driver.getRawAxis(axis.getAxis()) : 0;
+		return (driver.getRawAxis(axis.getAxis()) < -.1 || driver.getRawAxis(axis.getAxis()) > .1 ) ? driver.getRawAxis(axis.getAxis()) : 0;
 	}
 
 	public double getCoDriverAxis(Axis axis) {
-		return(coDriver.getRawAxis(axis.getAxis()) <-.1 || coDriver.getRawAxis(axis.getAxis()) >.1 ) ? coDriver.getRawAxis(axis.getAxis()) : 0;
+		return (coDriver.getRawAxis(axis.getAxis()) < -.1 || coDriver.getRawAxis(axis.getAxis()) > .1 ) ? coDriver.getRawAxis(axis.getAxis()) : 0;
 	}
 }

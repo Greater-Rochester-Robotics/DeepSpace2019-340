@@ -24,7 +24,7 @@ import frc.robot.RobotMap;
  * <i>subsystem</i> is named mantis... which is which?
  */
 public class Mantis extends Subsystem {
-	private static Solenoid stingerDrop; //Controls the piston at the back of the bot
+	private static Solenoid stingerDrop, stingerRaise; //Controls the piston at the back of the bot
 	private static Talon arm; //Throws the mantis arms down
 	private static DigitalInput front, back, down; //front, back, and down sensors for mantis driving on
 	/**
@@ -51,6 +51,7 @@ public class Mantis extends Subsystem {
 	/**
 	 * Flick the piston
 	 * @param isForward {@code true} if stringer should extend
+	 * TODO: forward/backward
 	 */
 	public void setStinger(boolean isForward) {
 		stingerDrop.set(isForward);

@@ -18,24 +18,23 @@ import frc.robot.RobotMap;
 public class CRelease extends Command {
 	
 	/**
-	 * Step 1: wrist goes up
-	 * Step 2: take the C<br>
-	 * Step 3: release
-	 * Step 4: stop release
+	 * Step 1: take the C<br>
+	 * Step 2: release<br>
+	 * Step 3: stop release
 	 */
-	public CRelease() {
+	public CRelease(double timeout) {
 		requires(Robot.manipulatorWithKaChunker);
+		setTimeout(timeout);
 	}
 
 	@Override
 	protected void initialize() {
-		Robot.manipulatorWithKaChunker.setWristUp();
 		Robot.manipulatorWithKaChunker.setCSpeed(RobotMap.C_OUTTAKE); //Roll wheels outward the instant this command begins
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return !Robot.manipulatorWithKaChunker.hasCargo(); //Continue rolling until interrupt or cargo acquisition
+		return !Robot.manipulatorWithKaChunker.hasCargo() || isTimedOut(); //Continue rolling until interrupt or cargo acquisition
 	}
 
 	@Override

@@ -24,7 +24,7 @@ public class KaChunkerToggle extends Command {
 
   	@Override
 	protected void initialize() {
-		Robot.manipulatorWithKaChunker.toggleKachunker();; //Set to the opposite of the current state
+		Robot.manipulatorWithKaChunker.toggleKachunker(); //Set to the opposite of the current state
 	}
 
 	@Override

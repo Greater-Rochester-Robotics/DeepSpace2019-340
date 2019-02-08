@@ -32,6 +32,6 @@ public class MantisClimbing extends CommandGroup {
     // arm.
     addSequential(new ClimbMantisArmsDown());
     addSequential(new ClimbStingerAndMantisArmsDown());
-    addSequential(new RetractStinger());
+    addSequential(new StingerRetract());
   }
 }

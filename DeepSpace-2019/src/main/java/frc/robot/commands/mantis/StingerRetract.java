@@ -9,11 +9,10 @@ package frc.robot.commands.mantis;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.RobotMap;
 
 //FIXME: test this
-public class RetractStinger extends Command {
-  public RetractStinger() {
+public class StingerRetract extends Command {
+  public StingerRetract() {
     requires(Robot.mantis);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -25,26 +24,9 @@ public class RetractStinger extends Command {
     Robot.mantis.setStinger(false);
   }
 
-  // Called repeatedly when this Command is scheduled to run
-  @Override
-  protected void execute() {
-    
-  }
-
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
     return true;
-  }
-
-  // Called once after isFinished returns true
-  @Override
-  protected void end() {
-  }
-
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
-  @Override
-  protected void interrupted() {
   }
 }

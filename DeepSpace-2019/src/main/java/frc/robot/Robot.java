@@ -26,9 +26,9 @@ import frc.robot.subsystems.Mantis;
  * project.
  */
 public class Robot extends TimedRobot {
-	public static ManipulatorWithKaChunker manipulatorWithKaChunker;
 	public static Drive drive;
 	public static Elevator elevator;
+	public static ManipulatorWithKaChunker manipulatorWithKaChunker;
 	public static Mantis mantis;
 	public static OI oi;
 
@@ -43,8 +43,8 @@ public class Robot extends TimedRobot {
   public void robotInit() {
 	drive = new Drive();
 	elevator = new Elevator();
-	mantis = new Mantis();
 	manipulatorWithKaChunker = new ManipulatorWithKaChunker();
+	mantis = new Mantis();
 	oi = new OI();
 	m_chooser.setDefaultOption("Default Auto", new DriveXOne());
 	// chooser.addOption("My Auto", new MyAutoCommand());

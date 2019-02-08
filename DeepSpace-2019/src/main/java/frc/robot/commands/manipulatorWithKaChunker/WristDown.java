@@ -10,14 +10,9 @@ package frc.robot.commands.manipulatorWithKaChunker;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class KaChunkerIntake extends Command {
-	
-	/**
-	 * Step 1: piston goes out
-	 * Wrist down so it doesn't hit that stays down so the hatch elevator and piston stays out
-	 */
-  public KaChunkerIntake() {
-	  requires(Robot.manipulatorWithKaChunker);
+public class WristDown extends Command {
+  public WristDown() {
+	requires(Robot.manipulatorWithKaChunker);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -25,7 +20,7 @@ public class KaChunkerIntake extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-	  Robot.manipulatorWithKaChunker.setKachunkerGrab();
+	Robot.manipulatorWithKaChunker.setWristDown();
   }
 
   // Make this return true when this Command no longer needs to run execute()

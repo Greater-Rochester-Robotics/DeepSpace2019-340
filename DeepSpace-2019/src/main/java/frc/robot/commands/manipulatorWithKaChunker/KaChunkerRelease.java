@@ -13,9 +13,7 @@ import frc.robot.Robot;
 public class KaChunkerRelease extends Command {
 
 	/**
-	 * Step 1: wrist goes down
-	 * Step 2: piston goes in
-	 * Step 3: wrist goes up
+	 * Step 1: piston goes in
 	 */
   public KaChunkerRelease() {
 	  requires(Robot.manipulatorWithKaChunker);
@@ -26,7 +24,6 @@ public class KaChunkerRelease extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-	  Robot.manipulatorWithKaChunker.setWristDown();
 	  Robot.manipulatorWithKaChunker.setKachunkerDrop();
   }
 
@@ -40,6 +37,5 @@ public class KaChunkerRelease extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-	  Robot.manipulatorWithKaChunker.setWristUp();
   }
 }
