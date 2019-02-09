@@ -11,6 +11,7 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANDigitalInput;
 import com.revrobotics.CANEncoder;
+import com.revrobotics.CANSparkMaxLowLevel.ConfigParameter;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
@@ -28,10 +29,12 @@ import edu.wpi.first.wpilibj.Solenoid;
  */
 public class Elevator extends Subsystem {
 	
-	private static Solenoid tiltForward, tiltBackward, diskBrake;
+	private static Solenoid tiltForward, tiltBackward, discBrake;
 	private static CANSparkMax elevatorA, elevatorB, elevatorC;
 	private static CANDigitalInput reverseLimit;
-	private static CANEncoder elevatorAEncoder; 
+	private static CANEncoder enc;
+
+	private double offset = 0; //Adjusts for encoder drift
 
 	/**
 	 * Makes the ports given the not-so-magic
@@ -40,12 +43,12 @@ public class Elevator extends Subsystem {
 	public Elevator() {
 		tiltForward = new Solenoid(RobotMap.ELEVATOR_TILT_SOLENOID_FORWARD_CHANNEL);
 		tiltBackward = new Solenoid(RobotMap.ELEVATOR_TILT_SOLENOID_BACKWARD_CHANNEL);
-		diskBrake = new Solenoid(RobotMap.DISC_BRAKE_SOLENOID_RELEASE_CHANNEL);
+		discBrake = new Solenoid(RobotMap.DISC_BRAKE_SOLENOID_RELEASE_CHANNEL);
 		elevatorA = new CANSparkMax(RobotMap.ELEVATOR_A_MOTOR_CAN_ID, MotorType.kBrushless);
 		elevatorB = new CANSparkMax(RobotMap.ELEVATOR_B_MOTOR_CAN_ID, MotorType.kBrushless);
 		elevatorC = new CANSparkMax(RobotMap.ELEVATOR_C_MOTOR_CAN_ID, MotorType.kBrushless);
-		reverseLimit = elevatorA.getReverseLimitSwitch(CANDigitalInput.LimitSwitchPolarity.kNormallyClosed); //Explain?
-		elevatorAEncoder = elevatorA.getEncoder(); //FIXME: adjust for gearing
+		reverseLimit = elevatorA.getReverseLimitSwitch(CANDigitalInput.LimitSwitchPolarity.kNormallyOpen); //Explain? TODO: check normal state
+		enc = elevatorA.getEncoder(); //FIXME: adjust for gearing
 
 		//Enslave motors B and C to motor A
 		elevatorB.follow(elevatorA);
@@ -66,21 +69,27 @@ public class Elevator extends Subsystem {
 	 * @param spd new speed; positive = up
 	 */
 	public void setSpeed(double spd) {
+		if(isAtBottom() && spd < RobotMap.ZERO_SPEED) {
+			spd = RobotMap.ZERO_SPEED;
+		} else if(isAtTop() && spd > RobotMap.ZERO_SPEED) {
+			spd = RobotMap.ZERO_SPEED;
+		}
+
 		if(spd == RobotMap.ZERO_SPEED) {
-			diskBrake.set(true); //Brake the disk
+			discBrake.set(true); //Brake the disk
 		} else {
-			diskBrake.set(false); //Let it slide
+			discBrake.set(false); //Let it slide
 		}
 		
 		elevatorA.set(spd);
 	}
 
 	/**
-	 * @return the robot's distance traveled
-	 * FIXME: adjust for gearing
+	 * @return the robot's distance traveled, offset included
+	 * FIXME: adjust for gearing via {@link ConfigParameter#kEncoderCountsPerRev}
 	 */
 	public double getPos() {
-		return elevatorAEncoder.getPosition();
+		return enc.getPosition() - offset;
 	}
 
 	/**
@@ -104,5 +113,28 @@ public class Elevator extends Subsystem {
 	public void tiltBackward() {
 		tiltForward.set(false);
 		tiltBackward.set(true);
+	}
+
+	/**
+	 * Adjust encoder offset to set current output to """zero"""
+	 */
+	public void resetEncoder() {
+		offset += enc.getPosition();
+	}
+
+	/**
+	 * @return {@code true} if elevator is triggering bottom DI
+	 */
+	public boolean isAtBottom() {
+		return reverseLimit.get();
+	}
+
+	/**
+	 * @return {@code true} if the elevator is at least at its
+	 * max height. The encoder returns motor rotations, but this
+	 * value is scaled via the MAX to centimeters. Hopefully.
+	 */
+	public boolean isAtTop() {
+		return getPos() >= RobotMap.ELEVATOR_MAX_HEIGHT_CM;
 	}
 }

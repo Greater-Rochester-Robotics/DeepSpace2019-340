@@ -30,6 +30,10 @@ public class ElevatorStick extends Command {
 
 	@Override
 	protected void execute() {
+		if(Robot.elevator.isAtBottom()) {
+			Robot.elevator.resetEncoder();
+		}
+		
 		Robot.elevator.setSpeed(Robot.oi.getCoDriverAxis(Axis.LEFT_Y)); //Poll co-driver's left Y axis to raise/lower elevator
 	}
 

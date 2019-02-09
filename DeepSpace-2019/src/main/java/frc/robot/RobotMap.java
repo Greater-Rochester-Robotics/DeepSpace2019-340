@@ -76,9 +76,9 @@ public class RobotMap {
 	public static final int ELEVATOR_B_MOTOR_CAN_ID = 6;
 	public static final int ELEVATOR_C_MOTOR_CAN_ID = 7;
 
-	/////////////////////
-	// SPEED VARIABLES //
-	/////////////////////
+	///////////////
+	// CONSTANTS //
+	///////////////
 
 	/* C speed */
 	public static final double C_INTAKE = 1.0;
@@ -90,7 +90,7 @@ public class RobotMap {
 	public static final double ELEVATOR_DOWN_SPEED = -1.0;
 	public static final double ELEVATOR_STOP = 0.0;
 
-	/* Mantis speed*/
+	/* Mantis speed */
 	public static final double MANTIS_ARM_DOWN = -1.0;
 	public static final double MANTIS_ARM_UP = 1.0;
 	public static final double MANTIS_WHEELS_FORWARD = 1.0;
@@ -98,4 +98,6 @@ public class RobotMap {
 	public static final double MANTIS_WHEELS_BACKWARDS = -1.0;
 
 	public static final double ZERO_SPEED = 0.0;
+
+	public static final double ELEVATOR_MAX_HEIGHT_CM = 100; //temporary
 }
