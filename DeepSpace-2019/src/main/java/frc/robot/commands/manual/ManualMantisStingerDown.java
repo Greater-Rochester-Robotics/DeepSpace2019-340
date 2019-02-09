@@ -20,7 +20,7 @@ public class ManualMantisStingerDown extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-	  Robot.mantis.setPiston(true);
+	  Robot.mantis.setStinger(true);
   }
 
   // Called repeatedly when this Command is scheduled to run

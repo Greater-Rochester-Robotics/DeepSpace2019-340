@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 import frc.robot.OI.Axis;
 
 /**
@@ -39,6 +40,6 @@ public class ElevatorStick extends Command {
 
 	@Override
 	protected void end() {
-		Robot.elevator.setSpeed(0); //Stop the elevator on end (interrupt included)
+		Robot.elevator.setSpeed(RobotMap.ELEVATOR_STOP); //Stop the elevator on end (interrupt included)
 	}
 }

@@ -7,8 +7,11 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.Talon;
+//Can we clean these up?
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANDigitalInput;
+import com.revrobotics.CANEncoder;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.commands.ElevatorStick;
@@ -20,20 +23,35 @@ import edu.wpi.first.wpilibj.Solenoid;
  * Programmed assuming TalonSR and encoder; subject to change<br>
  * <br>
  * Always uses the Xbox ONE controller unless told otherwise
+ * 
+ * TODO: make this <i>much</i> more sophisticated
  */
 public class Elevator extends Subsystem {
-	private static Encoder enc;
-	private static Talon winch;
-	private static Solenoid leftTilt, rightTilt;
+	
+	private static Solenoid tiltForward, tiltBackward, diskBrake;
+	private static CANSparkMax elevatorA, elevatorB, elevatorC;
+	private static CANDigitalInput reverseLimit;
+	private static CANEncoder elevatorAEncoder; 
+
 	/**
 	 * Makes the ports given the not-so-magic
 	 * numbers in robotmap
 	 */
 	public Elevator() {
-		enc = new Encoder(RobotMap.ELEVATOR_ENCODER_CHANNEL_A, RobotMap.ELEVATOR_ENCODER_CHANNEL_B);
-		winch = new Talon(RobotMap.ELEVATOR_TALON_CHANNEL);
-		leftTilt = new Solenoid(RobotMap.ELEVATOR_SOLENOID_LEFT);
-		rightTilt = new Solenoid(RobotMap.ELEVATOR_SOLENOID_RIGHT);
+		tiltForward = new Solenoid(RobotMap.ELEVATOR_TILT_SOLENOID_FORWARD_CHANNEL);
+		tiltBackward = new Solenoid(RobotMap.ELEVATOR_TILT_SOLENOID_BACKWARD_CHANNEL);
+		diskBrake = new Solenoid(RobotMap.DISC_BRAKE_SOLENOID_RELEASE_CHANNEL);
+		elevatorA = new CANSparkMax(RobotMap.ELEVATOR_A_MOTOR_CAN_ID, MotorType.kBrushless);
+		elevatorB = new CANSparkMax(RobotMap.ELEVATOR_B_MOTOR_CAN_ID, MotorType.kBrushless);
+		elevatorC = new CANSparkMax(RobotMap.ELEVATOR_C_MOTOR_CAN_ID, MotorType.kBrushless);
+		reverseLimit = elevatorA.getReverseLimitSwitch(CANDigitalInput.LimitSwitchPolarity.kNormallyClosed); //Explain?
+		elevatorAEncoder = elevatorA.getEncoder(); //FIXME: adjust for gearing
+
+		//Enslave motors B and C to motor A
+		elevatorB.follow(elevatorA);
+		elevatorC.follow(elevatorA);
+
+		reverseLimit.enableLimitSwitch(true); //Does this add a top soft limit?
 	}
 
 	@Override
@@ -42,41 +60,49 @@ public class Elevator extends Subsystem {
 	}
 
 	/**
-	 * This just gets run over and over and over again
+	 * This just gets run over and over and over again<br>
+	 * <br>
+	 * <i>We don't need to worry about deadzones; that's implemented in OI</i>
 	 * @param spd new speed; positive = up
 	 */
 	public void setSpeed(double spd) {
-		winch.set(spd);
+		if(spd == RobotMap.ZERO_SPEED) {
+			diskBrake.set(true); //Brake the disk
+		} else {
+			diskBrake.set(false); //Let it slide
+		}
+		
+		elevatorA.set(spd);
 	}
 
 	/**
 	 * @return the robot's distance traveled
+	 * FIXME: adjust for gearing
 	 */
 	public double getPos() {
-		return enc.getDistance();
+		return elevatorAEncoder.getPosition();
 	}
 
 	/**
 	 * @return the current speed of the winch
 	 */
 	public double getSpeed() {
-		return winch.get();
+		return elevatorA.get();
 	}
 
 	/**
 	 *  Tilts the Elevator forward
 	 */
-	public void tiltForward(){
-		leftTilt.set(true);
-		rightTilt.set(true);
+	public void tiltForward() {
+		tiltForward.set(true);
+		tiltBackward.set(false);
 	}
 
 	/**
 	 *  Tilts the Elevator backward
 	 */
-	public void tiltBackward(){
-		leftTilt.set(false);
-		rightTilt.set(false);
+	public void tiltBackward() {
+		tiltForward.set(false);
+		tiltBackward.set(true);
 	}
-
 }

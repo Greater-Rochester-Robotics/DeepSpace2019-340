@@ -5,15 +5,18 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.manual;
+package frc.robot.commands.mantis;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
-//FIXME: test this
-public class ManualMantisStingerUp extends Command {
-  public ManualMantisStingerUp() {
-	  requires(Robot.mantis);
+/**
+ * TODO: this could use a rework
+ */
+public class ClimbStingerAndMantisArmsDown extends Command {
+  public ClimbStingerAndMantisArmsDown() {
+    requires(Robot.mantis);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -21,28 +24,27 @@ public class ManualMantisStingerUp extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-	Robot.mantis.setStinger(false);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    if(!Robot.mantis.isDown()){
+      Robot.mantis.setArmSpeed(RobotMap.MANTIS_ARM_DOWN);
+	}
+	
+    Robot.mantis.setStinger(true);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return true;
+    return (!Robot.mantis.isBackHigh());
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-  }
-
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
-  @Override
-  protected void interrupted() {
+	Robot.mantis.setArmSpeed(RobotMap.ZERO_SPEED);
   }
 }

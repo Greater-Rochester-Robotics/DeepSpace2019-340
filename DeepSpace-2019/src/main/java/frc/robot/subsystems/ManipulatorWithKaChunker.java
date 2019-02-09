@@ -24,7 +24,7 @@ import frc.robot.RobotMap;
  */
 public class ManipulatorWithKaChunker extends Subsystem {
 	private static DigitalInput cargoSensor; //Triggers when the cargo is secured
-	private static Solenoid kaChunker, wrist;
+	private static Solenoid kaChunkerGrab, kaChunkerDrop, wristDown, wristUp;
 	private static TalonSRX cBottom, cTop; //Top and bottom wheels of the C intake
 
 	/**
@@ -34,14 +34,16 @@ public class ManipulatorWithKaChunker extends Subsystem {
 	public ManipulatorWithKaChunker() {
 		cargoSensor = new DigitalInput(RobotMap.MANIPULATOR_CARGO_SENSOR_PORT);
 
-		kaChunker = new Solenoid(RobotMap.MANIPULATOR_KACHUNKER_SOLENOID_CHANNEL);
-		wrist = new Solenoid(RobotMap.MANIPULATOR_WRIST_SOLENOID_CHANNEL);
+		kaChunkerGrab = new Solenoid(RobotMap.KACHUNKER_SOLENOID_GRAB_CHANNEL);
+		kaChunkerDrop = new Solenoid(RobotMap.KACHUNKER_SOLENOID_DROP_CHANNEL);
+		wristDown = new Solenoid(RobotMap.WRIST_SOLENOID_DOWN_CHANNEL);
+		wristUp = new Solenoid(RobotMap.WRIST_SOLENOID_UP_CHANNEL);
 
 		cBottom = new TalonSRX(RobotMap.MANIPULATOR_C_SRX_BOTTOM_ID);
 		cTop = new TalonSRX(RobotMap.MANIPULATOR_C_SRX_TOP_ID);
 
 		cBottom.set(ControlMode.Follower, RobotMap.MANIPULATOR_C_SRX_TOP_ID); //Enslave bottom SRX to top SRX
-		cBottom.setInverted(true); //Always spin opposite the top SRX
+		cBottom.setInverted(true); //Always spin opposite the top SRX | TODO check if electrical will do this for us
 	}
 
 	////////////
@@ -60,10 +62,10 @@ public class ManipulatorWithKaChunker extends Subsystem {
 	////////////////
 
 	/**
-	 * @return {@code true} if ka-chunker is forward
+	 * @return {@code true} if ka-chunker is grabbing
 	 */
 	public boolean isKachunkerGrabbing() {
-		return kaChunker.get();
+		return kaChunkerGrab.get();
 	}
 
 	/**
@@ -71,7 +73,8 @@ public class ManipulatorWithKaChunker extends Subsystem {
 	 * @param isGrabbing {@code true} for grab, {@code false} for drop
 	 */
 	public void setKachunker(boolean isGrabbing) {
-		kaChunker.set(isGrabbing);
+		kaChunkerGrab.set(isGrabbing);
+		kaChunkerDrop.set(!isGrabbing);
 	}
 
 	/**
@@ -103,7 +106,7 @@ public class ManipulatorWithKaChunker extends Subsystem {
 	 * @return {@code true} if the manipulator is pointed down
 	 */
 	public boolean isWristDown() {
-		return wrist.get();
+		return wristDown.get();
 	}
 
 	/**
@@ -111,7 +114,8 @@ public class ManipulatorWithKaChunker extends Subsystem {
 	 * @param isDown {@code true} for down, {@code false} for up
 	 */
 	public void setWrist(boolean isDown) {
-		wrist.set(isDown);
+		wristDown.set(isDown);
+		wristUp.set(!isDown);
 	}
 
 	/**

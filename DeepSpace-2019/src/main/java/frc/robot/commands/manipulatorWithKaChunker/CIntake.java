@@ -5,30 +5,39 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.manipulatorWithKaChunker;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 /**
- * Toggles the ka-chunker. Fairly self-descriptive
+ * Use the C to intake cargo<br>
+ * It's not impossible to imagine this will have some PID at some point
  */
-public class KaChunkerToggle extends Command {
+public class CIntake extends Command {
 
 	/**
-	 * Check the ka-chunker's state, then invert it
+	 * Step 1: take the C<br>
+	 * Step 2: intake<br>
+	 * Step 3: stop intake
 	 */
-	public KaChunkerToggle() {
+	public CIntake() {
 		requires(Robot.manipulatorWithKaChunker);
 	}
 
-  	@Override
+	@Override
 	protected void initialize() {
-		Robot.manipulatorWithKaChunker.toggleKachunker();; //Set to the opposite of the current state
+		Robot.manipulatorWithKaChunker.setCSpeed(RobotMap.C_INTAKE); //Roll wheels inward the instant this command begins
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return true;
+		return Robot.manipulatorWithKaChunker.hasCargo(); //Continue rolling until interrupt or cargo acquisition
+	}
+
+	@Override
+	protected void end() {
+		Robot.manipulatorWithKaChunker.setCSpeed(RobotMap.C_STOP); //On interrupt or cargo acquisition, stop the wheels
 	}
 }

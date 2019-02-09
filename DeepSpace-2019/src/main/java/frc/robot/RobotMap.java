@@ -41,17 +41,27 @@ public class RobotMap {
 
 	/* Sensors */
 	public static final int MANIPULATOR_CARGO_SENSOR_PORT = 6;
+	public static final int MANTIS_FRONT_CHANNEL = 7;
+	public static final int MANTIS_BACK_CHANNEL = 8;
+	public static final int MANTIS_ARM_DOWN_SWITCH = 9;
 
 	////////////////////////
 	// PNEUMATIC CHANNELS //
 	////////////////////////
 
 	/* Solenoids */
-	public static final int ELEVATOR_SOLENOID_LEFT = 0;
-	public static final int ELEVATOR_SOLENOID_RIGHT = 1;
-	public static final int MANIPULATOR_KACHUNKER_SOLENOID_CHANNEL = 2;
-	public static final int MANIPULATOR_WRIST_SOLENOID_CHANNEL = 3;
-	public static final int MANTIS_SOLENOID_CHANNEL = 4;
+	public static final int KACHUNKER_SOLENOID_GRAB_CHANNEL = 0;
+	public static final int KACHUNKER_SOLENOID_DROP_CHANNEL = 1;
+	public static final int WRIST_SOLENOID_DOWN_CHANNEL = 2;
+	public static final int WRIST_SOLENOID_UP_CHANNEL = 3;
+	public static final int DISC_BRAKE_SOLENOID_RELEASE_CHANNEL = 4;
+	public static final int STINGER_SOLENOID_DROP_CHANNEL = 5;
+
+	//TODO: get official numbers
+	public static final int ELEVATOR_TILT_SOLENOID_FORWARD_CHANNEL = 98;
+	public static final int ELEVATOR_TILT_SOLENOID_BACKWARD_CHANNEL = 99;
+	
+	//Will we need more? Say, stinger up for instance
 
 	/////////////
 	// CAN IDs //
@@ -62,6 +72,9 @@ public class RobotMap {
 	public static final int DRIVE_MANTIS_SRX_RIGHT_ID = 2;
 	public static final int MANIPULATOR_C_SRX_TOP_ID = 3;
 	public static final int MANIPULATOR_C_SRX_BOTTOM_ID = 4;
+	public static final int ELEVATOR_A_MOTOR_CAN_ID = 5;
+	public static final int ELEVATOR_B_MOTOR_CAN_ID = 6;
+	public static final int ELEVATOR_C_MOTOR_CAN_ID = 7;
 
 	/////////////////////
 	// SPEED VARIABLES //
@@ -83,4 +96,6 @@ public class RobotMap {
 	public static final double MANTIS_WHEELS_FORWARD = 1.0;
 	public static final double MANTIS_WHEELS_STOP = 0.0;
 	public static final double MANTIS_WHEELS_BACKWARDS = -1.0;
+
+	public static final double ZERO_SPEED = 0.0;
 }
