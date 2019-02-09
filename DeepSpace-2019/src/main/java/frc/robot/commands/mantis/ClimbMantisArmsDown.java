@@ -27,7 +27,7 @@ public class ClimbMantisArmsDown extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return Robot.mantis.isDown() || Robot.mantis.isFrontHigh() || Robot.mantis.isBackHigh();
+    return Robot.mantis.isDown() || Robot.isFrontHigh() || Robot.isBackHigh();
   }
 
   // Called once after isFinished returns true

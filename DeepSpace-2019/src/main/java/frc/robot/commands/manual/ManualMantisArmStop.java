@@ -9,10 +9,11 @@ package frc.robot.commands.manual;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
-public class ManualKaChunkerGrab extends Command {
-  public ManualKaChunkerGrab() {
-	  requires(Robot.manipulatorWithKaChunker);
+public class ManualMantisArmStop extends Command {
+  public ManualMantisArmStop() {
+	  requires(Robot.mantis);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -20,17 +21,14 @@ public class ManualKaChunkerGrab extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-	Robot.manipulatorWithKaChunker.setKachunkerGrab();	  
-	System.out.println("[" + getClass().getName() + "] -Initialize-");
-	System.out.println("[" + getClass().getName() + "] -KaChunkerGrab-");
-}
+	  Robot.mantis.setArmSpeed(RobotMap.ZERO_SPEED);
+  }
 
-// Called repeatedly when this Command is scheduled to run
-@Override
-protected void execute() {
-	System.out.println("[" + getClass().getName() + "] -Execute-");
-	System.out.println("[" + getClass().getName() + "] -KaChunkerGrab- " + Robot.manipulatorWithKaChunker.isKachunkerGrabbing());
-}
+  // Called repeatedly when this Command is scheduled to run
+  @Override
+  protected void execute() {
+  }
+
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {

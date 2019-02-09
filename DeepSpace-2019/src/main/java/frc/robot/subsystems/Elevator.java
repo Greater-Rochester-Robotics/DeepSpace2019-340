@@ -9,13 +9,14 @@ package frc.robot.subsystems;
 
 //Can we clean these up?
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANDigitalInput.LimitSwitchPolarity;
+import com.revrobotics.CANDigitalInput;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.ConfigParameter;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.commands.ElevatorStick;
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
 
 /**
@@ -31,7 +32,7 @@ public class Elevator extends Subsystem {
 	
 	private static Solenoid tiltForward, tiltBackward, discBrake;
 	private static CANSparkMax elevatorA, elevatorB, elevatorC;
-	private static DigitalInput reverseLimit;
+	private static CANDigitalInput elevatorReverseLimit;
 	private static CANEncoder enc;
 
 	private double offset = 0; //Adjusts for encoder drift
@@ -47,7 +48,7 @@ public class Elevator extends Subsystem {
 		elevatorA = new CANSparkMax(RobotMap.ELEVATOR_A_MOTOR_CAN_ID, MotorType.kBrushless);
 		elevatorB = new CANSparkMax(RobotMap.ELEVATOR_B_MOTOR_CAN_ID, MotorType.kBrushless);
 		elevatorC = new CANSparkMax(RobotMap.ELEVATOR_C_MOTOR_CAN_ID, MotorType.kBrushless);
-		reverseLimit = new DigitalInput(RobotMap.ELEVATOR_BOTTOM_SENSOR_PORT); //Explain? TODO: check normal state
+		elevatorReverseLimit  = elevatorA.getReverseLimitSwitch(LimitSwitchPolarity.kNormallyOpen);	
 		enc = elevatorA.getEncoder(); //FIXME: adjust for gearing
 
 		//Enslave motors B and C to motor A
@@ -67,12 +68,6 @@ public class Elevator extends Subsystem {
 	 * @param spd new speed; positive = up
 	 */
 	public void setSpeed(double spd) {
-		if(isAtBottom() && spd < RobotMap.ZERO_SPEED) {
-			spd = RobotMap.ZERO_SPEED;
-		} else if(isAtTop() && spd > RobotMap.ZERO_SPEED) {
-			spd = RobotMap.ZERO_SPEED;
-		}
-
 		if(spd == RobotMap.ZERO_SPEED) {
 			discBrake.set(true); //Brake the disk
 		} else {
@@ -80,6 +75,29 @@ public class Elevator extends Subsystem {
 		}
 		
 		elevatorA.set(spd);
+	}
+
+	public void setSpeedScaled(double speed) {
+		//Slows the elevator down before it breaks everything.
+		if (speed < -0.05) {
+			if(getPos() < RobotMap.ELEVATOR_BOTTOM_UPPER_SLOW) {
+				speed *= 0.3;
+			} else if(getPos() < RobotMap.ELEVATOR_BOTTOM_LOWER_SLOW) {
+				speed *= 0.1;
+			}
+
+			setSpeed(speed);
+		} else if (speed > 0.05) {
+			if (getPos() > RobotMap.ELEVATOR_TOP_UPPER_SLOW) {
+				speed = 0.05;
+			} else if (getPos() > RobotMap.ELEVATOR_TOP_LOWER_SLOW) {
+				speed *= 0.4;
+			}
+
+			setSpeed(speed);
+		} else {
+			setSpeed(RobotMap.ZERO_SPEED);
+		}
 	}
 
 	/**
@@ -140,7 +158,7 @@ public class Elevator extends Subsystem {
 	 * @return {@code true} if elevator is triggering bottom DI
 	 */
 	public boolean isAtBottom() {
-		return reverseLimit.get();
+		return elevatorReverseLimit.get();
 	}
 
 	/**
@@ -149,6 +167,6 @@ public class Elevator extends Subsystem {
 	 * value is scaled via the MAX to centimeters. Hopefully.
 	 */
 	public boolean isAtTop() {
-		return getPos() >= RobotMap.ELEVATOR_MAX_HEIGHT_CM;
+		return getPos() >= RobotMap.ELEVATOR_MAX_HEIGHT;
 	}
 }

@@ -24,6 +24,7 @@ import frc.robot.RobotMap;
  */
 public class ManipulatorWithKaChunker extends Subsystem {
 	private static DigitalInput cargoSensor; //Triggers when the cargo is secured
+	private static DigitalInput hatchSensor;
 	private static Solenoid kaChunkerGrab, kaChunkerDrop, wristDown, wristUp;
 	private static TalonSRX cBottom, cTop; //Top and bottom wheels of the C intake
 
@@ -33,6 +34,7 @@ public class ManipulatorWithKaChunker extends Subsystem {
 	 */
 	public ManipulatorWithKaChunker() {
 		cargoSensor = new DigitalInput(RobotMap.MANIPULATOR_CARGO_SENSOR_PORT);
+		hatchSensor = new DigitalInput(RobotMap.MANIPULATOR_HATCH_SENSOR_PORT);
 
 		kaChunkerGrab = new Solenoid(RobotMap.KACHUNKER_SOLENOID_GRAB_CHANNEL);
 		kaChunkerDrop = new Solenoid(RobotMap.KACHUNKER_SOLENOID_DROP_CHANNEL);
@@ -65,21 +67,14 @@ public class ManipulatorWithKaChunker extends Subsystem {
 	 * @return {@code true} if ka-chunker is grabbing
 	 */
 	public boolean isKachunkerGrabbing() {
-		return kaChunkerGrab.get();
+		return kaChunkerGrab.get() && !kaChunkerDrop.get();
 	}
 
-	public boolean getKaChunkerGrab(){
-		return kaChunkerGrab.get();
-	}
-
-	public boolean getKaChunkerDrop(){
-		return kaChunkerDrop.get();
-	}
 	/**
 	 * Set the ka-chunker's state
 	 * @param isGrabbing {@code true} for grab, {@code false} for drop
 	 */
-	public void setKachunker(boolean isGrabbing) {
+	private void setKachunker(boolean isGrabbing) {
 		kaChunkerGrab.set(isGrabbing);
 		kaChunkerDrop.set(!isGrabbing);
 	}
@@ -105,8 +100,6 @@ public class ManipulatorWithKaChunker extends Subsystem {
 		setKachunker(!isKachunkerGrabbing());
 	}
 
-
-
 	///////////
 	// WRIST //
 	///////////
@@ -115,19 +108,14 @@ public class ManipulatorWithKaChunker extends Subsystem {
 	 * @return {@code true} if the manipulator is pointed down
 	 */
 	public boolean isWristDown() {
-		if( wristDown.get()){
-			return(true);
-		}
-		else
-			return(false);
-		
+		return  wristDown.get() && !wristUp.get();
 	}
 
 	/**
 	 * Set the wrist's direction
 	 * @param isDown {@code true} for down, {@code false} for up
 	 */
-	public void setWrist(boolean isDown) {
+	private void setWrist(boolean isDown) {
 		wristDown.set(isDown);
 		wristUp.set(!isDown);
 	}

@@ -11,9 +11,11 @@ import com.analog.adis16448.frc.ADIS16448_IMU;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.DriveXOne;
 
@@ -31,6 +33,8 @@ public class Drive extends Subsystem {
 	private static Talon talonLeft, talonRight;
 
 	private static TalonSRX mantisLeft, mantisRight;
+
+	private static DigitalInput back, front;
 
 	/**
 	 * Set up the Talons and encoders with the ports specified
@@ -273,9 +277,17 @@ public class Drive extends Subsystem {
 		    	mantisRSpeed = -Math.max(-moveValue, -rotateValue);
 		    }
 		}
-
-		setMantisBoth(mantisLSpeed, mantisRSpeed);
+		if (!Robot.isFrontHigh() && !Robot.isBackHigh()) {
+			setMantisBoth(0, 0);
+			setDriveBoth(mantisLSpeed, mantisRSpeed);
+		} else {
+			setMantisBoth(mantisLSpeed, mantisRSpeed);
+			setDriveBoth(mantisLSpeed, mantisRSpeed);
+		}
+		
 	}
+
+
 
 	/**
 	 * Experiental GTA-esque drive scheme from 2017. Probably not for competition use
@@ -289,4 +301,7 @@ public class Drive extends Subsystem {
 			}
 		}
 	}
+
+
+	
 }

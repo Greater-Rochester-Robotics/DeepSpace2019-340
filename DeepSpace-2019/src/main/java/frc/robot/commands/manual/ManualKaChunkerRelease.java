@@ -20,7 +20,7 @@ public class ManualKaChunkerRelease extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-	  Robot.manipulatorWithKaChunker.setKachunker(false);
+	  Robot.manipulatorWithKaChunker.setKachunkerDrop();
 	  System.out.println("[" + getClass().getName() + "] -Initialize-");
 	  System.out.println("[" + getClass().getName() + "] -KaChunkerGrab-");
   }
