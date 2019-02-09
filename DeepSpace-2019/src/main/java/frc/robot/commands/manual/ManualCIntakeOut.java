@@ -22,13 +22,16 @@ public class ManualCIntakeOut extends Command {
   @Override
   protected void initialize() {
 	  Robot.manipulatorWithKaChunker.setCSpeed(RobotMap.C_OUTTAKE);
+	  System.out.println("[" + getClass().getName() + "] -Initialize-");
+	  System.out.println("[" + getClass().getName() + "] -CIntakeOut-");
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+	  System.out.println("[" + getClass().getName() + "] -Execute-");
+	  System.out.println("[" + getClass().getName() + "] -CIntakeSpeed- " + Robot.manipulatorWithKaChunker.getCSpeed());
   }
-
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {

@@ -68,6 +68,13 @@ public class ManipulatorWithKaChunker extends Subsystem {
 		return kaChunkerGrab.get();
 	}
 
+	public boolean getKaChunkerGrab(){
+		return kaChunkerGrab.get();
+	}
+
+	public boolean getKaChunkerDrop(){
+		return kaChunkerDrop.get();
+	}
 	/**
 	 * Set the ka-chunker's state
 	 * @param isGrabbing {@code true} for grab, {@code false} for drop
@@ -98,6 +105,8 @@ public class ManipulatorWithKaChunker extends Subsystem {
 		setKachunker(!isKachunkerGrabbing());
 	}
 
+
+
 	///////////
 	// WRIST //
 	///////////
@@ -106,7 +115,12 @@ public class ManipulatorWithKaChunker extends Subsystem {
 	 * @return {@code true} if the manipulator is pointed down
 	 */
 	public boolean isWristDown() {
-		return wristDown.get();
+		if( wristDown.get()){
+			return(true);
+		}
+		else
+			return(false);
+		
 	}
 
 	/**

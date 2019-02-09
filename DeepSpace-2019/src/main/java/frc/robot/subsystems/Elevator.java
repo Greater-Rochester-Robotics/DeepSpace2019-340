@@ -91,6 +91,22 @@ public class Elevator extends Subsystem {
 	}
 
 	/**
+	 * 
+	 * @return the value of the forward solenoid
+	 */
+	public boolean getTiltForward(){
+		return tiltForward.get();
+	}
+
+	/**
+	 * 
+	 * @return the value of the backward solenoid
+	 */
+	public boolean getTiltBackward(){
+		return tiltBackward.get();
+	}
+
+	/**
 	 *  Tilts the Elevator forward
 	 */
 	public void tiltForward() {

@@ -21,12 +21,17 @@ public class ManualElevatorTiltBack extends Command {
   @Override
   protected void initialize() {
 	  Robot.elevator.tiltBackward();
+	  System.out.println("[" + getClass().getName() + "] -Initialize-");
+	  System.out.println("[" + getClass().getName() + "] -ElevatorTiltForward-");
   }
-
+  
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-  }
+	  System.out.println("[" + getClass().getName() + "] -Execute-");
+	  System.out.println("[" + getClass().getName() + "] -ElevatorTiltForward- " + Robot.elevator.getTiltForward());
+	  System.out.println("[" + getClass().getName() + "] -ElevatorTiltForward- "  + Robot.elevator.getTiltBackward());
+	}	
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
