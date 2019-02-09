@@ -21,11 +21,15 @@ public class ManualManipulatorWristUp extends Command {
   @Override
   protected void initialize() {
 	  Robot.manipulatorWithKaChunker.setWristUp();
+	  System.out.println("[" + getClass().getName() + "] -Initialize-");
+	  System.out.println("[" + getClass().getName() + "] -WristUp-");
   }
-
+  
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+	  System.out.println("[" + getClass().getName() + "] -Execute-");
+	  System.out.println("[" + getClass().getName() + "] -WristUp- " + !Robot.manipulatorWithKaChunker.isWristDown());
   }
 
   // Make this return true when this Command no longer needs to run execute()

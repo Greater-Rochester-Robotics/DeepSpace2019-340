@@ -21,14 +21,17 @@ public class ManualKaChunkerGrab extends Command {
   @Override
   protected void initialize() {
 	Robot.manipulatorWithKaChunker.setKachunker(true);	  
-  }
-
-  // Called repeatedly when this Command is scheduled to run
-  @Override
-  protected void execute() {
-  
+	System.out.println("[" + getClass().getName() + "] -Initialize-");
+	System.out.println("[" + getClass().getName() + "] -KaChunkerGrab-");
 }
 
+// Called repeatedly when this Command is scheduled to run
+@Override
+protected void execute() {
+	System.out.println("[" + getClass().getName() + "] -Execute-");
+	System.out.println("[" + getClass().getName() + "] -KaChunkerGrab- " + Robot.manipulatorWithKaChunker.getKaChunkerGrab());
+	System.out.println("[" + getClass().getName() + "] -KaChunkerDrop- "  + Robot.manipulatorWithKaChunker.getKaChunkerDrop());
+}
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {

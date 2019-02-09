@@ -22,13 +22,16 @@ public class ManualElevatorUp extends Command {
   @Override
   protected void initialize() {
 	  Robot.elevator.setSpeed(RobotMap.ELEVATOR_UP_SPEED);
-	  
-
+	  System.out.println("[" + getClass().getName() + "] -Initialize-");
+	  System.out.println("[" + getClass().getName() + "] -ElevatorUp-");
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+	  System.out.println("[" + getClass().getName() + "] -Execute-");
+	  System.out.println("[" + getClass().getName() + "] -ElevatorSpeed- " + Robot.elevator.getSpeed());
+	  System.out.println("[" + getClass().getName() + "] -ElevatorPosition- "  + Robot.elevator.getPos());
   }
 
   // Make this return true when this Command no longer needs to run execute()
