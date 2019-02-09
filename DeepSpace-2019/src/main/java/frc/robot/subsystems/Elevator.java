@@ -9,13 +9,13 @@ package frc.robot.subsystems;
 
 //Can we clean these up?
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANDigitalInput;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.ConfigParameter;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.commands.ElevatorStick;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
 
 /**
@@ -31,7 +31,7 @@ public class Elevator extends Subsystem {
 	
 	private static Solenoid tiltForward, tiltBackward, discBrake;
 	private static CANSparkMax elevatorA, elevatorB, elevatorC;
-	private static CANDigitalInput reverseLimit;
+	private static DigitalInput reverseLimit;
 	private static CANEncoder enc;
 
 	private double offset = 0; //Adjusts for encoder drift
@@ -47,14 +47,12 @@ public class Elevator extends Subsystem {
 		elevatorA = new CANSparkMax(RobotMap.ELEVATOR_A_MOTOR_CAN_ID, MotorType.kBrushless);
 		elevatorB = new CANSparkMax(RobotMap.ELEVATOR_B_MOTOR_CAN_ID, MotorType.kBrushless);
 		elevatorC = new CANSparkMax(RobotMap.ELEVATOR_C_MOTOR_CAN_ID, MotorType.kBrushless);
-		reverseLimit = elevatorA.getReverseLimitSwitch(CANDigitalInput.LimitSwitchPolarity.kNormallyOpen); //Explain? TODO: check normal state
+		reverseLimit = new DigitalInput(RobotMap.ELEVATOR_BOTTOM_SENSOR_PORT); //Explain? TODO: check normal state
 		enc = elevatorA.getEncoder(); //FIXME: adjust for gearing
 
 		//Enslave motors B and C to motor A
 		elevatorB.follow(elevatorA);
 		elevatorC.follow(elevatorA);
-
-		reverseLimit.enableLimitSwitch(true); //Does this add a top soft limit?
 	}
 
 	@Override

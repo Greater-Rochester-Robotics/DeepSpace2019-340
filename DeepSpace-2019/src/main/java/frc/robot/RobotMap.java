@@ -36,10 +36,11 @@ public class RobotMap {
 	public static final int DRIVE_ENCODER_LEFT_CHANNEL_B = 1;
 	public static final int DRIVE_ENCODER_RIGHT_CHANNEL_A = 2;
 	public static final int DRIVE_ENCODER_RIGHT_CHANNEL_B = 3;
-	public static final int ELEVATOR_ENCODER_CHANNEL_A = 4;
-	public static final int ELEVATOR_ENCODER_CHANNEL_B = 5;
+	// public static final int ELEVATOR_ENCODER_CHANNEL_A = 4;
+	// public static final int ELEVATOR_ENCODER_CHANNEL_B = 5;
 
 	/* Sensors */
+	public static final int ELEVATOR_BOTTOM_SENSOR_PORT = 4;
 	public static final int MANIPULATOR_CARGO_SENSOR_PORT = 6;
 	public static final int MANTIS_FRONT_CHANNEL = 7;
 	public static final int MANTIS_BACK_CHANNEL = 8;
