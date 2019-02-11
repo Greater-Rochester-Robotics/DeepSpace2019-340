@@ -74,9 +74,10 @@ public class RobotMap {
 	public static final int DRIVE_MANTIS_SRX_RIGHT_ID = 2;
 	public static final int MANIPULATOR_C_SRX_TOP_ID = 3;
 	public static final int MANIPULATOR_C_SRX_BOTTOM_ID = 4;
-	public static final int ELEVATOR_A_MOTOR_CAN_ID = 5;
-	public static final int ELEVATOR_B_MOTOR_CAN_ID = 6;
-	public static final int ELEVATOR_C_MOTOR_CAN_ID = 7;
+	//SRXes on IDs 5 and 6 are currently unassigned. 5 goes to a taped-off wire, and 6 to nothing
+	public static final int ELEVATOR_A_MOTOR_CAN_ID = 8; //leftmost; chooched; number to be swapped back from B
+	public static final int ELEVATOR_B_MOTOR_CAN_ID = 7; //rightmost; temp leader; ID to be swapped back from A
+	public static final int ELEVATOR_C_MOTOR_CAN_ID = 9; //middle
 
 	///////////////
 	// CONSTANTS //
@@ -100,9 +101,12 @@ public class RobotMap {
 	public static final double MANTIS_WHEELS_STOP = 0.0;
 	public static final double MANTIS_WHEELS_BACKWARDS = -1.0;
 
+	/* The Titular Zero Speed */
 	public static final double ZERO_SPEED = 0.0;
 
-	public static final double ELEVATOR_MAX_HEIGHT = 100; //temporary
+	/* Elevator heights */
+	//All currently temporary
+	public static final double ELEVATOR_MAX_HEIGHT = 100;
 	public static final double ELEVATOR_TOP_UPPER_SLOW = 95;
 	public static final double ELEVATOR_TOP_LOWER_SLOW = 90;
 	public static final double ELEVATOR_BOTTOM_UPPER_SLOW = 10;

@@ -101,7 +101,7 @@ public class Elevator extends Subsystem {
 	}
 
 	/**
-	 * @return the robot's distance traveled, offset included
+	 * @return the elevator's height traveled, offset included
 	 * FIXME: adjust for gearing via {@link ConfigParameter#kEncoderCountsPerRev}
 	 */
 	public double getPos() {
@@ -116,7 +116,6 @@ public class Elevator extends Subsystem {
 	}
 
 	/**
-	 * 
 	 * @return the value of the forward solenoid
 	 */
 	public boolean getTiltForward(){
@@ -165,6 +164,7 @@ public class Elevator extends Subsystem {
 	 * @return {@code true} if the elevator is at least at its
 	 * max height. The encoder returns motor rotations, but this
 	 * value is scaled via the MAX to centimeters. Hopefully.
+	 * TODO: check if we might as well just use revolutions
 	 */
 	public boolean isAtTop() {
 		return getPos() >= RobotMap.ELEVATOR_MAX_HEIGHT;
