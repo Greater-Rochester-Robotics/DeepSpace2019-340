@@ -250,58 +250,25 @@ public class Drive extends Subsystem {
 		    }
 		}
 
-		setDriveBoth(leftSpeed, rightSpeed);
-	}
-
-	/**
-     * One joystick drive mode for mantis wheels. One stick axis speeds forward/backwards,
-	 * the other adds rotation on robot yaw axis
-     * @param moveValue forward/backward speed, as a percentage of max forward speed
-     * @param rotateValue rotation speed, as a percentage of max rightward rotation speed
-     */
-    public void mantisArcadeDrive(double moveValue, double rotateValue) {
-		if(moveValue > 0.0) {
-		    if(rotateValue > 0.0) {
-		    	mantisLSpeed = moveValue - rotateValue;
-		    	mantisRSpeed = Math.max(moveValue, rotateValue);
-		    } else {
-		    	mantisLSpeed = Math.max(moveValue, -rotateValue);
-		    	mantisRSpeed = moveValue + rotateValue;
-		    }
-		} else {
-		    if(rotateValue > 0.0) {
-		    	mantisLSpeed = -Math.max(-moveValue, rotateValue);
-		    	mantisRSpeed = moveValue + rotateValue;
-		    } else {
-				mantisLSpeed = moveValue - rotateValue;
-		    	mantisRSpeed = -Math.max(-moveValue, -rotateValue);
-		    }
-		}
-		if (!Robot.isFrontHigh() && !Robot.isBackHigh()) {
+		if(!Robot.isFrontHigh() && !Robot.isBackHigh()) {
 			setMantisBoth(0, 0);
-			setDriveBoth(mantisLSpeed, mantisRSpeed);
+			setDriveBoth(leftSpeed, rightSpeed);
 		} else {
-			setMantisBoth(mantisLSpeed, mantisRSpeed);
-			setDriveBoth(mantisLSpeed, mantisRSpeed);
+			setMantisBoth(leftSpeed, rightSpeed);
+			setDriveBoth(leftSpeed, rightSpeed);
 		}
-		
 	}
-
-
 
 	/**
 	 * Experiental GTA-esque drive scheme from 2017. Probably not for competition use
 	 * @param speed forward/backward speed, as a percentage of max forward speed
 	 * @param rotateValue rotation speed, as a percentage of max rightward rotation speed
 	 */
-	public void gtaDrive(double speed, double rotateValue) {
-		if(speed > 0) {
-			if(rotateValue > 0) {
-				//TODO: write this
-			}
-		}
-	}
-
-
-	
+	// public void gtaDrive(double speed, double rotateValue) {
+	// 	if(speed > 0) {
+	// 		if(rotateValue > 0) {
+	// 			//
+	// 		}
+	// 	}
+	// }
 }
