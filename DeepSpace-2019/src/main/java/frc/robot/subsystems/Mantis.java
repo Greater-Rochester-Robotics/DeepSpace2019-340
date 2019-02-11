@@ -8,8 +8,9 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
@@ -24,7 +25,7 @@ import frc.robot.RobotMap;
  * <i>subsystem</i> is named mantis... which is which?
  */
 public class Mantis extends Subsystem {
-	private static Solenoid stingerDrop, stingerRaise; //Controls the piston at the back of the bot
+	private static DoubleSolenoid stinger; //Drops the back piston
 	private static Talon arm; //Throws the mantis arms down
 	private static DigitalInput down;
 	 //front, back, and down sensors for mantis driving on
@@ -33,7 +34,7 @@ public class Mantis extends Subsystem {
 	 * given {@link RobotMap}
 	 */
 	public Mantis() {
-		stingerDrop = new Solenoid(RobotMap.STINGER_SOLENOID_DROP_CHANNEL);
+		stinger = new DoubleSolenoid(RobotMap.STINGER_SOLENOID_DROP_CHANNEL, RobotMap.STINGER_SOLENOID_RAISE_CHANNEL);
 		arm = new Talon(RobotMap.MANTIS_TALON_CHANNEL);
 		down = new DigitalInput(RobotMap.MANTIS_ARM_DOWN_SWITCH);
 	}
@@ -49,22 +50,20 @@ public class Mantis extends Subsystem {
 
 	/**
 	 * Flick the piston
-	 * @param isForward {@code true} if stringer should extend
+	 * @param isForward {@code true} if stinger should extend
 	 * TODO: forward/backward
 	 */
 	public void setStinger(boolean isForward) {
-		stingerDrop.set(isForward);
+		stinger.set(isForward ? Value.kForward : Value.kReverse);
 	}
 
 	/**
 	 * Returns whether or not the Mantis down arm is all the way down.
-	 * @return True if the arm is down.
+	 * @return {@code true} if the arm is down.
 	 */
 	public boolean isDown() {
 		return down.get();
 	}
-
-
 
 	@Override
 	public void initDefaultCommand() {}

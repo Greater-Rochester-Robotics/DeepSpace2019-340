@@ -29,7 +29,6 @@ import edu.wpi.first.wpilibj.Solenoid;
  * TODO: make this <i>much</i> more sophisticated
  */
 public class Elevator extends Subsystem {
-	
 	private static Solenoid tiltForward, tiltBackward, discBrake;
 	private static CANSparkMax elevatorA, elevatorB, elevatorC;
 	private static CANDigitalInput elevatorReverseLimit;
@@ -118,16 +117,8 @@ public class Elevator extends Subsystem {
 	/**
 	 * @return the value of the forward solenoid
 	 */
-	public boolean getTiltForward(){
+	public boolean isTiltedForward() {
 		return tiltForward.get();
-	}
-
-	/**
-	 * 
-	 * @return the value of the backward solenoid
-	 */
-	public boolean getTiltBackward(){
-		return tiltBackward.get();
 	}
 
 	/**

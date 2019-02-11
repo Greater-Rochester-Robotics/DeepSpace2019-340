@@ -11,7 +11,9 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Ultrasonic;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
@@ -24,8 +26,9 @@ import frc.robot.RobotMap;
  */
 public class ManipulatorWithKaChunker extends Subsystem {
 	private static DigitalInput cargoSensor; //Triggers when the cargo is secured
-	private static DigitalInput hatchSensor;
-	private static Solenoid kaChunkerGrab, kaChunkerDrop, wristDown, wristUp;
+	private static DigitalInput hatchSensor; //Triggers when the hatch is confirmed grabbed
+	private static Ultrasonic hatchGrabSensor; //Used to determine whether to auto-grab hatch
+	private static DoubleSolenoid kaChunker, wrist;
 	private static TalonSRX cBottom, cTop; //Top and bottom wheels of the C intake
 
 	/**
@@ -36,10 +39,8 @@ public class ManipulatorWithKaChunker extends Subsystem {
 		cargoSensor = new DigitalInput(RobotMap.MANIPULATOR_CARGO_SENSOR_PORT);
 		hatchSensor = new DigitalInput(RobotMap.MANIPULATOR_HATCH_SENSOR_PORT);
 
-		kaChunkerGrab = new Solenoid(RobotMap.KACHUNKER_SOLENOID_GRAB_CHANNEL);
-		kaChunkerDrop = new Solenoid(RobotMap.KACHUNKER_SOLENOID_DROP_CHANNEL);
-		wristDown = new Solenoid(RobotMap.WRIST_SOLENOID_DOWN_CHANNEL);
-		wristUp = new Solenoid(RobotMap.WRIST_SOLENOID_UP_CHANNEL);
+		kaChunker = new DoubleSolenoid(RobotMap.KACHUNKER_SOLENOID_DROP_CHANNEL, RobotMap.KACHUNKER_SOLENOID_GRAB_CHANNEL);
+		wrist = new DoubleSolenoid(RobotMap.WRIST_SOLENOID_DOWN_CHANNEL, RobotMap.WRIST_SOLENOID_UP_CHANNEL);
 
 		cBottom = new TalonSRX(RobotMap.MANIPULATOR_C_SRX_BOTTOM_ID);
 		cTop = new TalonSRX(RobotMap.MANIPULATOR_C_SRX_TOP_ID);
@@ -67,7 +68,7 @@ public class ManipulatorWithKaChunker extends Subsystem {
 	 * @return {@code true} if ka-chunker is grabbing
 	 */
 	public boolean isKachunkerGrabbing() {
-		return kaChunkerGrab.get() && !kaChunkerDrop.get();
+		return kaChunker.get().equals(Value.kReverse);
 	}
 
 	/**
@@ -75,8 +76,7 @@ public class ManipulatorWithKaChunker extends Subsystem {
 	 * @param isGrabbing {@code true} for grab, {@code false} for drop
 	 */
 	private void setKachunker(boolean isGrabbing) {
-		kaChunkerGrab.set(isGrabbing);
-		kaChunkerDrop.set(!isGrabbing);
+		kaChunker.set(isGrabbing ? Value.kReverse : Value.kForward);
 	}
 
 	/**
@@ -108,7 +108,7 @@ public class ManipulatorWithKaChunker extends Subsystem {
 	 * @return {@code true} if the manipulator is pointed down
 	 */
 	public boolean isWristDown() {
-		return  wristDown.get() && !wristUp.get();
+		return wrist.get().equals(Value.kForward);
 	}
 
 	/**
@@ -116,8 +116,7 @@ public class ManipulatorWithKaChunker extends Subsystem {
 	 * @param isDown {@code true} for down, {@code false} for up
 	 */
 	private void setWrist(boolean isDown) {
-		wristDown.set(isDown);
-		wristUp.set(!isDown);
+		wrist.set(isDown ? Value.kForward : Value.kReverse);
 	}
 
 	/**

@@ -56,12 +56,11 @@ public class RobotMap {
 	public static final int KACHUNKER_SOLENOID_DROP_CHANNEL = 1;
 	public static final int WRIST_SOLENOID_DOWN_CHANNEL = 2;
 	public static final int WRIST_SOLENOID_UP_CHANNEL = 3;
-	public static final int DISC_BRAKE_SOLENOID_RELEASE_CHANNEL = 4;
+	public static final int DISC_BRAKE_SOLENOID_RELEASE_CHANNEL = 4; //Single
 	public static final int STINGER_SOLENOID_DROP_CHANNEL = 5;
-
-	//TODO: get official numbers
-	public static final int ELEVATOR_TILT_SOLENOID_FORWARD_CHANNEL = 98;
-	public static final int ELEVATOR_TILT_SOLENOID_BACKWARD_CHANNEL = 99;
+	public static final int STINGER_SOLENOID_RAISE_CHANNEL = 6;
+	public static final int ELEVATOR_TILT_SOLENOID_FORWARD_CHANNEL = 7; //Single
+	public static final int ELEVATOR_TILT_SOLENOID_BACKWARD_CHANNEL = 8; //Single
 	
 	//Will we need more? Say, stinger up for instance
 

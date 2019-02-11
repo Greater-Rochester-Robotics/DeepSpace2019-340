@@ -10,8 +10,6 @@ package frc.robot.subsystems;
 import com.analog.adis16448.frc.ADIS16448_IMU;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -25,16 +23,12 @@ import frc.robot.commands.DriveXOne;
  * command unless explicitly told otherwise
  */
 public class Drive extends Subsystem {
-	private double leftSpeed, rightSpeed; //Makes math easier for fancy drive 
-	private double mantisLSpeed, mantisRSpeed; //See above
+	private double leftSpeed, rightSpeed; //Makes math easier for fancy drive
 
 	private static ADIS16448_IMU imu;
 	private static Encoder encLeft, encRight; //TODO: adjust for circumference
 	private static Talon talonLeft, talonRight;
-
 	private static TalonSRX mantisLeft, mantisRight;
-
-	private static DigitalInput back, front;
 
 	/**
 	 * Set up the Talons and encoders with the ports specified
