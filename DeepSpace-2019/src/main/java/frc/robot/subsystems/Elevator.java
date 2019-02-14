@@ -9,7 +9,7 @@ package frc.robot.subsystems;
 
 //Can we clean these up?
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANDigitalInput.LimitSwitchPolarity;
+// import com.revrobotics.CANDigitalInput.LimitSwitchPolarity;
 import com.revrobotics.CANDigitalInput;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.ConfigParameter;
@@ -17,7 +17,9 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.commands.ElevatorStick;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 /**
  * <h1>Elevator</h1>
@@ -29,9 +31,10 @@ import edu.wpi.first.wpilibj.Solenoid;
  * TODO: make this <i>much</i> more sophisticated
  */
 public class Elevator extends Subsystem {
-	private static Solenoid tiltForward, tiltBackward, discBrake;
+	private static Solenoid discBrake;
+	private static DoubleSolenoid tilt;
 	private static CANSparkMax elevatorA, elevatorB, elevatorC;
-	private static CANDigitalInput elevatorReverseLimit;
+	// private static CANDigitalInput elevatorReverseLimit;
 	private static CANEncoder enc;
 
 	private double offset = 0; //Adjusts for encoder drift
@@ -41,13 +44,12 @@ public class Elevator extends Subsystem {
 	 * numbers in robotmap
 	 */
 	public Elevator() {
-		tiltForward = new Solenoid(RobotMap.ELEVATOR_TILT_SOLENOID_FORWARD_CHANNEL);
-		tiltBackward = new Solenoid(RobotMap.ELEVATOR_TILT_SOLENOID_BACKWARD_CHANNEL);
+		tilt = new DoubleSolenoid(RobotMap.ELEVATOR_TILT_SOLENOID_FORWARD_CHANNEL, RobotMap.ELEVATOR_TILT_SOLENOID_BACKWARD_CHANNEL);
 		discBrake = new Solenoid(RobotMap.DISC_BRAKE_SOLENOID_RELEASE_CHANNEL);
 		elevatorA = new CANSparkMax(RobotMap.ELEVATOR_A_MOTOR_CAN_ID, MotorType.kBrushless);
 		elevatorB = new CANSparkMax(RobotMap.ELEVATOR_B_MOTOR_CAN_ID, MotorType.kBrushless);
 		elevatorC = new CANSparkMax(RobotMap.ELEVATOR_C_MOTOR_CAN_ID, MotorType.kBrushless);
-		elevatorReverseLimit  = elevatorA.getReverseLimitSwitch(LimitSwitchPolarity.kNormallyOpen);	
+		// elevatorReverseLimit  = elevatorA.getReverseLimitSwitch(LimitSwitchPolarity.kNormallyOpen);
 		enc = elevatorA.getEncoder(); //FIXME: adjust for gearing
 
 		//Enslave motors B and C to motor A
@@ -68,9 +70,9 @@ public class Elevator extends Subsystem {
 	 */
 	public void setSpeed(double spd) {
 		if(spd == RobotMap.ZERO_SPEED) {
-			discBrake.set(true); //Brake the disk
+			discBrake.set(false); //Brake the disk
 		} else {
-			discBrake.set(false); //Let it slide
+			discBrake.set(true); //Let it slide
 		}
 		
 		elevatorA.set(spd);
@@ -118,23 +120,21 @@ public class Elevator extends Subsystem {
 	 * @return the value of the forward solenoid
 	 */
 	public boolean isTiltedForward() {
-		return tiltForward.get();
+		return tilt.get().equals(Value.kForward);
 	}
 
 	/**
 	 *  Tilts the Elevator forward
 	 */
 	public void tiltForward() {
-		tiltForward.set(true);
-		tiltBackward.set(false);
+		tilt.set(Value.kForward);
 	}
 
 	/**
 	 *  Tilts the Elevator backward
 	 */
 	public void tiltBackward() {
-		tiltForward.set(false);
-		tiltBackward.set(true);
+		tilt.set(Value.kReverse);
 	}
 
 	/**
@@ -148,7 +148,8 @@ public class Elevator extends Subsystem {
 	 * @return {@code true} if elevator is triggering bottom DI
 	 */
 	public boolean isAtBottom() {
-		return elevatorReverseLimit.get();
+		// return elevatorReverseLimit.get();
+		return false;
 	}
 
 	/**

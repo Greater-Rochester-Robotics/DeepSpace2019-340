@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Ultrasonic;
@@ -28,7 +29,8 @@ public class ManipulatorWithKaChunker extends Subsystem {
 	private static DigitalInput cargoSensor; //Triggers when the cargo is secured
 	private static DigitalInput hatchSensor; //Triggers when the hatch is confirmed grabbed
 	private static Ultrasonic hatchGrabSensor; //Used to determine whether to auto-grab hatch
-	private static DoubleSolenoid kaChunker, wrist;
+	private static DoubleSolenoid wrist;
+	private static Solenoid kaChunker; //true == drop false == grab
 	private static TalonSRX cBottom, cTop; //Top and bottom wheels of the C intake
 
 	/**
@@ -39,14 +41,13 @@ public class ManipulatorWithKaChunker extends Subsystem {
 		cargoSensor = new DigitalInput(RobotMap.MANIPULATOR_CARGO_SENSOR_PORT);
 		hatchSensor = new DigitalInput(RobotMap.MANIPULATOR_HATCH_SENSOR_PORT);
 
-		kaChunker = new DoubleSolenoid(RobotMap.KACHUNKER_SOLENOID_DROP_CHANNEL, RobotMap.KACHUNKER_SOLENOID_GRAB_CHANNEL);
+		kaChunker = new Solenoid(RobotMap.KACHUNKER_SOLENOID_GRAB_CHANNEL);
 		wrist = new DoubleSolenoid(RobotMap.WRIST_SOLENOID_DOWN_CHANNEL, RobotMap.WRIST_SOLENOID_UP_CHANNEL);
 
 		cBottom = new TalonSRX(RobotMap.MANIPULATOR_C_SRX_BOTTOM_ID);
 		cTop = new TalonSRX(RobotMap.MANIPULATOR_C_SRX_TOP_ID);
 
 		cBottom.set(ControlMode.Follower, RobotMap.MANIPULATOR_C_SRX_TOP_ID); //Enslave bottom SRX to top SRX
-		cBottom.setInverted(true); //Always spin opposite the top SRX | TODO check if electrical will do this for us
 	}
 
 	////////////
@@ -68,7 +69,7 @@ public class ManipulatorWithKaChunker extends Subsystem {
 	 * @return {@code true} if ka-chunker is grabbing
 	 */
 	public boolean isKachunkerGrabbing() {
-		return kaChunker.get().equals(Value.kReverse);
+		return (!kaChunker.get());
 	}
 
 	/**
@@ -76,7 +77,7 @@ public class ManipulatorWithKaChunker extends Subsystem {
 	 * @param isGrabbing {@code true} for grab, {@code false} for drop
 	 */
 	private void setKachunker(boolean isGrabbing) {
-		kaChunker.set(isGrabbing ? Value.kReverse : Value.kForward);
+		kaChunker.set(!isGrabbing);
 	}
 
 	/**
