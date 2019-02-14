@@ -9,7 +9,7 @@ package frc.robot.subsystems;
 
 //Can we clean these up?
 import com.revrobotics.CANSparkMax;
-// import com.revrobotics.CANDigitalInput.LimitSwitchPolarity;
+import com.revrobotics.CANDigitalInput.LimitSwitchPolarity;
 import com.revrobotics.CANDigitalInput;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.ConfigParameter;
@@ -34,7 +34,7 @@ public class Elevator extends Subsystem {
 	private static Solenoid discBrake;
 	private static DoubleSolenoid tilt;
 	private static CANSparkMax elevatorA, elevatorB, elevatorC;
-	// private static CANDigitalInput elevatorReverseLimit;
+	private static CANDigitalInput elevatorReverseLimit;
 	private static CANEncoder enc;
 
 	private double offset = 0; //Adjusts for encoder drift
@@ -49,7 +49,7 @@ public class Elevator extends Subsystem {
 		elevatorA = new CANSparkMax(RobotMap.ELEVATOR_A_MOTOR_CAN_ID, MotorType.kBrushless);
 		elevatorB = new CANSparkMax(RobotMap.ELEVATOR_B_MOTOR_CAN_ID, MotorType.kBrushless);
 		elevatorC = new CANSparkMax(RobotMap.ELEVATOR_C_MOTOR_CAN_ID, MotorType.kBrushless);
-		// elevatorReverseLimit  = elevatorA.getReverseLimitSwitch(LimitSwitchPolarity.kNormallyOpen);
+		elevatorReverseLimit  = elevatorA.getReverseLimitSwitch(LimitSwitchPolarity.kNormallyOpen);
 		enc = elevatorA.getEncoder(); //FIXME: adjust for gearing
 
 		//Enslave motors B and C to motor A
@@ -102,11 +102,11 @@ public class Elevator extends Subsystem {
 	}
 
 	/**
-	 * @return the elevator's height traveled, offset included
+	 * @return the elevator's height traveled, offset included, based on motor rotations
 	 * FIXME: adjust for gearing via {@link ConfigParameter#kEncoderCountsPerRev}
 	 */
 	public double getPos() {
-		return enc.getPosition() - offset;
+		return offset - enc.getPosition(); //Equivalent of -(enc - offset); negative on account of sign
 	}
 
 	/**
@@ -148,8 +148,7 @@ public class Elevator extends Subsystem {
 	 * @return {@code true} if elevator is triggering bottom DI
 	 */
 	public boolean isAtBottom() {
-		// return elevatorReverseLimit.get();
-		return false;
+		return elevatorReverseLimit.get();
 	}
 
 	/**
