@@ -53,15 +53,13 @@ public class RobotMap {
 
 	/* Solenoids */
 	public static final int KACHUNKER_SOLENOID_GRAB_CHANNEL = 0; //Single
-	public static final int WRIST_SOLENOID_DOWN_CHANNEL = 1;
-	public static final int WRIST_SOLENOID_UP_CHANNEL = 2;
-	public static final int DISC_BRAKE_SOLENOID_RELEASE_CHANNEL = 3; //Single
-	public static final int STINGER_SOLENOID_DROP_CHANNEL = 4;
-	public static final int STINGER_SOLENOID_RAISE_CHANNEL = 5;
-	public static final int ELEVATOR_TILT_SOLENOID_FORWARD_CHANNEL = 6; //Single
-	public static final int ELEVATOR_TILT_SOLENOID_BACKWARD_CHANNEL = 7; //Single
-	
-	//Will we need more? Say, stinger up for instance
+	public static final int WRIST_SOLENOID_DOWN_CHANNEL = 3;
+	public static final int WRIST_SOLENOID_UP_CHANNEL = 4;
+	public static final int DISC_BRAKE_SOLENOID_RELEASE_CHANNEL = 5; //Single
+	public static final int STINGER_SOLENOID_DROP_CHANNEL = 1;
+	public static final int STINGER_SOLENOID_RAISE_CHANNEL = 7;
+	public static final int ELEVATOR_TILT_SOLENOID_FORWARD_CHANNEL = 6;
+	public static final int ELEVATOR_TILT_SOLENOID_BACKWARD_CHANNEL = 2;
 
 	/////////////
 	// CAN IDs //
@@ -82,9 +80,9 @@ public class RobotMap {
 	///////////////
 
 	/* C speed */
-	public static final double C_INTAKE = 1.0;
+	public static final double C_INTAKE = -1.0;
 	public static final double C_STOP = 0.0;
-	public static final double C_OUTTAKE = -1.0;
+	public static final double C_OUTTAKE = 1.0;
 	
 	/* Elevator speed */
 	public static final double ELEVATOR_UP_SPEED = 1.0;
