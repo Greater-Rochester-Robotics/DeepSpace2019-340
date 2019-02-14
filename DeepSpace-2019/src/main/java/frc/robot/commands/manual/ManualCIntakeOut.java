@@ -14,8 +14,6 @@ import frc.robot.RobotMap;
 public class ManualCIntakeOut extends Command {
   public ManualCIntakeOut() {
 	  requires(Robot.manipulatorWithKaChunker);
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
   }
 
   // Called just before this Command runs the first time
