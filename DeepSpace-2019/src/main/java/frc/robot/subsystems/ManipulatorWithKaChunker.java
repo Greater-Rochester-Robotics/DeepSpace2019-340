@@ -48,6 +48,7 @@ public class ManipulatorWithKaChunker extends Subsystem {
 		cTop = new TalonSRX(RobotMap.MANIPULATOR_C_SRX_TOP_ID);
 
 		cBottom.set(ControlMode.Follower, RobotMap.MANIPULATOR_C_SRX_TOP_ID); //Enslave bottom SRX to top SRX
+
 	}
 
 	////////////
@@ -153,7 +154,8 @@ public class ManipulatorWithKaChunker extends Subsystem {
 	}
 
 	/**
-	 * Set the percent output of the C
+	 * Set the percent output of the C<br>
+	 * Negative in, positive out
 	 * @param speed the percent output from [-1, 1]
 	 */
 	public void setCSpeed(double speed) {
