@@ -47,6 +47,8 @@ public class Drive extends Subsystem {
 
 		mantisLeft = new TalonSRX(RobotMap.DRIVE_MANTIS_SRX_LEFT_ID);
 		mantisRight = new TalonSRX(RobotMap.DRIVE_MANTIS_SRX_RIGHT_ID);
+
+		mantisRight.setInverted(true);
 	}
 
 	@Override
@@ -244,13 +246,13 @@ public class Drive extends Subsystem {
 		    }
 		}
 
-		if(!Robot.isFrontHigh() && !Robot.isBackHigh()) {
+		/*if(!Robot.isFrontHigh() && !Robot.isBackHigh()) {
 			setMantisBoth(0, 0);
 			setDriveBoth(leftSpeed, rightSpeed);
-		} else {
+		} else {*/
 			setMantisBoth(leftSpeed, rightSpeed);
 			setDriveBoth(leftSpeed, rightSpeed);
-		}
+		// }
 	}
 
 	/**

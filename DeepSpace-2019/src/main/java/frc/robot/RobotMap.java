@@ -24,8 +24,6 @@ public class RobotMap {
 	/* Talons */
 	public static final int DRIVE_TALON_LEFT_CHANNEL = 0;
 	public static final int DRIVE_TALON_RIGHT_CHANNEL = 1;
-	public static final int ELEVATOR_TALON_CHANNEL = 2;
-	public static final int MANTIS_TALON_CHANNEL = 3;
 
 	///////////////
 	// DIO PORTS //
@@ -58,8 +56,8 @@ public class RobotMap {
 	public static final int DISC_BRAKE_SOLENOID_RELEASE_CHANNEL = 5; //Single
 	public static final int STINGER_SOLENOID_DROP_CHANNEL = 1;
 	public static final int STINGER_SOLENOID_RAISE_CHANNEL = 7;
-	public static final int ELEVATOR_TILT_SOLENOID_FORWARD_CHANNEL = 6;
-	public static final int ELEVATOR_TILT_SOLENOID_BACKWARD_CHANNEL = 2;
+	public static final int ELEVATOR_TILT_SOLENOID_FORWARD_CHANNEL = 2;
+	public static final int ELEVATOR_TILT_SOLENOID_BACKWARD_CHANNEL = 6;
 
 	/////////////
 	// CAN IDs //
@@ -70,7 +68,8 @@ public class RobotMap {
 	public static final int DRIVE_MANTIS_SRX_RIGHT_ID = 2;
 	public static final int MANIPULATOR_C_SRX_TOP_ID = 4;
 	public static final int MANIPULATOR_C_SRX_BOTTOM_ID = 3;
-	//SRXes on IDs 5 and 6 are currently unassigned. 5 goes to a taped-off wire, and 6 to nothing
+	public static final int MANTIS_ARM_SRX_LEFT_ID = 5;
+	public static final int MANTIS_ARM_SRX_RIGHT_ID = 6;
 	public static final int ELEVATOR_A_MOTOR_CAN_ID = 13; //mid
 	public static final int ELEVATOR_B_MOTOR_CAN_ID = 12; //left
 	public static final int ELEVATOR_C_MOTOR_CAN_ID = 14; //right

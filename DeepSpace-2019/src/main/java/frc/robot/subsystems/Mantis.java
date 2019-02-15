@@ -7,9 +7,11 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
@@ -26,7 +28,7 @@ import frc.robot.RobotMap;
  */
 public class Mantis extends Subsystem {
 	private static DoubleSolenoid stinger; //Drops the back piston
-	private static Talon arm; //Throws the mantis arms down
+	private static TalonSRX leftArm, rightArm; //Throws the mantis arms down
 	private static DigitalInput down;
 	 //front, back, and down sensors for mantis driving on
 	/**
@@ -35,8 +37,12 @@ public class Mantis extends Subsystem {
 	 */
 	public Mantis() {
 		stinger = new DoubleSolenoid(RobotMap.STINGER_SOLENOID_DROP_CHANNEL, RobotMap.STINGER_SOLENOID_RAISE_CHANNEL);
-		arm = new Talon(RobotMap.MANTIS_TALON_CHANNEL);
+		leftArm = new TalonSRX(RobotMap.MANTIS_ARM_SRX_LEFT_ID);
+		rightArm = new TalonSRX(RobotMap.MANTIS_ARM_SRX_RIGHT_ID);
 		down = new DigitalInput(RobotMap.MANTIS_ARM_DOWN_SWITCH);
+
+		rightArm.set(ControlMode.Follower, RobotMap.MANTIS_ARM_SRX_LEFT_ID);
+		// rightArm.setInverted(true);
 	}
 
 	/**
@@ -45,7 +51,7 @@ public class Mantis extends Subsystem {
 	 * @param speed percentage [-1, 1]
 	 */
 	public void setArmSpeed(double speed) {
-		arm.set(speed);
+		leftArm.set(ControlMode.PercentOutput, speed);
 	}
 
 	/**
