@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.DPad;
+import frc.robot.commands.mantis.MantisClimb;
 import frc.robot.commands.manual.ManualCIntakeIn;
 import frc.robot.commands.manual.ManualCIntakeOut;
 import frc.robot.commands.manual.ManualCIntakeStop;
@@ -20,7 +21,6 @@ import frc.robot.commands.manual.ManualKaChunkerGrab;
 import frc.robot.commands.manual.ManualKaChunkerRelease;
 import frc.robot.commands.manual.ManualManipulatorWristDown;
 import frc.robot.commands.manual.ManualManipulatorWristUp;
-import frc.robot.commands.manual.ManualMantisArmDown;
 import frc.robot.commands.manual.ManualMantisArmStop;
 import frc.robot.commands.manual.ManualMantisArmUp;
 import frc.robot.commands.manual.ManualMantisStingerDown;
@@ -73,30 +73,6 @@ public class OI {
 	private Button coDriverDRight = new DPad(coDriver, DPad.Direction.RIGHT);
 
 	public OI() {
-		//TODO: wait until Chase tells me what to put here. NO TOUCHIES
-		// driverA.whenPressed(new ManualCIntakeIn());
-		// driverA.whenReleased(new ManualCIntakeStop());
-
-		// driverB.whenPressed(new ManualCIntakeOut());
-		// driverB.whenReleased(new ManualCIntakeStop());
-
-		// driverX.whenPressed(new ManualManipulatorWristDown());
-
-		// driverY.whenPressed(new ManualManipulatorWristUp());
-
-		// driverLB.whenPressed(new ManualElevatorTiltBack());
-		// driverRB.whenPressed(new ManualElevatorTiltForward());
-
-		// driverDUp.whenPressed(new ManualKaChunkerGrab());
-		
-		// driverDDown.whenPressed(new ManualKaChunkerRelease());
-
-		// coDriverA.whenPressed(new ManualMantisArmUp());
-		// coDriverA.whenReleased(new ManualMantisArmStop());
-
-		// coDriverB.whenPressed(new ManualMantisArmDown());
-		// coDriverB.whenReleased(new ManualMantisArmStop());
-
 		driverA.whenPressed(new ManualCIntakeIn());
 		driverA.whenReleased(new ManualCIntakeStop());
 		driverB.whenPressed(new ManualCIntakeOut());
@@ -112,18 +88,8 @@ public class OI {
 		coDriverA.whenPressed(new ManualMantisStingerDown());
 		coDriverDUp.whenPressed(new ManualMantisArmUp());
 		coDriverDUp.whenPressed(new ManualMantisArmStop());
-		coDriverDDown.whenPressed(new ManualMantisArmDown());
+		coDriverDDown.whenPressed(new MantisClimb());
 		coDriverDDown.whenPressed(new ManualMantisArmStop());
-
-		// coDriverX.whenPressed(new ManualMantisArmWheelsForward());
-		// coDriverX.whenReleased(new ManualMantisArmWheelsStop());
-
-		// coDriverY.whenPressed(new ManualMantisArmWheelsBackward());
-		// coDriverY.whenReleased(new ManualMantisArmStop());
-
-		// coDriverLB.whenPressed(new ManualMantisStingerUp());
-
-		// coDriverRB.whenPressed(new ManualMantisStingerDown());
 	}
 
 	public enum Axis {

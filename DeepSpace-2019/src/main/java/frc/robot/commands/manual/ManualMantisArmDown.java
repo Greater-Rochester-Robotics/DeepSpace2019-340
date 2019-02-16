@@ -21,7 +21,7 @@ public class ManualMantisArmDown extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-	  Robot.mantis.setArmSpeed(RobotMap.MANTIS_ARM_DOWN);
+	  Robot.mantis.setArmSpeed(RobotMap.MANTIS_ARM_DOWN_SPEED);
   }
 
   // Called repeatedly when this Command is scheduled to run

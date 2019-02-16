@@ -29,8 +29,8 @@ public class ClimbStingerAndMantisArmsDown extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(!Robot.mantis.isDown()){
-      Robot.mantis.setArmSpeed(RobotMap.MANTIS_ARM_DOWN);
+    if(!Robot.mantis.isDown()) {
+      Robot.mantis.setArmSpeed(RobotMap.MANTIS_ARM_DOWN_SPEED);
 	}
 	
     Robot.mantis.setStinger(true);

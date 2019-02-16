@@ -21,7 +21,7 @@ public class ManualMantisArmWheelsBackward extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-	  Robot.drive.setMantisBoth(RobotMap.MANTIS_WHEELS_BACKWARDS);
+	  Robot.drive.setMantisBoth(RobotMap.MANTIS_WHEELS_BACKWARDS_SPEED);
   }
 
   // Called repeatedly when this Command is scheduled to run

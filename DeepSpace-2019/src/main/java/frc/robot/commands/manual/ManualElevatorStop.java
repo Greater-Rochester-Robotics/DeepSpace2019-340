@@ -21,7 +21,7 @@ public class ManualElevatorStop extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-	Robot.elevator.setSpeed(RobotMap.ELEVATOR_STOP);
+	Robot.elevator.setSpeed(RobotMap.ZERO_SPEED);
 	System.out.println("[" + getClass().getName() + "] -Initialize-");
 	System.out.println("[" + getClass().getName() + "] -ElevatorStop-");
 }

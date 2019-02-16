@@ -246,13 +246,13 @@ public class Drive extends Subsystem {
 		    }
 		}
 
-		/*if(!Robot.isFrontHigh() && !Robot.isBackHigh()) {
+		if(!Robot.isFrontHigh() && !Robot.isBackHigh()) {
 			setMantisBoth(0, 0);
 			setDriveBoth(leftSpeed, rightSpeed);
-		} else {*/
-			// setMantisBoth(leftSpeed, rightSpeed);
+		} else {
+			setMantisBoth(leftSpeed, rightSpeed);
 			setDriveBoth(leftSpeed, rightSpeed);
-		// }
+		}
 	}
 
 	/**

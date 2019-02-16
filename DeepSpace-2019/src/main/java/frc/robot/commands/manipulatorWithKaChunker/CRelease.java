@@ -29,7 +29,7 @@ public class CRelease extends Command {
 
 	@Override
 	protected void initialize() {
-		Robot.manipulatorWithKaChunker.setCSpeed(RobotMap.C_OUTTAKE); //Roll wheels outward the instant this command begins
+		Robot.manipulatorWithKaChunker.setCSpeed(RobotMap.C_OUTTAKE_SPEED); //Roll wheels outward the instant this command begins
 	}
 
 	@Override
@@ -39,6 +39,6 @@ public class CRelease extends Command {
 
 	@Override
 	protected void end() {
-		Robot.manipulatorWithKaChunker.setCSpeed(RobotMap.C_STOP); //On interrupt or cargo acquisition, stop the wheels
+		Robot.manipulatorWithKaChunker.setCSpeed(RobotMap.ZERO_SPEED); //On interrupt or cargo acquisition, stop the wheels
 	}
 }

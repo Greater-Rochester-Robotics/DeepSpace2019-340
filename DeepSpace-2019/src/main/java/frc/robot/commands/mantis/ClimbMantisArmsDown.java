@@ -20,7 +20,7 @@ public class ClimbMantisArmsDown extends Command {
   @Override
   protected void initialize() {
     if(!Robot.mantis.isDown()) {
-        Robot.mantis.setArmSpeed(RobotMap.MANTIS_ARM_DOWN);
+        Robot.mantis.setArmSpeed(RobotMap.MANTIS_ARM_DOWN_SPEED);
     }
   }
 

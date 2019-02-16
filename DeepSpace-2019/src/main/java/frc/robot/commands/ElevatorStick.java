@@ -49,6 +49,6 @@ public class ElevatorStick extends Command {
 
 	@Override
 	protected void end() {
-		Robot.elevator.setSpeed(RobotMap.ELEVATOR_STOP); //Stop the elevator on end (interrupt included)
+		Robot.elevator.setSpeed(RobotMap.ZERO_SPEED); //Stop the elevator on end (interrupt included)
 	}
 }

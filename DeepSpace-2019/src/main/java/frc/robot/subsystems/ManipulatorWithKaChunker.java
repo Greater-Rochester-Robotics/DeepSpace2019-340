@@ -27,8 +27,7 @@ import frc.robot.RobotMap;
  */
 public class ManipulatorWithKaChunker extends Subsystem {
 	private static DigitalInput cargoSensor; //Triggers when the cargo is secured
-	private static DigitalInput hatchSensor; //Triggers when the hatch is confirmed grabbed
-	private static Ultrasonic hatchGrabSensor; //Used to determine whether to auto-grab hatch
+	private static DigitalInput hatchSensor; //Triggers witht the hatch. TODO: when?
 	private static DoubleSolenoid wrist;
 	private static Solenoid kaChunker; //true == drop false == grab
 	private static TalonSRX cBottom, cTop; //Top and bottom wheels of the C intake
@@ -100,6 +99,13 @@ public class ManipulatorWithKaChunker extends Subsystem {
 	 */
 	public void toggleKachunker() {
 		setKachunker(!isKachunkerGrabbing());
+	}
+
+	/**
+	 * @return {@code true} when hatch sensor is clicked in
+	 */
+	public boolean hasHatch() {
+		return hatchSensor.get();
 	}
 
 	///////////

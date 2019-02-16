@@ -21,7 +21,7 @@ public class ManualCIntakeIn extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-	  Robot.manipulatorWithKaChunker.setCSpeed(RobotMap.C_INTAKE);
+	  Robot.manipulatorWithKaChunker.setCSpeed(RobotMap.C_INTAKE_SPEED);
 	  System.out.println("[" + getClass().getName() + "] -Initialize-");
 	  System.out.println("[" + getClass().getName() + "] -CIntakeIn-");
   }

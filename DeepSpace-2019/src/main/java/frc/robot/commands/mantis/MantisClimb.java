@@ -5,39 +5,42 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.manipulatorWithKaChunker;
+package frc.robot.commands.mantis;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
-/**
- * Use the C to intake cargo<br>
- * It's not impossible to imagine this will have some PID at some point
- */
-public class CIntake extends Command {
+import static frc.robot.Robot.mantis;
 
-	/**
-	 * Step 1: take the C<br>
-	 * Step 2: intake<br>
-	 * Step 3: stop intake
-	 */
-	public CIntake() {
-		requires(Robot.manipulatorWithKaChunker);
+public class MantisClimb extends Command {
+	public MantisClimb() {
+		requires(mantis);
 	}
 
 	@Override
 	protected void initialize() {
-		Robot.manipulatorWithKaChunker.setCSpeed(RobotMap.C_INTAKE_SPEED); //Roll wheels inward the instant this command begins
+		mantis.setStinger(true); //fire stinger
+	}
+
+	@Override
+	protected void execute() {
+		mantis.setArmSpeed(RobotMap.MANTIS_ARM_DOWN_SPEED); //start raising the front, too
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return Robot.manipulatorWithKaChunker.hasCargo(); //Continue rolling until interrupt or cargo acquisition
+		return Robot.isBackHigh() && Robot.isFrontHigh() && mantis.isDown(); //Up AND flush w/ hab3
 	}
 
 	@Override
 	protected void end() {
-		Robot.manipulatorWithKaChunker.setCSpeed(RobotMap.ZERO_SPEED); //On interrupt or cargo acquisition, stop the wheels
+		mantis.setStinger(false);
+		mantis.setArmSpeed(RobotMap.ZERO_SPEED);
+	}
+
+	@Override
+	protected void interrupted() {
+		mantis.setArmSpeed(RobotMap.ZERO_SPEED);
 	}
 }

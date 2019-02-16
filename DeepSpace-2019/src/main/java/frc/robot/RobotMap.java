@@ -79,22 +79,19 @@ public class RobotMap {
 	///////////////
 
 	/* C speed */
-	public static final double C_INTAKE = -1.0;
-	public static final double C_STOP = 0.0;
-	public static final double C_OUTTAKE = 1.0;
+	public static final double C_INTAKE_SPEED = -1.0;
+	public static final double C_OUTTAKE_SPEED = 1.0;
 	
 	/* Elevator speed */
 	public static final double ELEVATOR_UP_SPEED = 1.0;
 	public static final double ELEVATOR_DOWN_SPEED = -1.0;
-	public static final double ELEVATOR_STOP = 0.0;
 	
 
 	/* Mantis speed */
-	public static final double MANTIS_ARM_DOWN = -1.0;
-	public static final double MANTIS_ARM_UP = 1.0;
-	public static final double MANTIS_WHEELS_FORWARD = 1.0;
-	public static final double MANTIS_WHEELS_STOP = 0.0;
-	public static final double MANTIS_WHEELS_BACKWARDS = -1.0;
+	public static final double MANTIS_ARM_DOWN_SPEED = -1.0;
+	public static final double MANTIS_ARM_UP_SPEED = 1.0;
+	public static final double MANTIS_WHEELS_FORWARD_SPEED = 1.0;
+	public static final double MANTIS_WHEELS_BACKWARDS_SPEED = -1.0;
 
 	/* The Titular Zero Speed */
 	public static final double ZERO_SPEED = 0.0;
