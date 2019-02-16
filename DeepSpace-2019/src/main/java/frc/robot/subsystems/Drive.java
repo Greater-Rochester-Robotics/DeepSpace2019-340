@@ -250,7 +250,7 @@ public class Drive extends Subsystem {
 			setMantisBoth(0, 0);
 			setDriveBoth(leftSpeed, rightSpeed);
 		} else {*/
-			setMantisBoth(leftSpeed, rightSpeed);
+			// setMantisBoth(leftSpeed, rightSpeed);
 			setDriveBoth(leftSpeed, rightSpeed);
 		// }
 	}
