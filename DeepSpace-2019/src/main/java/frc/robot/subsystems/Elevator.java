@@ -23,7 +23,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 /**
  * <h1>Elevator</h1>
- * Moves the claw and hatchy-boi up and down.<br>
+ * Moves the claw and hatch mechanism up and down.<br>
  * Programmed assuming TalonSR and encoder; subject to change<br>
  * <br>
  * Always uses the Xbox ONE controller unless told otherwise
@@ -55,6 +55,13 @@ public class Elevator extends Subsystem {
 		//Enslave motors B and C to motor A
 		elevatorB.follow(elevatorA);
 		elevatorC.follow(elevatorA);
+		
+		// put kP and kI constants here
+		// kP = ((maxSpeed) / (maxPosition * %from max to start slowing down))
+		// kI ~ kP * 0.01
+		// elevatorA.getPIDController();
+		// pidController.setP(kP);
+		// pidController.setI(kI);
 	}
 
 	@Override
