@@ -22,6 +22,7 @@ public class ManualCIntakeOut extends Command {
 	  Robot.manipulatorWithKaChunker.setCSpeed(RobotMap.C_OUTTAKE_SPEED);
 	  System.out.println("[" + getClass().getName() + "] -Initialize-");
 	  System.out.println("[" + getClass().getName() + "] -CIntakeOut-");
+	  System.out.println("[" + getClass().getName() + "] -CIntakeSensors- " + Robot.manipulatorWithKaChunker.hasCargo());
   }
 
   // Called repeatedly when this Command is scheduled to run

@@ -29,9 +29,9 @@ public class ManualElevatorStop extends Command {
 // Called repeatedly when this Command is scheduled to run
 @Override
 protected void execute() {
-	System.out.println("[" + getClass().getName() + "] -Execute-");
-	System.out.println("[" + getClass().getName() + "] -ElevatorSpeed- " + Robot.elevator.getSpeed());
-	System.out.println("[" + getClass().getName() + "] -ElevatorPosition- "  + Robot.elevator.getPos());
+	// System.out.println("[" + getClass().getName() + "] -Execute-");
+	// System.out.println("[" + getClass().getName() + "] -ElevatorSpeed- " + Robot.elevator.getSpeed());
+	System.out.println("[" + getClass().getName() + "] -ElevatorPosition- "  + Robot.elevator.getPos() + " -Bottomness-" + Robot.elevator.isAtBottom());
 }
 
 

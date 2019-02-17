@@ -21,14 +21,16 @@ public class ManualKaChunkerRelease extends Command {
 	  Robot.manipulatorWithKaChunker.setKachunkerDrop();
 	  System.out.println("[" + getClass().getName() + "] -Initialize-");
 	  System.out.println("[" + getClass().getName() + "] -KaChunkerGrab-");
+	  System.out.println("[" + getClass().getName() + "] -KaChunkerButton-" + Robot.manipulatorWithKaChunker.hasHatch());
   }
   
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
 	  System.out.println("[" + getClass().getName() + "] -Execute-");
-	  System.out.println("[" + getClass().getName() + "] -KaChunkerRelease- " + Robot.elevator.getSpeed());
-	  System.out.println("[" + getClass().getName() + "] -KaChunkerGrab- "  + Robot.elevator.getPos());
+	  System.out.println("[" + getClass().getName() + "] -KaChunkerGrab- "  + Robot.manipulatorWithKaChunker.isKachunkerGrabbing());
+	  System.out.println("[" + getClass().getName() + "] -KaChunkerButton-" + Robot.manipulatorWithKaChunker.hasHatch());
+
   }
   // Make this return true when this Command no longer needs to run execute()
   @Override

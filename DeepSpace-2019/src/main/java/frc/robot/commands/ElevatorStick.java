@@ -7,9 +7,6 @@
 
 package frc.robot.commands;
 
-import com.ctre.phoenix.ErrorCode;
-import com.ctre.phoenix.Logger;
-
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
@@ -38,8 +35,8 @@ public class ElevatorStick extends Command {
 		}
 		
 		Robot.elevator.setSpeed(Robot.oi.getCoDriverAxis(Axis.LEFT_Y) * .4); //Poll co-driver's left Y axis to raise/lower elevator
-		
-		Logger.log(ErrorCode.GeneralWarning, "Elevator encoder: " + Robot.elevator.getPos());
+		System.out.println("[" + this.getClass().getName() + "] btm :" + Robot.elevator.isAtBottom() + ": pos :" + Robot.elevator.getRawPos() + ":");
+		// Logger.log(ErrorCode.GeneralWarning, "Elevator encoder: " + Robot.elevator.getPos());
 	}
 
 	@Override

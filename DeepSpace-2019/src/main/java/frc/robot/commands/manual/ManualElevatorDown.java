@@ -27,16 +27,16 @@ public class ManualElevatorDown extends Command {
 // Called repeatedly when this Command is scheduled to run
 @Override
 protected void execute() {
-	System.out.println("[" + getClass().getName() + "] -Execute-");
-	System.out.println("[" + getClass().getName() + "] -ElevatorSpeed- " + Robot.elevator.getSpeed());
-	System.out.println("[" + getClass().getName() + "] -ElevatorPosition- "  + Robot.elevator.getPos());
+	// System.out.println("[" + getClass().getName() + "] -Execute-");
+	// System.out.println("[" + getClass().getName() + "] -ElevatorSwitch- " + Robot.elevator.isAtBottom());
+	System.out.println("[" + getClass().getName() + "] -ElevatorPosition- "  + Robot.elevator.getPos() + " -Bottomness-" + Robot.elevator.isAtBottom());
 }
 
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return true;
+    return false;
   }
 
   // Called once after isFinished returns true

@@ -34,16 +34,14 @@ public class RobotMap {
 	public static final int DRIVE_ENCODER_LEFT_CHANNEL_B = 1;
 	public static final int DRIVE_ENCODER_RIGHT_CHANNEL_A = 2;
 	public static final int DRIVE_ENCODER_RIGHT_CHANNEL_B = 3;
-	// public static final int ELEVATOR_ENCODER_CHANNEL_A = 4;
-	// public static final int ELEVATOR_ENCODER_CHANNEL_B = 5;
 
 	/* Sensors */
-	public static final int ELEVATOR_BOTTOM_SENSOR_PORT = 4;
-	public static final int MANIPULATOR_CARGO_SENSOR_PORT = 6;
+	public static final int MANIPULATOR_HATCH_SENSOR_PORT = 4;
+	public static final int MANIPULATOR_CARGO_LEFT_SENSOR_PORT = 5;
+	public static final int MANIPULATOR_CARGO_RIGHT_SENSOR_PORT = 6;
 	public static final int FRONT_DOWN_CHANNEL = 7;
 	public static final int BACK_DOWN_CHANNEL = 8;
 	public static final int MANTIS_ARM_DOWN_SWITCH = 9;
-	public static final int MANIPULATOR_HATCH_SENSOR_PORT = 5;
 
 	////////////////////////
 	// PNEUMATIC CHANNELS //
@@ -83,8 +81,8 @@ public class RobotMap {
 	public static final double C_OUTTAKE_SPEED = 1.0;
 	
 	/* Elevator speed */
-	public static final double ELEVATOR_UP_SPEED = 1.0;
-	public static final double ELEVATOR_DOWN_SPEED = -1.0;
+	public static final double ELEVATOR_UP_SPEED = .4;
+	public static final double ELEVATOR_DOWN_SPEED = -.4;
 	
 
 	/* Mantis speed */

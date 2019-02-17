@@ -12,11 +12,9 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANDigitalInput.LimitSwitchPolarity;
 import com.revrobotics.CANDigitalInput;
 import com.revrobotics.CANEncoder;
-import com.revrobotics.CANSparkMaxLowLevel.ConfigParameter;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
-import frc.robot.commands.ElevatorStick;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
@@ -34,7 +32,7 @@ public class Elevator extends Subsystem {
 	private static Solenoid discBrake;
 	private static DoubleSolenoid tilt;
 	private static CANSparkMax elevatorA, elevatorB, elevatorC;
-	private static CANDigitalInput elevatorReverseLimit;
+	private static CANDigitalInput elevatorBottomLimit;
 	private static CANEncoder enc;
 
 	private double offset = 0; //Adjusts for encoder drift
@@ -49,17 +47,21 @@ public class Elevator extends Subsystem {
 		elevatorA = new CANSparkMax(RobotMap.ELEVATOR_A_MOTOR_CAN_ID, MotorType.kBrushless);
 		elevatorB = new CANSparkMax(RobotMap.ELEVATOR_B_MOTOR_CAN_ID, MotorType.kBrushless);
 		elevatorC = new CANSparkMax(RobotMap.ELEVATOR_C_MOTOR_CAN_ID, MotorType.kBrushless);
-		elevatorReverseLimit  = elevatorA.getReverseLimitSwitch(LimitSwitchPolarity.kNormallyOpen);
+		elevatorBottomLimit  = elevatorA.getForwardLimitSwitch(LimitSwitchPolarity.kNormallyOpen); //Faux reverse limit... Will we use it?
+		elevatorBottomLimit.enableLimitSwitch(true);
 		enc = elevatorA.getEncoder(); //FIXME: adjust for gearing
-
+		
 		//Enslave motors B and C to motor A
 		elevatorB.follow(elevatorA);
 		elevatorC.follow(elevatorA);
+
+		//Invert direction
+		elevatorA.setInverted(true);
 	}
 
 	@Override
 	public void initDefaultCommand() {
-		setDefaultCommand(new ElevatorStick());
+		//setDefaultCommand(new ElevatorStick());
 	}
 
 	/**
@@ -103,12 +105,18 @@ public class Elevator extends Subsystem {
 
 	/**
 	 * @return the elevator's height traveled, offset included, based on motor rotations
-	 * FIXME: adjust for gearing via {@link ConfigParameter#kEncoderCountsPerRev}
+	 * FIXME: check if we have to <i>adjust</i> or <i>redefine</i> the offset
 	 */
 	public double getPos() {
 		return offset - enc.getPosition(); //Equivalent of -(enc - offset); negative on account of sign
 	}
 
+	/**
+	 * @return raw encoder output, in motor rotations
+	 */
+	public double getRawPos() {
+		return enc.getPosition();
+	}
 	/**
 	 * @return the current speed of the winch
 	 */
@@ -148,7 +156,7 @@ public class Elevator extends Subsystem {
 	 * @return {@code true} if elevator is triggering bottom DI
 	 */
 	public boolean isAtBottom() {
-		return elevatorReverseLimit.get();
+		return elevatorBottomLimit.get();
 	}
 
 	/**

@@ -31,6 +31,7 @@ public class ManualCIntakeIn extends Command {
   protected void execute() {
 	  System.out.println("[" + getClass().getName() + "] -Execute-");
 	  System.out.println("[" + getClass().getName() + "] -CIntakeSpeed- " + Robot.manipulatorWithKaChunker.getCSpeed());
+	  System.out.println("[" + getClass().getName() + "] -CIntakeSensors- " + Robot.manipulatorWithKaChunker.hasCargo());
   }
 
   // Make this return true when this Command no longer needs to run execute()

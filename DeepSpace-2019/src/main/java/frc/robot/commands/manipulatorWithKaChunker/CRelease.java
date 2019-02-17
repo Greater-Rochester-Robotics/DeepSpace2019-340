@@ -34,7 +34,7 @@ public class CRelease extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		return !Robot.manipulatorWithKaChunker.hasCargo() || isTimedOut(); //Continue rolling until interrupt or cargo acquisition
+		return !Robot.manipulatorWithKaChunker.hasCargo() && isTimedOut(); //Continue rolling until interrupt or cargo acquisition
 	}
 
 	@Override

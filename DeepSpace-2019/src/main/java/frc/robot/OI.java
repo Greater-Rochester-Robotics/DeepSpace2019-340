@@ -11,14 +11,18 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.DPad;
+import frc.robot.commands.manipulatorWithKaChunker.CIntake;
+import frc.robot.commands.manipulatorWithKaChunker.CRelease;
+import frc.robot.commands.manipulatorWithKaChunker.KaChunkerAutoHandler;
 import frc.robot.commands.mantis.MantisClimb;
 import frc.robot.commands.manual.ManualCIntakeIn;
-import frc.robot.commands.manual.ManualCIntakeOut;
 import frc.robot.commands.manual.ManualCIntakeStop;
+import frc.robot.commands.manual.ManualElevatorDown;
+import frc.robot.commands.manual.ManualElevatorStop;
 import frc.robot.commands.manual.ManualElevatorTiltBack;
 import frc.robot.commands.manual.ManualElevatorTiltForward;
+import frc.robot.commands.manual.ManualElevatorUp;
 import frc.robot.commands.manual.ManualKaChunkerGrab;
-import frc.robot.commands.manual.ManualKaChunkerRelease;
 import frc.robot.commands.manual.ManualManipulatorWristDown;
 import frc.robot.commands.manual.ManualManipulatorWristUp;
 import frc.robot.commands.manual.ManualMantisArmStop;
@@ -73,14 +77,22 @@ public class OI {
 	private Button coDriverDRight = new DPad(coDriver, DPad.Direction.RIGHT);
 
 	public OI() {
-		driverA.whenPressed(new ManualCIntakeIn());
+		driverA.whenPressed(new CIntake());
 		driverA.whenReleased(new ManualCIntakeStop());
-		driverB.whenPressed(new ManualCIntakeOut());
+		driverB.whenPressed(new CRelease(0.25));
 		driverB.whenReleased(new ManualCIntakeStop());
-		driverX.whenPressed(new ManualKaChunkerGrab());
-		driverY.whenPressed(new ManualKaChunkerRelease());
+		driverX.whenPressed(new ManualCIntakeIn());
+		driverX.whenReleased(new ManualCIntakeStop());
+		//driverY.whenPressed(new ManualKaChunkerRelease());
+		driverY.whenPressed(new KaChunkerAutoHandler());
+		driverY.whenReleased(new ManualKaChunkerGrab());
 		driverLB.whenPressed(new ManualManipulatorWristDown());
 		driverRB.whenPressed(new ManualManipulatorWristUp());
+
+		driverStart.whenPressed(new ManualElevatorUp());
+		driverStart.whenReleased(new ManualElevatorStop());
+		driverBack.whenPressed(new ManualElevatorDown());
+		driverBack.whenReleased(new ManualElevatorStop());
 
 		coDriverLB.whenPressed(new ManualElevatorTiltBack());
 		coDriverRB.whenPressed(new ManualElevatorTiltForward());

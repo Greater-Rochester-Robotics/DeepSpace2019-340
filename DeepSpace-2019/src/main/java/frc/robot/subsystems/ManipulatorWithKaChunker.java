@@ -13,7 +13,6 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
@@ -26,7 +25,8 @@ import frc.robot.RobotMap;
  * a wrist-like piston actuation
  */
 public class ManipulatorWithKaChunker extends Subsystem {
-	private static DigitalInput cargoSensor; //Triggers when the cargo is secured
+	private static DigitalInput cargoLeftSensor; //Triggers when the cargo is secured
+	private static DigitalInput cargoRightSensor; //See above
 	private static DigitalInput hatchSensor; //Triggers witht the hatch. TODO: when?
 	private static DoubleSolenoid wrist;
 	private static Solenoid kaChunker; //true == drop false == grab
@@ -37,7 +37,8 @@ public class ManipulatorWithKaChunker extends Subsystem {
 	 * as per the {@link RobotMap} specs
 	 */
 	public ManipulatorWithKaChunker() {
-		cargoSensor = new DigitalInput(RobotMap.MANIPULATOR_CARGO_SENSOR_PORT);
+		cargoLeftSensor = new DigitalInput(RobotMap.MANIPULATOR_CARGO_LEFT_SENSOR_PORT);
+		cargoRightSensor = new DigitalInput(RobotMap.MANIPULATOR_CARGO_RIGHT_SENSOR_PORT);
 		hatchSensor = new DigitalInput(RobotMap.MANIPULATOR_HATCH_SENSOR_PORT);
 
 		kaChunker = new Solenoid(RobotMap.KACHUNKER_SOLENOID_GRAB_CHANNEL);
@@ -47,7 +48,6 @@ public class ManipulatorWithKaChunker extends Subsystem {
 		cTop = new TalonSRX(RobotMap.MANIPULATOR_C_SRX_TOP_ID);
 
 		cBottom.set(ControlMode.Follower, RobotMap.MANIPULATOR_C_SRX_TOP_ID); //Enslave bottom SRX to top SRX
-
 	}
 
 	////////////
@@ -58,7 +58,7 @@ public class ManipulatorWithKaChunker extends Subsystem {
 	 * @return {@code true} if the cargo has been secured
 	 */
 	public boolean hasCargo() {
-		return cargoSensor.get();
+		return !cargoLeftSensor.get() || !cargoRightSensor.get();
 	}
 
 	////////////////
@@ -69,7 +69,7 @@ public class ManipulatorWithKaChunker extends Subsystem {
 	 * @return {@code true} if ka-chunker is grabbing
 	 */
 	public boolean isKachunkerGrabbing() {
-		return (!kaChunker.get());
+		return !kaChunker.get();
 	}
 
 	/**
@@ -77,7 +77,9 @@ public class ManipulatorWithKaChunker extends Subsystem {
 	 * @param isGrabbing {@code true} for grab, {@code false} for drop
 	 */
 	private void setKachunker(boolean isGrabbing) {
+		System.out.println("setting hatch manip to " + !isGrabbing);
 		kaChunker.set(!isGrabbing);
+		System.out.println("Hatch set to " + !isGrabbing);
 	}
 
 	/**
@@ -105,7 +107,7 @@ public class ManipulatorWithKaChunker extends Subsystem {
 	 * @return {@code true} when hatch sensor is clicked in
 	 */
 	public boolean hasHatch() {
-		return hatchSensor.get();
+		return !hatchSensor.get();
 	}
 
 	///////////
