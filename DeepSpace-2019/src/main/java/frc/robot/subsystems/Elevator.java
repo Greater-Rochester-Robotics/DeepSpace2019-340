@@ -70,7 +70,6 @@ public class Elevator extends Subsystem {
 
 		//Invert direction
 		elevatorA.setInverted(true);
-		// elevatorA.setParameter(ConfigParameter.kHardLimitRevEn, RobotMap.ELEVATOR_MAX_DELTA_HEIGHT);
 
 		pidController = elevatorA.getPIDController();
 		pidController.setP(kP);
@@ -105,6 +104,7 @@ public class Elevator extends Subsystem {
 		}
 
 		//Cut motor if robot is too high up
+		//The Spark Mins (hah) can't do it themselves
 		if(enc.getPosition() >= RobotMap.ELEVATOR_MAX_HEIGHT && spd > 0) {
 			spd = RobotMap.ZERO_SPEED;
 		}
