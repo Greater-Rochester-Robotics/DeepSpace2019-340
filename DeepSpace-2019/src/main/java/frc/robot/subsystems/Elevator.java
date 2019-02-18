@@ -12,6 +12,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANDigitalInput.LimitSwitchPolarity;
 import com.revrobotics.CANDigitalInput;
 import com.revrobotics.CANEncoder;
+import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
@@ -35,7 +36,14 @@ public class Elevator extends Subsystem {
 	private static CANDigitalInput elevatorBottomLimit;
 	private static CANEncoder enc;
 
-	private double offset = 0; //Adjusts for encoder drift
+	// kP = ((maxSpeed) / (maxPosition * %from max position to start slowing down))
+	// kI ~ kP * 0.01
+	private static double kP = (RobotMap.ELEVATOR_MAX_UP_SPEED / (RobotMap.ELEVATOR_MAX_HEIGHT * 0.2));
+	private static double kI = kP * 0.01;
+
+	private static CANPIDController pidController;
+
+	@Deprecated private double offset = 0; //Adjusts for encoder drift
 
 	/**
 	 * Makes the ports given the not-so-magic
@@ -47,9 +55,14 @@ public class Elevator extends Subsystem {
 		elevatorA = new CANSparkMax(RobotMap.ELEVATOR_A_MOTOR_CAN_ID, MotorType.kBrushless);
 		elevatorB = new CANSparkMax(RobotMap.ELEVATOR_B_MOTOR_CAN_ID, MotorType.kBrushless);
 		elevatorC = new CANSparkMax(RobotMap.ELEVATOR_C_MOTOR_CAN_ID, MotorType.kBrushless);
-		elevatorBottomLimit  = elevatorA.getForwardLimitSwitch(LimitSwitchPolarity.kNormallyOpen); //Faux reverse limit... Will we use it?
+
+		elevatorA.restoreFactoryDefaults();
+		elevatorB.restoreFactoryDefaults();
+		elevatorC.restoreFactoryDefaults();
+
+		elevatorBottomLimit = elevatorA.getForwardLimitSwitch(LimitSwitchPolarity.kNormallyOpen); //Faux reverse limit... Will we use it?
 		elevatorBottomLimit.enableLimitSwitch(true);
-		enc = elevatorA.getEncoder(); //FIXME: adjust for gearing
+		enc = elevatorA.getEncoder();
 		
 		//Enslave motors B and C to motor A
 		elevatorB.follow(elevatorA);
@@ -57,12 +70,20 @@ public class Elevator extends Subsystem {
 
 		//Invert direction
 		elevatorA.setInverted(true);
-		// put kP and kI constants here
-		// kP = ((maxSpeed) / (maxPosition * %from max to start slowing down))
-		// kI ~ kP * 0.01
-		// elevatorA.getPIDController();
-		// pidController.setP(kP);
-		// pidController.setI(kI);
+		// elevatorA.setParameter(ConfigParameter.kHardLimitRevEn, RobotMap.ELEVATOR_MAX_DELTA_HEIGHT);
+
+		pidController = elevatorA.getPIDController();
+		pidController.setP(kP);
+		pidController.setI(kI);
+		// pidController.setReference(1, ControlType.kPosition);
+	}
+
+	/**
+	 * @return the current offset. Duh.
+	 */
+	@Deprecated
+	public double getEncoderOffset() {
+		return offset;
 	}
 
 	@Override
@@ -77,18 +98,29 @@ public class Elevator extends Subsystem {
 	 * @param spd new speed; positive = up
 	 */
 	public void setSpeed(double spd) {
+
+		//Jeremiah doesn't like this here but John put his foot down, so here it will stay...
+		if(isAtBottom()) {
+			resetEncoder();
+		}
+
+		//Cut motor if robot is too high up
+		if(enc.getPosition() >= RobotMap.ELEVATOR_MAX_HEIGHT && spd > 0) {
+			spd = RobotMap.ZERO_SPEED;
+		}
+
 		if(spd == RobotMap.ZERO_SPEED) {
 			discBrake.set(false); //Brake the disk
 		} else {
 			discBrake.set(true); //Let it slide
 		}
-		
+
 		elevatorA.set(spd);
 	}
 
 	public void setSpeedScaled(double speed) {
 		//Slows the elevator down before it breaks everything.
-		if (speed < -0.05) {
+		if(speed < -0.05) {
 			if(getPos() < RobotMap.ELEVATOR_BOTTOM_UPPER_SLOW) {
 				speed *= 0.3;
 			} else if(getPos() < RobotMap.ELEVATOR_BOTTOM_LOWER_SLOW) {
@@ -96,10 +128,10 @@ public class Elevator extends Subsystem {
 			}
 
 			setSpeed(speed);
-		} else if (speed > 0.05) {
-			if (getPos() > RobotMap.ELEVATOR_TOP_UPPER_SLOW) {
+		} else if(speed > 0.05) {
+			if(getPos() > RobotMap.ELEVATOR_TOP_UPPER_SLOW) {
 				speed = 0.05;
-			} else if (getPos() > RobotMap.ELEVATOR_TOP_LOWER_SLOW) {
+			} else if(getPos() > RobotMap.ELEVATOR_TOP_LOWER_SLOW) {
 				speed *= 0.4;
 			}
 
@@ -113,6 +145,7 @@ public class Elevator extends Subsystem {
 	 * @return the elevator's height traveled, offset included, based on motor rotations
 	 * FIXME: check if we have to <i>adjust</i> or <i>redefine</i> the offset
 	 */
+	@Deprecated
 	public double getPos() {
 		return offset - enc.getPosition(); //Equivalent of -(enc - offset); negative on account of sign
 	}
@@ -154,8 +187,11 @@ public class Elevator extends Subsystem {
 	/**
 	 * Adjust encoder offset to set current output to """zero"""
 	 */
-	public void resetEncoder() {
-		offset += enc.getPosition();
+	public void resetEncoder() {		
+		// offset = enc.getPosition();
+		elevatorA.setEncPosition(0);
+		// elevatorA.setParameter(ConfigParameter.kSoftLimitRevEn, offset - RobotMap.ELEVATOR_MAX_DELTA_HEIGHT);
+		// System.out.println(" kSoftLimitRevEn " + (offset - RobotMap.ELEVATOR_MAX_DELTA_HEIGHT));
 	}
 
 	/**

@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.Ultrasonic;
 import frc.robot.RobotMap;
 
 /**
@@ -32,6 +33,8 @@ public class ManipulatorWithKaChunker extends Subsystem {
 	private static Solenoid kaChunker; //true == drop false == grab
 	private static TalonSRX cBottom, cTop; //Top and bottom wheels of the C intake
 
+	private static Ultrasonic hatchDistanceSensor;
+
 	/**
 	 * Assigns the sensor, solenoids, and SRXs their port, channels, and IDs
 	 * as per the {@link RobotMap} specs
@@ -48,6 +51,7 @@ public class ManipulatorWithKaChunker extends Subsystem {
 		cTop = new TalonSRX(RobotMap.MANIPULATOR_C_SRX_TOP_ID);
 
 		cBottom.set(ControlMode.Follower, RobotMap.MANIPULATOR_C_SRX_TOP_ID); //Enslave bottom SRX to top SRX
+
 	}
 
 	////////////

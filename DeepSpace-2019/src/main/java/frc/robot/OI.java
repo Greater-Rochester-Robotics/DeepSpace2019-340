@@ -25,6 +25,7 @@ import frc.robot.commands.manual.ManualElevatorUp;
 import frc.robot.commands.manual.ManualKaChunkerGrab;
 import frc.robot.commands.manual.ManualManipulatorWristDown;
 import frc.robot.commands.manual.ManualManipulatorWristUp;
+import frc.robot.commands.manual.ManualMantisArmDown;
 import frc.robot.commands.manual.ManualMantisArmStop;
 import frc.robot.commands.manual.ManualMantisArmUp;
 import frc.robot.commands.manual.ManualMantisStingerDown;
@@ -83,7 +84,6 @@ public class OI {
 		driverB.whenReleased(new ManualCIntakeStop());
 		driverX.whenPressed(new ManualCIntakeIn());
 		driverX.whenReleased(new ManualCIntakeStop());
-		//driverY.whenPressed(new ManualKaChunkerRelease());
 		driverY.whenPressed(new KaChunkerAutoHandler());
 		driverY.whenReleased(new ManualKaChunkerGrab());
 		driverLB.whenPressed(new ManualManipulatorWristDown());
@@ -99,9 +99,10 @@ public class OI {
 		coDriverY.whenPressed(new ManualMantisStingerUp());
 		coDriverA.whenPressed(new ManualMantisStingerDown());
 		coDriverDUp.whenPressed(new ManualMantisArmUp());
-		coDriverDUp.whenPressed(new ManualMantisArmStop());
-		coDriverDDown.whenPressed(new MantisClimb());
-		coDriverDDown.whenPressed(new ManualMantisArmStop());
+		coDriverDUp.whenReleased(new ManualMantisArmStop());
+		// coDriverDDown.whenPressed(new MantisClimb());
+		coDriverDDown.whenPressed(new ManualMantisArmDown());
+		coDriverDDown.whenReleased(new ManualMantisArmStop());
 	}
 
 	public enum Axis {

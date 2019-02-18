@@ -31,7 +31,7 @@ public class ManualElevatorStop extends Command {
 protected void execute() {
 	// System.out.println("[" + getClass().getName() + "] -Execute-");
 	// System.out.println("[" + getClass().getName() + "] -ElevatorSpeed- " + Robot.elevator.getSpeed());
-	System.out.println("[" + getClass().getName() + "] -ElevatorPosition- "  + Robot.elevator.getPos() + " -Bottomness-" + Robot.elevator.isAtBottom());
+	System.out.println("[" + getClass().getName() + "] -ElevatorPosition- "  + Robot.elevator.getRawPos() + " -Bottomness-" + Robot.elevator.isAtBottom());
 }
 
 

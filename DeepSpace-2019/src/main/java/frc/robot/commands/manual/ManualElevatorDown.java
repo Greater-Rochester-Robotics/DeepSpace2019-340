@@ -19,19 +19,20 @@ public class ManualElevatorDown extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-	Robot.elevator.setSpeed(RobotMap.ELEVATOR_DOWN_SPEED);
+	Robot.elevator.setSpeed(RobotMap.ELEVATOR_MAX_DOWN_SPEED);
 	System.out.println("[" + getClass().getName() + "] -Initialize-");
 	System.out.println("[" + getClass().getName() + "] -ElevatorDown-");
 }
 
-// Called repeatedly when this Command is scheduled to run
-@Override
-protected void execute() {
-	// System.out.println("[" + getClass().getName() + "] -Execute-");
-	// System.out.println("[" + getClass().getName() + "] -ElevatorSwitch- " + Robot.elevator.isAtBottom());
-	System.out.println("[" + getClass().getName() + "] -ElevatorPosition- "  + Robot.elevator.getPos() + " -Bottomness-" + Robot.elevator.isAtBottom());
-}
-
+	// Called repeatedly when this Command is scheduled to run
+	@Override
+	protected void execute() {
+		Robot.elevator.setSpeed(RobotMap.ELEVATOR_MAX_DOWN_SPEED);
+		// System.out.println("[" + getClass().getName() + "] -Execute-");
+		// System.out.println("[" + getClass().getName() + "] -ElevatorSwitch- " +
+		// Robot.elevator.isAtBottom());
+		System.out.println("[" + getClass().getName() + "] spd :"+Robot.elevator.getSpeed()+ ": raw :" + Robot.elevator.getRawPos() + " : bottomness : " + Robot.elevator.isAtBottom());
+	}
 
   // Make this return true when this Command no longer needs to run execute()
   @Override

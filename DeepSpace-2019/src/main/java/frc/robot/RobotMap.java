@@ -38,7 +38,7 @@ public class RobotMap {
 	/* Sensors */
 	public static final int MANIPULATOR_HATCH_SENSOR_PORT = 4;
 	public static final int MANIPULATOR_CARGO_LEFT_SENSOR_PORT = 5;
-	public static final int MANIPULATOR_CARGO_RIGHT_SENSOR_PORT = 6;
+	public static final int MANIPULATOR_CARGO_RIGHT_SENSOR_PORT = 6; //freed
 	public static final int FRONT_DOWN_CHANNEL = 7;
 	public static final int BACK_DOWN_CHANNEL = 8;
 	public static final int MANTIS_ARM_DOWN_SWITCH = 9;
@@ -81,13 +81,13 @@ public class RobotMap {
 	public static final double C_OUTTAKE_SPEED = 1.0;
 	
 	/* Elevator speed */
-	public static final double ELEVATOR_UP_SPEED = .4;
-	public static final double ELEVATOR_DOWN_SPEED = -.4;
+	public static final double ELEVATOR_MAX_UP_SPEED = .4;
+	public static final double ELEVATOR_MAX_DOWN_SPEED = -.4;
 	
 
 	/* Mantis speed */
-	public static final double MANTIS_ARM_DOWN_SPEED = -1.0;
-	public static final double MANTIS_ARM_UP_SPEED = 1.0;
+	public static final double MANTIS_ARM_DOWN_SPEED = -.5;
+	public static final double MANTIS_ARM_UP_SPEED = .5;
 	public static final double MANTIS_WHEELS_FORWARD_SPEED = 1.0;
 	public static final double MANTIS_WHEELS_BACKWARDS_SPEED = -1.0;
 
@@ -96,7 +96,7 @@ public class RobotMap {
 
 	/* Elevator heights */
 	//All currently temporary
-	public static final double ELEVATOR_MAX_HEIGHT = 100;
+	public static final double ELEVATOR_MAX_HEIGHT = 42; //57.09
 	public static final double ELEVATOR_TOP_UPPER_SLOW = 95;
 	public static final double ELEVATOR_TOP_LOWER_SLOW = 90;
 	public static final double ELEVATOR_BOTTOM_UPPER_SLOW = 10;
