@@ -34,7 +34,7 @@ public class ElevatorStick extends Command {
 			Robot.elevator.resetEncoder();
 		}
 		
-		Robot.elevator.setSpeed(Robot.oi.getCoDriverAxis(Axis.LEFT_Y) * .4); //Poll co-driver's left Y axis to raise/lower elevator
+		Robot.elevator.setSpeed(Robot.oi.getCoDriverAxis(Axis.LEFT_Y) * .8); //Poll co-driver's left Y axis to raise/lower elevator
 		System.out.println("[" + this.getClass().getName() + "] btm :" + Robot.elevator.isAtBottom() + ": pos :" + Robot.elevator.getRawPos() + ":");
 		// Logger.log(ErrorCode.GeneralWarning, "Elevator encoder: " + Robot.elevator.getPos());
 	}

@@ -30,18 +30,19 @@ public class RobotMap {
 	///////////////
 
 	/* Encoders */
-	public static final int DRIVE_ENCODER_LEFT_CHANNEL_A = 0;
-	public static final int DRIVE_ENCODER_LEFT_CHANNEL_B = 1;
-	public static final int DRIVE_ENCODER_RIGHT_CHANNEL_A = 2;
-	public static final int DRIVE_ENCODER_RIGHT_CHANNEL_B = 3;
+	public static final int DRIVE_ENCODER_LEFT_CHANNEL_A = 8;
+	public static final int DRIVE_ENCODER_LEFT_CHANNEL_B = 9;
+	public static final int DRIVE_ENCODER_RIGHT_CHANNEL_A = 6;
+	public static final int DRIVE_ENCODER_RIGHT_CHANNEL_B = 7;
 
 	/* Sensors */
-	public static final int MANIPULATOR_HATCH_SENSOR_PORT = 4;
-	public static final int MANIPULATOR_CARGO_LEFT_SENSOR_PORT = 5;
-	public static final int MANIPULATOR_CARGO_RIGHT_SENSOR_PORT = 6; //freed
-	public static final int FRONT_DOWN_CHANNEL = 7;
-	public static final int BACK_DOWN_CHANNEL = 8;
-	public static final int MANTIS_ARM_DOWN_SWITCH = 9;
+	public static final int MANIPULATOR_HATCH_DISTANCE_SENSOR_PING_PORT = 1;
+	public static final int MANIPULATOR_HATCH_DISTANCE_SENSOR_ECHO_PORT = 2;
+	public static final int MANIPULATOR_CARGO_LEFT_SENSOR_PORT = 0;
+	public static final int MANIPULATOR_CARGO_RIGHT_SENSOR_PORT = 4;
+	public static final int FRONT_DOWN_CHANNEL = 1; //Might be eliminated; depending on USonic. For now, cargo right  4
+	public static final int BACK_DOWN_CHANNEL = 5;
+	public static final int MANTIS_ARM_DOWN_SWITCH = 3;
 
 	////////////////////////
 	// PNEUMATIC CHANNELS //
@@ -96,7 +97,7 @@ public class RobotMap {
 
 	/* Elevator heights */
 	//All currently temporary
-	public static final double ELEVATOR_MAX_HEIGHT = 42; //57.09
+	public static final double ELEVATOR_MAX_HEIGHT = 42; //57.09 at first, now 48-ish
 	public static final double ELEVATOR_TOP_UPPER_SLOW = 95;
 	public static final double ELEVATOR_TOP_LOWER_SLOW = 90;
 	public static final double ELEVATOR_BOTTOM_UPPER_SLOW = 10;

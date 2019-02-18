@@ -15,6 +15,7 @@ import frc.robot.commands.manipulatorWithKaChunker.CRelease;
 import frc.robot.commands.manipulatorWithKaChunker.KaChunkerAutoHandler;
 import frc.robot.commands.mantis.MantisClimb;
 import frc.robot.commands.manual.ManualCIntakeIn;
+import frc.robot.commands.manual.ManualCIntakeOut;
 import frc.robot.commands.manual.ManualCIntakeStop;
 import frc.robot.commands.manual.ManualElevatorDown;
 import frc.robot.commands.manual.ManualElevatorStop;
@@ -84,15 +85,10 @@ public class OI {
 		driverB.whenReleased(new ManualCIntakeStop());
 		driverX.whenPressed(new ManualCIntakeIn());
 		driverX.whenReleased(new ManualCIntakeStop());
-		driverY.whenPressed(new KaChunkerAutoHandler());
+		driverY.whenPressed(new KaChunkerAutoHandler(.15));
 		driverY.whenReleased(new ManualKaChunkerGrab());
 		driverLB.whenPressed(new ManualManipulatorWristDown());
 		driverRB.whenPressed(new ManualManipulatorWristUp());
-
-		driverStart.whenPressed(new ManualElevatorUp());
-		driverStart.whenReleased(new ManualElevatorStop());
-		driverBack.whenPressed(new ManualElevatorDown());
-		driverBack.whenReleased(new ManualElevatorStop());
 
 		coDriverLB.whenPressed(new ManualElevatorTiltBack());
 		coDriverRB.whenPressed(new ManualElevatorTiltForward());

@@ -28,12 +28,10 @@ import frc.robot.RobotMap;
 public class ManipulatorWithKaChunker extends Subsystem {
 	private static DigitalInput cargoLeftSensor; //Triggers when the cargo is secured
 	private static DigitalInput cargoRightSensor; //See above
-	private static DigitalInput hatchSensor; //Triggers witht the hatch. TODO: when?
+	// private static Ultrasonic hatchDistanceSensor;
 	private static DoubleSolenoid wrist;
-	private static Solenoid kaChunker; //true == drop false == grab
+	private static Solenoid kaChunker; //true == drop; false == grab
 	private static TalonSRX cBottom, cTop; //Top and bottom wheels of the C intake
-
-	private static Ultrasonic hatchDistanceSensor;
 
 	/**
 	 * Assigns the sensor, solenoids, and SRXs their port, channels, and IDs
@@ -42,7 +40,8 @@ public class ManipulatorWithKaChunker extends Subsystem {
 	public ManipulatorWithKaChunker() {
 		cargoLeftSensor = new DigitalInput(RobotMap.MANIPULATOR_CARGO_LEFT_SENSOR_PORT);
 		cargoRightSensor = new DigitalInput(RobotMap.MANIPULATOR_CARGO_RIGHT_SENSOR_PORT);
-		hatchSensor = new DigitalInput(RobotMap.MANIPULATOR_HATCH_SENSOR_PORT);
+
+		// hatchDistanceSensor = new Ultrasonic(RobotMap.MANIPULATOR_HATCH_DISTANCE_SENSOR_PING_PORT, RobotMap.MANIPULATOR_HATCH_DISTANCE_SENSOR_ECHO_PORT);
 
 		kaChunker = new Solenoid(RobotMap.KACHUNKER_SOLENOID_GRAB_CHANNEL);
 		wrist = new DoubleSolenoid(RobotMap.WRIST_SOLENOID_DOWN_CHANNEL, RobotMap.WRIST_SOLENOID_UP_CHANNEL);
@@ -51,7 +50,6 @@ public class ManipulatorWithKaChunker extends Subsystem {
 		cTop = new TalonSRX(RobotMap.MANIPULATOR_C_SRX_TOP_ID);
 
 		cBottom.set(ControlMode.Follower, RobotMap.MANIPULATOR_C_SRX_TOP_ID); //Enslave bottom SRX to top SRX
-
 	}
 
 	////////////
@@ -111,7 +109,9 @@ public class ManipulatorWithKaChunker extends Subsystem {
 	 * @return {@code true} when hatch sensor is clicked in
 	 */
 	public boolean hasHatch() {
-		return !hatchSensor.get();
+		// System.out.println("RANGE: " + hatchDistanceSensor.getRangeMM());
+		// return hatchDistanceSensor.getRangeMM() <= 120;
+		return false;
 	}
 
 	///////////

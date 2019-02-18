@@ -49,6 +49,7 @@ public class Robot extends TimedRobot {
 		manipulatorWithKaChunker = new ManipulatorWithKaChunker();
 		mantis = new Mantis();
 		oi = new OI();
+		SmartDashboard.putData("Ball", manipulatorWithKaChunker);
 		m_chooser.setDefaultOption("Default Auto", new DriveXOne()); //I suppose that's one way to do it
 		// chooser.addOption("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);

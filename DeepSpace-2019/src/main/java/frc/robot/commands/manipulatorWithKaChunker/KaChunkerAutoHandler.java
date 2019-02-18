@@ -11,14 +11,17 @@ import edu.wpi.first.wpilibj.command.Command;
 import static frc.robot.Robot.manipulatorWithKaChunker;
 
 public class KaChunkerAutoHandler extends Command {
-	public KaChunkerAutoHandler() {
+	private static double timeout;
+
+	public KaChunkerAutoHandler(double timeout) {
 		requires(manipulatorWithKaChunker);
+		this.timeout = timeout;
 	}
 
 	@Override
 	protected void initialize() {
 		manipulatorWithKaChunker.setKachunkerDrop();
-		setTimeout(.15); //When trying to drop a hatch, give the machine .15 seconds to finish dropping
+		setTimeout(timeout); //When trying to drop a hatch, give the machine .15 seconds to finish dropping
 	}
 
 	@Override
