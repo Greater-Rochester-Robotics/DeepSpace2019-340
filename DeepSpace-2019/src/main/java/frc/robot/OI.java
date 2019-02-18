@@ -10,7 +10,6 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.DPad;
 import frc.robot.commands.manipulatorWithKaChunker.CIntake;
 import frc.robot.commands.manipulatorWithKaChunker.CRelease;
 import frc.robot.commands.manipulatorWithKaChunker.KaChunkerAutoHandler;
@@ -35,6 +34,7 @@ import frc.robot.commands.manual.ManualMantisStingerUp;
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
+@SuppressWarnings("unused")
 public class OI {
 	private Joystick driver = new Joystick(0);
 	private Joystick coDriver = new Joystick(1);

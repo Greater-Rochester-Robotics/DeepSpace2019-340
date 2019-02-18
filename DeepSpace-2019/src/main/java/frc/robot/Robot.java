@@ -49,7 +49,7 @@ public class Robot extends TimedRobot {
 		manipulatorWithKaChunker = new ManipulatorWithKaChunker();
 		mantis = new Mantis();
 		oi = new OI();
-		m_chooser.setDefaultOption("Default Auto", new DriveXOne());
+		m_chooser.setDefaultOption("Default Auto", new DriveXOne()); //I suppose that's one way to do it
 		// chooser.addOption("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);
 	}
@@ -161,5 +161,4 @@ public class Robot extends TimedRobot {
 	public static boolean isBackHigh() {
 		return Robot.backSensor.get();
 	}
-
 }
