@@ -12,15 +12,93 @@ package frc.robot;
  * to a variable name. This provides flexibility changing wiring, makes checking
  * the wiring easier and significantly reduces the number of magic numbers
  * floating around.
+ * 
+ * This will eventually be replaced with some kind of scheme relating to auto-detection of comp/prac bot
  */
 public class RobotMap {
-  // For example to map the left and right motors, you could define the
-  // following variables to use with your drivetrain subsystem.
-  // public static int leftMotor = 1;
-  // public static int rightMotor = 2;
+	
+	//////////////////
+	// PWM CHANNELS //
+	//////////////////
 
-  // If you are using multiple modules, make sure to define both the port
-  // number and the module. For example you with a rangefinder:
-  // public static int rangefinderPort = 1;
-  // public static int rangefinderModule = 1;
+	/* Talons */
+	public static final int DRIVE_TALON_LEFT_CHANNEL = 0;
+	public static final int DRIVE_TALON_RIGHT_CHANNEL = 1;
+
+	///////////////
+	// DIO PORTS //
+	///////////////
+
+	/* Encoders */
+	public static final int DRIVE_ENCODER_LEFT_CHANNEL_A = 0;
+	public static final int DRIVE_ENCODER_LEFT_CHANNEL_B = 1;
+	public static final int DRIVE_ENCODER_RIGHT_CHANNEL_A = 2;
+	public static final int DRIVE_ENCODER_RIGHT_CHANNEL_B = 3;
+
+	/* Sensors */
+	public static final int MANIPULATOR_HATCH_SENSOR_PORT = 4;
+	public static final int MANIPULATOR_CARGO_LEFT_SENSOR_PORT = 5;
+	public static final int MANIPULATOR_CARGO_RIGHT_SENSOR_PORT = 6; //freed
+	public static final int FRONT_DOWN_CHANNEL = 7;
+	public static final int BACK_DOWN_CHANNEL = 8;
+	public static final int MANTIS_ARM_DOWN_SWITCH = 9;
+
+	////////////////////////
+	// PNEUMATIC CHANNELS //
+	////////////////////////
+
+	/* Solenoids */
+	public static final int KACHUNKER_SOLENOID_GRAB_CHANNEL = 0; //Single
+	public static final int WRIST_SOLENOID_DOWN_CHANNEL = 3;
+	public static final int WRIST_SOLENOID_UP_CHANNEL = 4;
+	public static final int DISC_BRAKE_SOLENOID_RELEASE_CHANNEL = 5; //Single
+	public static final int STINGER_SOLENOID_DROP_CHANNEL = 1;
+	public static final int STINGER_SOLENOID_RAISE_CHANNEL = 7;
+	public static final int ELEVATOR_TILT_SOLENOID_FORWARD_CHANNEL = 2;
+	public static final int ELEVATOR_TILT_SOLENOID_BACKWARD_CHANNEL = 6;
+
+	/////////////
+	// CAN IDs //
+	/////////////
+
+	/* TalonSRXs */
+	public static final int DRIVE_MANTIS_SRX_LEFT_ID = 1;
+	public static final int DRIVE_MANTIS_SRX_RIGHT_ID = 2;
+	public static final int MANIPULATOR_C_SRX_TOP_ID = 4;
+	public static final int MANIPULATOR_C_SRX_BOTTOM_ID = 3;
+	public static final int MANTIS_ARM_SRX_LEFT_ID = 5;
+	public static final int MANTIS_ARM_SRX_RIGHT_ID = 6;
+	public static final int ELEVATOR_A_MOTOR_CAN_ID = 13; //mid
+	public static final int ELEVATOR_B_MOTOR_CAN_ID = 12; //left
+	public static final int ELEVATOR_C_MOTOR_CAN_ID = 14; //right
+
+	///////////////
+	// CONSTANTS //
+	///////////////
+
+	/* C speed */
+	public static final double C_INTAKE_SPEED = -1.0;
+	public static final double C_OUTTAKE_SPEED = 1.0;
+	
+	/* Elevator speed */
+	public static final double ELEVATOR_MAX_UP_SPEED = .4;
+	public static final double ELEVATOR_MAX_DOWN_SPEED = -.4;
+	
+
+	/* Mantis speed */
+	public static final double MANTIS_ARM_DOWN_SPEED = -.5;
+	public static final double MANTIS_ARM_UP_SPEED = .5;
+	public static final double MANTIS_WHEELS_FORWARD_SPEED = 1.0;
+	public static final double MANTIS_WHEELS_BACKWARDS_SPEED = -1.0;
+
+	/* The Titular Zero Speed */
+	public static final double ZERO_SPEED = 0.0;
+
+	/* Elevator heights */
+	//All currently temporary
+	public static final double ELEVATOR_MAX_HEIGHT = 42; //57.09
+	public static final double ELEVATOR_TOP_UPPER_SLOW = 95;
+	public static final double ELEVATOR_TOP_LOWER_SLOW = 90;
+	public static final double ELEVATOR_BOTTOM_UPPER_SLOW = 10;
+	public static final double ELEVATOR_BOTTOM_LOWER_SLOW = 5;
 }

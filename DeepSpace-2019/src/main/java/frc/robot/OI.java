@@ -7,36 +7,127 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.DPad;
+import frc.robot.commands.manipulatorWithKaChunker.CIntake;
+import frc.robot.commands.manipulatorWithKaChunker.CRelease;
+import frc.robot.commands.manipulatorWithKaChunker.KaChunkerAutoHandler;
+import frc.robot.commands.mantis.MantisClimb;
+import frc.robot.commands.manual.ManualCIntakeIn;
+import frc.robot.commands.manual.ManualCIntakeStop;
+import frc.robot.commands.manual.ManualElevatorDown;
+import frc.robot.commands.manual.ManualElevatorStop;
+import frc.robot.commands.manual.ManualElevatorTiltBack;
+import frc.robot.commands.manual.ManualElevatorTiltForward;
+import frc.robot.commands.manual.ManualElevatorUp;
+import frc.robot.commands.manual.ManualKaChunkerGrab;
+import frc.robot.commands.manual.ManualManipulatorWristDown;
+import frc.robot.commands.manual.ManualManipulatorWristUp;
+import frc.robot.commands.manual.ManualMantisArmDown;
+import frc.robot.commands.manual.ManualMantisArmStop;
+import frc.robot.commands.manual.ManualMantisArmUp;
+import frc.robot.commands.manual.ManualMantisStingerDown;
+import frc.robot.commands.manual.ManualMantisStingerUp;
+
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-  //// CREATING BUTTONS
-  // One type of button is a joystick button which is any button on a
-  //// joystick.
-  // You create one by telling it which joystick it's on and which button
-  // number it is.
-  // Joystick stick = new Joystick(port);
-  // Button button = new JoystickButton(stick, buttonNumber);
+	private Joystick driver = new Joystick(0);
+	private Joystick coDriver = new Joystick(1);
 
-  // There are a few additional built in buttons you can use. Additionally,
-  // by subclassing Button you can create custom triggers and bind those to
-  // commands the same as any other Button.
+	////////////////////
+	// DRIVER BUTTONS //
+	////////////////////
 
-  //// TRIGGERING COMMANDS WITH BUTTONS
-  // Once you have a button, it's trivial to bind it to a button in one of
-  // three ways:
+	private Button driverA = new JoystickButton(driver, 1);
+	private Button driverB = new JoystickButton(driver, 2);
+	private Button driverX = new JoystickButton(driver, 3);
+	private Button driverY = new JoystickButton(driver, 4);
+	private Button driverLB = new JoystickButton(driver, 5);
+	private Button driverRB = new JoystickButton(driver, 6);
+	private Button driverBack = new JoystickButton(driver, 7);
+	private Button driverStart = new JoystickButton(driver, 8);
+	private Button driverLS = new JoystickButton(driver, 9);
+	private Button driverRS = new JoystickButton(driver, 10);
+	private Button driverDUp = new DPad(driver, DPad.Direction.UP);
+	private Button driverDDown = new DPad(driver, DPad.Direction.DOWN);
+	private Button driverDLeft = new DPad(driver, DPad.Direction.LEFT);
+	private Button driverDRight = new DPad(driver, DPad.Direction.RIGHT);
 
-  // Start the command when the button is pressed and let it run the command
-  // until it is finished as determined by it's isFinished method.
-  // button.whenPressed(new ExampleCommand());
+	///////////////////////
+	// CO-DRIVER BUTTONS //
+	///////////////////////
 
-  // Run the command while the button is being held down and interrupt it once
-  // the button is released.
-  // button.whileHeld(new ExampleCommand());
+	private Button coDriverA = new JoystickButton(coDriver, 1);
+	private Button coDriverB = new JoystickButton(coDriver, 2);
+	private Button coDriverX = new JoystickButton(coDriver, 3);
+	private Button coDriverY = new JoystickButton(coDriver, 4);
+	private Button coDriverLB = new JoystickButton(coDriver, 5);
+	private Button coDriverRB = new JoystickButton(coDriver, 6);
+	private Button coDriverBack = new JoystickButton(coDriver, 7);
+	private Button coDriverStart = new JoystickButton(coDriver, 8);
+	private Button coDriverLS = new JoystickButton(coDriver, 9);
+	private Button coDriverRS = new JoystickButton(coDriver, 10);
+	private Button coDriverDUp = new DPad(coDriver, DPad.Direction.UP);
+	private Button coDriverDDown = new DPad(coDriver, DPad.Direction.DOWN);
+	private Button coDriverDLeft = new DPad(coDriver, DPad.Direction.LEFT);
+	private Button coDriverDRight = new DPad(coDriver, DPad.Direction.RIGHT);
 
-  // Start the command when the button is released and let it run the command
-  // until it is finished as determined by it's isFinished method.
-  // button.whenReleased(new ExampleCommand());
+	public OI() {
+		driverA.whenPressed(new CIntake());
+		driverA.whenReleased(new ManualCIntakeStop());
+		driverB.whenPressed(new CRelease(0.25));
+		driverB.whenReleased(new ManualCIntakeStop());
+		driverX.whenPressed(new ManualCIntakeIn());
+		driverX.whenReleased(new ManualCIntakeStop());
+		driverY.whenPressed(new KaChunkerAutoHandler());
+		driverY.whenReleased(new ManualKaChunkerGrab());
+		driverLB.whenPressed(new ManualManipulatorWristDown());
+		driverRB.whenPressed(new ManualManipulatorWristUp());
+
+		driverStart.whenPressed(new ManualElevatorUp());
+		driverStart.whenReleased(new ManualElevatorStop());
+		driverBack.whenPressed(new ManualElevatorDown());
+		driverBack.whenReleased(new ManualElevatorStop());
+
+		coDriverLB.whenPressed(new ManualElevatorTiltBack());
+		coDriverRB.whenPressed(new ManualElevatorTiltForward());
+		coDriverY.whenPressed(new ManualMantisStingerUp());
+		coDriverA.whenPressed(new ManualMantisStingerDown());
+		coDriverDUp.whenPressed(new ManualMantisArmUp());
+		coDriverDUp.whenReleased(new ManualMantisArmStop());
+		// coDriverDDown.whenPressed(new MantisClimb());
+		coDriverDDown.whenPressed(new ManualMantisArmDown());
+		coDriverDDown.whenReleased(new ManualMantisArmStop());
+	}
+
+	public enum Axis {
+		LEFT_X(0),
+		LEFT_Y(1),
+		LEFT_TRIGGER(2),
+		RIGHT_TRIGGER(3),
+		RIGHT_X(4),
+		RIGHT_Y(5);
+
+		private int axis;
+
+		private Axis(int axis) {
+			this.axis = axis;
+		}
+		public int getAxis() {
+			return axis;
+		}
+	}
+
+	public double getDriverAxis(Axis axis) {
+		return (driver.getRawAxis(axis.getAxis()) < -.1 || driver.getRawAxis(axis.getAxis()) > .1 ) ? driver.getRawAxis(axis.getAxis()) : 0;
+	}
+
+	public double getCoDriverAxis(Axis axis) {
+		return (coDriver.getRawAxis(axis.getAxis()) < -.1 || coDriver.getRawAxis(axis.getAxis()) > .1 ) ? coDriver.getRawAxis(axis.getAxis()) : 0;
+	}
 }
