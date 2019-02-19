@@ -93,8 +93,8 @@ public class RobotMap {
 	
 
 	/* Mantis speed */
-	public static final double MANTIS_ARM_DOWN_SPEED = -.5;
-	public static final double MANTIS_ARM_UP_SPEED = .5;
+	public static final double MANTIS_ARM_DOWN_SPEED = .5; //Positive down
+	public static final double MANTIS_ARM_UP_SPEED = -.5; //Negative up
 	public static final double MANTIS_WHEELS_FORWARD_SPEED = 1.0;
 	public static final double MANTIS_WHEELS_BACKWARDS_SPEED = -1.0;
 
