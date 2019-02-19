@@ -15,7 +15,6 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.Ultrasonic;
 import frc.robot.RobotMap;
 
 /**
@@ -28,7 +27,7 @@ import frc.robot.RobotMap;
 public class ManipulatorWithKaChunker extends Subsystem {
 	private static DigitalInput cargoLeftSensor; //Triggers when the cargo is secured
 	private static DigitalInput cargoRightSensor; //See above
-	// private static Ultrasonic hatchDistanceSensor;
+	private static DigitalInput hatchSensor;
 	private static DoubleSolenoid wrist;
 	private static Solenoid kaChunker; //true == drop; false == grab
 	private static TalonSRX cBottom, cTop; //Top and bottom wheels of the C intake
@@ -41,7 +40,7 @@ public class ManipulatorWithKaChunker extends Subsystem {
 		cargoLeftSensor = new DigitalInput(RobotMap.MANIPULATOR_CARGO_LEFT_SENSOR_PORT);
 		cargoRightSensor = new DigitalInput(RobotMap.MANIPULATOR_CARGO_RIGHT_SENSOR_PORT);
 
-		// hatchDistanceSensor = new Ultrasonic(RobotMap.MANIPULATOR_HATCH_DISTANCE_SENSOR_PING_PORT, RobotMap.MANIPULATOR_HATCH_DISTANCE_SENSOR_ECHO_PORT);
+		hatchSensor = new DigitalInput(RobotMap.MANIPULATOR_HATCH_SENSOR_PORT);
 
 		kaChunker = new Solenoid(RobotMap.KACHUNKER_SOLENOID_GRAB_CHANNEL);
 		wrist = new DoubleSolenoid(RobotMap.WRIST_SOLENOID_DOWN_CHANNEL, RobotMap.WRIST_SOLENOID_UP_CHANNEL);
@@ -50,17 +49,6 @@ public class ManipulatorWithKaChunker extends Subsystem {
 		cTop = new TalonSRX(RobotMap.MANIPULATOR_C_SRX_TOP_ID);
 
 		cBottom.set(ControlMode.Follower, RobotMap.MANIPULATOR_C_SRX_TOP_ID); //Enslave bottom SRX to top SRX
-	}
-
-	////////////
-	// SENSOR //
-	////////////
-
-	/**
-	 * @return {@code true} if the cargo has been secured
-	 */
-	public boolean hasCargo() {
-		return !cargoLeftSensor.get() || !cargoRightSensor.get();
 	}
 
 	////////////////
@@ -79,9 +67,7 @@ public class ManipulatorWithKaChunker extends Subsystem {
 	 * @param isGrabbing {@code true} for grab, {@code false} for drop
 	 */
 	private void setKachunker(boolean isGrabbing) {
-		System.out.println("setting hatch manip to " + !isGrabbing);
 		kaChunker.set(!isGrabbing);
-		System.out.println("Hatch set to " + !isGrabbing);
 	}
 
 	/**
@@ -109,9 +95,8 @@ public class ManipulatorWithKaChunker extends Subsystem {
 	 * @return {@code true} when hatch sensor is clicked in
 	 */
 	public boolean hasHatch() {
-		// System.out.println("RANGE: " + hatchDistanceSensor.getRangeMM());
-		// return hatchDistanceSensor.getRangeMM() <= 120;
-		return false;
+		System.out.println("Hatch sensor: " + hatchSensor.get());
+		return !hatchSensor.get();
 	}
 
 	///////////
@@ -172,6 +157,13 @@ public class ManipulatorWithKaChunker extends Subsystem {
 	 */
 	public void setCSpeed(double speed) {
 		cTop.set(ControlMode.PercentOutput, speed);
+	}
+
+	/**
+	 * @return {@code true} if the cargo has been secured
+	 */
+	public boolean hasCargo() {
+		return !cargoLeftSensor.get() || !cargoRightSensor.get();
 	}
 
 	@Override

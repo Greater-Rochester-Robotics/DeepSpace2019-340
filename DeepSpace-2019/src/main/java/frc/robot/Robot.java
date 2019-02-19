@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -31,8 +32,12 @@ public class Robot extends TimedRobot {
 	public static Elevator elevator;
 	public static ManipulatorWithKaChunker manipulatorWithKaChunker;
 	public static Mantis mantis;
+
 	private static DigitalInput frontSensor = new DigitalInput(RobotMap.FRONT_DOWN_CHANNEL);
 	private static DigitalInput backSensor = new DigitalInput(RobotMap.BACK_DOWN_CHANNEL);
+
+	public static Compressor compressor;
+
 	public static OI oi;
 
 	Command m_autonomousCommand;
@@ -48,6 +53,7 @@ public class Robot extends TimedRobot {
 		elevator = new Elevator();
 		manipulatorWithKaChunker = new ManipulatorWithKaChunker();
 		mantis = new Mantis();
+		compressor = new Compressor(RobotMap.SECONDARY_PCM_ID);
 		oi = new OI();
 		SmartDashboard.putData("Ball", manipulatorWithKaChunker);
 		m_chooser.setDefaultOption("Default Auto", new DriveXOne()); //I suppose that's one way to do it
@@ -75,6 +81,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void disabledInit() {
+		compressor.stop();
 	}
 
 	@Override
@@ -97,6 +104,8 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		m_autonomousCommand = m_chooser.getSelected();
+
+		compressor.start();
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
@@ -121,6 +130,8 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopInit() {
+		compressor.start();
+
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove

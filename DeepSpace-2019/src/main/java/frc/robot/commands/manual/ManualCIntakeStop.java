@@ -12,42 +12,29 @@ import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 public class ManualCIntakeStop extends Command {
-  public ManualCIntakeStop() {
-	  requires(Robot.manipulatorWithKaChunker);
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
-  }
+	public ManualCIntakeStop() {
+		requires(Robot.manipulatorWithKaChunker);
+	}
 
-  // Called just before this Command runs the first time
-  @Override
-  protected void initialize() {
-	  Robot.manipulatorWithKaChunker.setCSpeed(RobotMap.ZERO_SPEED);
-	  System.out.println("[" + getClass().getName() + "] -Initialize-");
-	  System.out.println("[" + getClass().getName() + "] -CIntakeStop-");
-  }
+	// Called just before this Command runs the first time
+	@Override
+	protected void initialize() {
+		Robot.manipulatorWithKaChunker.setCSpeed(RobotMap.ZERO_SPEED);
+		// System.out.println("[" + getClass().getName() + "] -Initialize-");
+		// System.out.println("[" + getClass().getName() + "] -CIntakeStop-");
+	}
 
-  // Called repeatedly when this Command is scheduled to run
-  @Override
-  protected void execute() {
-	  System.out.println("[" + getClass().getName() + "] -Execute-");
-	  System.out.println("[" + getClass().getName() + "] -CIntakeSpeed- " + Robot.manipulatorWithKaChunker.getCSpeed());
-  }
+	// Called repeatedly when this Command is scheduled to run
+	@Override
+	protected void execute() {
+		// System.out.println("[" + getClass().getName() + "] -Execute-");
+		// System.out.println("[" + getClass().getName() + "] -CIntakeSpeed- " +
+		// Robot.manipulatorWithKaChunker.getCSpeed());
+	}
 
-
-  // Make this return true when this Command no longer needs to run execute()
-  @Override
-  protected boolean isFinished() {
-    return true;
-  }
-
-  // Called once after isFinished returns true
-  @Override
-  protected void end() {
-  }
-
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
-  @Override
-  protected void interrupted() {
-  }
+	// Make this return true when this Command no longer needs to run execute()
+	@Override
+	protected boolean isFinished() {
+		return true;
+	}
 }

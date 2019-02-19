@@ -11,29 +11,43 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
+import static frc.robot.Robot.manipulatorWithKaChunker;
+
 /**
- * Use the C to intake cargo<br>
+ * Use the C to release/fire cargo<br>
  * It's not impossible to imagine this will have some PID at some point
  */
-public class CIntake extends Command {
-
+public class CRocketRelease extends Command {
+	
 	/**
 	 * Step 1: take the C<br>
-	 * Step 2: intake<br>
-	 * Step 3: stop intake
+	 * Step 2: release<br>
+	 * Step 3: stop release
 	 */
-	public CIntake() {
-		requires(Robot.manipulatorWithKaChunker);
+	public CRocketRelease() {
+		requires(manipulatorWithKaChunker);
 	}
 
 	@Override
 	protected void initialize() {
-		Robot.manipulatorWithKaChunker.setCSpeed(RobotMap.C_INTAKE_SPEED); //Roll wheels inward the instant this command begins
+		if(manipulatorWithKaChunker.isWristDown()) {
+			manipulatorWithKaChunker.setWristUp();
+			setTimeout(RobotMap.WRIST_TILT_UP_TIME_S);
+		} else {
+			setTimeout(0);
+		}
+	}
+
+	@Override
+	protected void execute() {
+		if(isTimedOut()) {
+			manipulatorWithKaChunker.setCSpeed(RobotMap.C_OUTTAKE_SPEED);
+		}
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return Robot.manipulatorWithKaChunker.hasCargo(); //Continue rolling until interrupt or cargo acquisition
+		return false; //Continue rolling until interrupt
 	}
 
 	@Override

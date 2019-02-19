@@ -10,21 +10,15 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.manipulatorWithKaChunker.CIntake;
-import frc.robot.commands.manipulatorWithKaChunker.CRelease;
+import frc.robot.commands.manipulatorWithKaChunker.CIntakeWall;
+import frc.robot.commands.manipulatorWithKaChunker.CIntakeFloor;
+import frc.robot.commands.manipulatorWithKaChunker.CRocketRelease;
+import frc.robot.commands.manipulatorWithKaChunker.CShipRelease;
 import frc.robot.commands.manipulatorWithKaChunker.KaChunkerAutoHandler;
-import frc.robot.commands.mantis.MantisClimb;
-import frc.robot.commands.manual.ManualCIntakeIn;
-import frc.robot.commands.manual.ManualCIntakeOut;
 import frc.robot.commands.manual.ManualCIntakeStop;
-import frc.robot.commands.manual.ManualElevatorDown;
-import frc.robot.commands.manual.ManualElevatorStop;
 import frc.robot.commands.manual.ManualElevatorTiltBack;
 import frc.robot.commands.manual.ManualElevatorTiltForward;
-import frc.robot.commands.manual.ManualElevatorUp;
 import frc.robot.commands.manual.ManualKaChunkerGrab;
-import frc.robot.commands.manual.ManualManipulatorWristDown;
-import frc.robot.commands.manual.ManualManipulatorWristUp;
 import frc.robot.commands.manual.ManualMantisArmDown;
 import frc.robot.commands.manual.ManualMantisArmStop;
 import frc.robot.commands.manual.ManualMantisArmUp;
@@ -35,7 +29,6 @@ import frc.robot.commands.manual.ManualMantisStingerUp;
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
-@SuppressWarnings("unused")
 public class OI {
 	private Joystick driver = new Joystick(0);
 	private Joystick coDriver = new Joystick(1);
@@ -79,17 +72,18 @@ public class OI {
 	private Button coDriverDRight = new DPad(coDriver, DPad.Direction.RIGHT);
 
 	public OI() {
-		driverA.whenPressed(new CIntake());
+		driverA.whenPressed(new CIntakeFloor());
 		driverA.whenReleased(new ManualCIntakeStop());
-		driverB.whenPressed(new CRelease(0.25));
+		driverB.whenPressed(new CRocketRelease());
 		driverB.whenReleased(new ManualCIntakeStop());
-		driverX.whenPressed(new ManualCIntakeIn());
+		driverX.whenPressed(new CIntakeWall());
 		driverX.whenReleased(new ManualCIntakeStop());
-		driverY.whenPressed(new KaChunkerAutoHandler(.15));
-		driverY.whenReleased(new ManualKaChunkerGrab());
-		driverLB.whenPressed(new ManualManipulatorWristDown());
-		driverRB.whenPressed(new ManualManipulatorWristUp());
+		driverY.whenPressed(new CShipRelease());
+		driverY.whenReleased(new ManualCIntakeStop());
+		driverRB.whenPressed(new KaChunkerAutoHandler(.2));
+		driverRB.whenReleased(new ManualKaChunkerGrab());
 
+		//TBD
 		coDriverLB.whenPressed(new ManualElevatorTiltBack());
 		coDriverRB.whenPressed(new ManualElevatorTiltForward());
 		coDriverY.whenPressed(new ManualMantisStingerUp());

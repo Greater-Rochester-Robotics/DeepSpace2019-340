@@ -8,33 +8,33 @@
 package frc.robot.commands.manipulatorWithKaChunker;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.RobotMap;
+
 import static frc.robot.Robot.manipulatorWithKaChunker;
 
-public class KaChunkerAutoHandler extends Command {
-	private double timeout;
+public class CIntakeWall extends Command {
 
 	/**
-	 * Handles the ka-chunker with masterful accuracy. Maybe.
+	 * Step 1: intake
+	 * Step 2: stop intaking when sensors get vv upset
 	 */
-	public KaChunkerAutoHandler(double timeout) {
+	public CIntakeWall() {
 		requires(manipulatorWithKaChunker);
-		this.timeout = timeout;
 	}
 
 	@Override
 	protected void initialize() {
-		manipulatorWithKaChunker.setWristDown();
-		manipulatorWithKaChunker.setKachunkerDrop();
-		setTimeout(timeout); //When trying to drop a hatch, give the machine .15 seconds to finish dropping
+		manipulatorWithKaChunker.setWristUp();
+		manipulatorWithKaChunker.setCSpeed(RobotMap.C_INTAKE_SPEED);
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return manipulatorWithKaChunker.hasHatch() && isTimedOut();
+		return manipulatorWithKaChunker.hasCargo();
 	}
 
 	@Override
 	protected void end() {
-		manipulatorWithKaChunker.setKachunkerGrab();
+		manipulatorWithKaChunker.setCSpeed(RobotMap.ZERO_SPEED);
 	}
 }

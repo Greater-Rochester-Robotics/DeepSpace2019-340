@@ -36,11 +36,10 @@ public class RobotMap {
 	public static final int DRIVE_ENCODER_RIGHT_CHANNEL_B = 7;
 
 	/* Sensors */
-	public static final int MANIPULATOR_HATCH_DISTANCE_SENSOR_PING_PORT = 1;
-	public static final int MANIPULATOR_HATCH_DISTANCE_SENSOR_ECHO_PORT = 2;
-	public static final int MANIPULATOR_CARGO_LEFT_SENSOR_PORT = 0;
-	public static final int MANIPULATOR_CARGO_RIGHT_SENSOR_PORT = 4;
-	public static final int FRONT_DOWN_CHANNEL = 1; //Might be eliminated; depending on USonic. For now, cargo right  4
+	public static final int MANIPULATOR_HATCH_SENSOR_PORT = 2;
+	public static final int MANIPULATOR_CARGO_LEFT_SENSOR_PORT = 1;
+	public static final int MANIPULATOR_CARGO_RIGHT_SENSOR_PORT = 0;
+	public static final int FRONT_DOWN_CHANNEL = 4; //Might be eliminated; depending on USonic. For now, cargo right  4
 	public static final int BACK_DOWN_CHANNEL = 5;
 	public static final int MANTIS_ARM_DOWN_SWITCH = 3;
 
@@ -49,29 +48,36 @@ public class RobotMap {
 	////////////////////////
 
 	/* Solenoids */
-	public static final int KACHUNKER_SOLENOID_GRAB_CHANNEL = 0; //Single
-	public static final int WRIST_SOLENOID_DOWN_CHANNEL = 3;
-	public static final int WRIST_SOLENOID_UP_CHANNEL = 4;
-	public static final int DISC_BRAKE_SOLENOID_RELEASE_CHANNEL = 5; //Single
-	public static final int STINGER_SOLENOID_DROP_CHANNEL = 1;
+	public static final int KACHUNKER_SOLENOID_GRAB_CHANNEL = 1; //Single 0
+	public static final int WRIST_SOLENOID_DOWN_CHANNEL = 6; //3
+	public static final int WRIST_SOLENOID_UP_CHANNEL = 5; //4
+	public static final int DISC_BRAKE_SOLENOID_RELEASE_CHANNEL = 2; //Single 5
+	public static final int STINGER_SOLENOID_DROP_CHANNEL = 0; //1
 	public static final int STINGER_SOLENOID_RAISE_CHANNEL = 7;
-	public static final int ELEVATOR_TILT_SOLENOID_FORWARD_CHANNEL = 2;
-	public static final int ELEVATOR_TILT_SOLENOID_BACKWARD_CHANNEL = 6;
+	public static final int ELEVATOR_TILT_SOLENOID_FORWARD_CHANNEL = 4; //2
+	public static final int ELEVATOR_TILT_SOLENOID_BACKWARD_CHANNEL = 3; //6
 
 	/////////////
 	// CAN IDs //
 	/////////////
 
 	/* TalonSRXs */
-	public static final int DRIVE_MANTIS_SRX_LEFT_ID = 1;
-	public static final int DRIVE_MANTIS_SRX_RIGHT_ID = 2;
-	public static final int MANIPULATOR_C_SRX_TOP_ID = 4;
-	public static final int MANIPULATOR_C_SRX_BOTTOM_ID = 3;
-	public static final int MANTIS_ARM_SRX_LEFT_ID = 5;
-	public static final int MANTIS_ARM_SRX_RIGHT_ID = 6;
+
+	//Commented numbers are on prac bot. THEY ARE NOT NOT PERMANENT ON EITHER BOT
+	public static final int DRIVE_MANTIS_SRX_LEFT_ID = 4; //1
+	public static final int DRIVE_MANTIS_SRX_RIGHT_ID = 5; //2
+	public static final int MANIPULATOR_C_SRX_TOP_ID = 1; //4
+	public static final int MANIPULATOR_C_SRX_BOTTOM_ID = 2; //3
+	public static final int MANTIS_ARM_SRX_LEFT_ID = 6; //5
+	public static final int MANTIS_ARM_SRX_RIGHT_ID = 3; //6
+
+	/* Spark MAXes */
 	public static final int ELEVATOR_A_MOTOR_CAN_ID = 13; //mid
 	public static final int ELEVATOR_B_MOTOR_CAN_ID = 12; //left
 	public static final int ELEVATOR_C_MOTOR_CAN_ID = 14; //right
+
+	/* Compressor/LED PCM */
+	public static final int SECONDARY_PCM_ID = 10;
 
 	///////////////
 	// CONSTANTS //
@@ -94,6 +100,10 @@ public class RobotMap {
 
 	/* The Titular Zero Speed */
 	public static final double ZERO_SPEED = 0.0;
+
+	/* Wrist tilt timing */
+	public static final double WRIST_TILT_UP_TIME_S = 1.05;
+	public static final double WRIST_TILT_DOWN_TIME_S = .6;
 
 	/* Elevator heights */
 	//All currently temporary
