@@ -39,7 +39,7 @@ public class Elevator extends Subsystem {
 
 	// kP = ((maxSpeed) / (maxPosition * %from max position to start slowing down))
 	// kI ~ kP * 0.01
-	private static double kP = (RobotMap.ELEVATOR_MAX_UP_SPEED / (RobotMap.ELEVATOR_MAX_HEIGHT * 0.2));
+	private static double kP = (RobotMap.ELEVATOR_SPEED_MULTIPLIER / (RobotMap.ELEVATOR_MAX_HEIGHT * 0.2));
 	private static double kI = kP * 0.01;
 
 	private static CANPIDController pidController;
@@ -108,6 +108,11 @@ public class Elevator extends Subsystem {
 		//The Spark Mins (hah) can't do it themselves
 		if(enc.getPosition() >= RobotMap.ELEVATOR_MAX_HEIGHT && spd > 0) {
 			spd = RobotMap.ZERO_SPEED;
+		}
+
+		//Drive down no faster than 55%
+		if(spd < -.55) {
+			spd = -.55;
 		}
 
 		if(spd == RobotMap.ZERO_SPEED) {

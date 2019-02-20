@@ -34,7 +34,7 @@ public class ElevatorStick extends Command {
 			Robot.elevator.resetEncoder();
 		}
 		
-		Robot.elevator.setSpeed(-Robot.oi.getCoDriverAxis(Axis.LEFT_Y) * .4); //Poll co-driver's left Y axis to raise/lower elevator. Negative to account for axis directionality
+		Robot.elevator.setSpeed(-Robot.oi.getCoDriverAxis(Axis.LEFT_Y) * RobotMap.ELEVATOR_SPEED_MULTIPLIER); //Poll co-driver's left Y axis to raise/lower elevator. Negative to account for axis directionality
 	}
 
 	@Override

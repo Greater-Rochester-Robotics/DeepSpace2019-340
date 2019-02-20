@@ -21,7 +21,7 @@ public class ManualElevatorUp extends Command {
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
-		Robot.elevator.setSpeed(RobotMap.ELEVATOR_MAX_UP_SPEED);
+		Robot.elevator.setSpeed(RobotMap.ELEVATOR_SPEED_MULTIPLIER);
 		System.out.println("[" + getClass().getName() + "] -Initialize-");
 		System.out.println("[" + getClass().getName() + "] -ElevatorUp-");
 	}
@@ -29,7 +29,7 @@ public class ManualElevatorUp extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		Robot.elevator.setSpeed(RobotMap.ELEVATOR_MAX_UP_SPEED);
+		Robot.elevator.setSpeed(RobotMap.ELEVATOR_SPEED_MULTIPLIER);
 		// System.out.println("[" + getClass().getName() + "] -Execute-");
 		// System.out.println("[" + getClass().getName() + "] -ElevatorSwitch- " +
 		// Robot.elevator.isAtBottom());
