@@ -107,7 +107,7 @@ public class RobotMap {
 
 	/* Elevator heights */
 	//All currently temporary
-	public static final double ELEVATOR_MAX_HEIGHT = 44; //57.09 at first, now 48-ish
+	public static final double ELEVATOR_MAX_HEIGHT = 46; //57.09 at first, now 48-ish
 	public static final double ELEVATOR_LEVEL_2_HEIGHT = 23;
 
 	public static final double ELEVATOR_TOP_UPPER_SLOW = 42;
