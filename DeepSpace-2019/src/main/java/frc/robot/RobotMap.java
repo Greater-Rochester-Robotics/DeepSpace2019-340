@@ -88,8 +88,8 @@ public class RobotMap {
 	public static final double C_OUTTAKE_SPEED = 1.0;
 	
 	/* Elevator speed */
-	public static final double ELEVATOR_MAX_UP_SPEED = .4;
-	public static final double ELEVATOR_MAX_DOWN_SPEED = -.4;
+	public static final double ELEVATOR_SPEED_MULTIPLIER = .75; //Also used as max up speed for manual overrides and kP
+	public static final double ELEVATOR_MAX_DOWN_SPEED = -.55;
 	
 
 	/* Mantis speed */
@@ -107,7 +107,7 @@ public class RobotMap {
 
 	/* Elevator heights */
 	//All currently temporary
-	public static final double ELEVATOR_MAX_HEIGHT = 42; //57.09 at first, now 48-ish
+	public static final double ELEVATOR_MAX_HEIGHT = 44; //57.09 at first, now 48-ish
 	public static final double ELEVATOR_LEVEL_2_HEIGHT = 23;
 
 	public static final double ELEVATOR_TOP_UPPER_SLOW = 42;
