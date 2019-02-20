@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 //Can we clean these up?
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.ControlType;
 import com.revrobotics.CANDigitalInput.LimitSwitchPolarity;
 import com.revrobotics.CANDigitalInput;
 import com.revrobotics.CANEncoder;
@@ -148,6 +149,14 @@ public class Elevator extends Subsystem {
 	}
 
 	/**
+	 * Cut the motor
+	 */
+	public void stop() {
+		pidController.setReference(0, ControlType.kDutyCycle);
+		elevatorA.stopMotor();
+	}
+
+	/**
 	 * @return the elevator's height traveled, offset included, based on motor rotations
 	 * FIXME: check if we have to <i>adjust</i> or <i>redefine</i> the offset
 	 */
@@ -188,6 +197,16 @@ public class Elevator extends Subsystem {
 	 */
 	public void tiltBackward() {
 		tilt.set(Value.kReverse);
+	}
+
+	/**
+	 * Use PID to set the elevator to a given position<br>
+	 * This is like 98% certain to completely fail,
+	 * and 1% certain to succeed with nasty side effects
+	 * @param pos height to go to, in motor rotations
+	 */
+	public void goToPos(double pos) {
+		pidController.setReference(pos, ControlType.kPosition);
 	}
 
 	/**
