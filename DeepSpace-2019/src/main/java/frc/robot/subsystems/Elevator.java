@@ -120,26 +120,26 @@ public class Elevator extends Subsystem {
 	}
 
 	public void setSpeedScaled(double speed) {
+		
 		//Slows the elevator down before it breaks everything.
+		//Cutoff is intentionally smaller than OI, to prevent double issues
 		if(speed < -0.05) {
-			if(getPos() < RobotMap.ELEVATOR_BOTTOM_UPPER_SLOW) {
-				speed *= 0.3;
-			} else if(getPos() < RobotMap.ELEVATOR_BOTTOM_LOWER_SLOW) {
+			if(getPos() < RobotMap.ELEVATOR_BOTTOM_LOWER_SLOW) {
 				speed *= 0.1;
+			} else if(getPos() < RobotMap.ELEVATOR_BOTTOM_UPPER_SLOW) {
+				speed *= 0.3;
 			}
-
-			setSpeed(speed);
 		} else if(speed > 0.05) {
 			if(getPos() > RobotMap.ELEVATOR_TOP_UPPER_SLOW) {
 				speed = 0.05;
 			} else if(getPos() > RobotMap.ELEVATOR_TOP_LOWER_SLOW) {
 				speed *= 0.4;
 			}
-
-			setSpeed(speed);
 		} else {
-			setSpeed(RobotMap.ZERO_SPEED);
+			speed = RobotMap.ZERO_SPEED;
 		}
+
+		setSpeed(speed);
 	}
 
 	/**
