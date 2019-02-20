@@ -28,9 +28,17 @@ public class CIntakeWall extends Command {
 		manipulatorWithKaChunker.setCSpeed(RobotMap.C_INTAKE_SPEED);
 	}
 
+	//Will this work? :thonk:
+	@Override
+	protected void execute() {
+		if(manipulatorWithKaChunker.hasCargo()) {
+			setTimeout(.05 + timeSinceInitialized());
+		}
+	}
+
 	@Override
 	protected boolean isFinished() {
-		return manipulatorWithKaChunker.hasCargo();
+		return manipulatorWithKaChunker.hasCargo() && isTimedOut();
 	}
 
 	@Override

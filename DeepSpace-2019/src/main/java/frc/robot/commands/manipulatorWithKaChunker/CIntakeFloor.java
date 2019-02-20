@@ -8,7 +8,7 @@
 package frc.robot.commands.manipulatorWithKaChunker;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Robot;
+import static frc.robot.Robot.manipulatorWithKaChunker;
 import frc.robot.RobotMap;
 
 /**
@@ -23,28 +23,36 @@ public class CIntakeFloor extends Command {
 	 * Step 3: flip wrist up
 	 */
 	public CIntakeFloor() {
-		requires(Robot.manipulatorWithKaChunker);
+		requires(manipulatorWithKaChunker);
 	}
 
 	@Override
 	protected void initialize() {
-		Robot.manipulatorWithKaChunker.setWristDown();
-		Robot.manipulatorWithKaChunker.setCSpeed(RobotMap.C_INTAKE_SPEED); //Roll wheels inward the instant this command begins
+		manipulatorWithKaChunker.setWristDown();
+		manipulatorWithKaChunker.setCSpeed(RobotMap.C_INTAKE_SPEED); //Roll wheels inward the instant this command begins
+	}
+
+	//Will this work? :thonk:
+	@Override
+	protected void execute() {
+		if(manipulatorWithKaChunker.hasCargo()) {
+			setTimeout(.1 + timeSinceInitialized());
+		}
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return Robot.manipulatorWithKaChunker.hasCargo(); //Continue rolling until interrupt or cargo acquisition
+		return manipulatorWithKaChunker.hasCargo() && isTimedOut(); //Continue rolling until interrupt or cargo acquisition
 	}
 
 	@Override
 	protected void end() {
-		Robot.manipulatorWithKaChunker.setCSpeed(RobotMap.ZERO_SPEED); //On interrupt or cargo acquisition, stop the wheels
-		Robot.manipulatorWithKaChunker.setWristUp();
+		manipulatorWithKaChunker.setCSpeed(RobotMap.ZERO_SPEED); //On interrupt or cargo acquisition, stop the wheels
+		manipulatorWithKaChunker.setWristUp();
 	}
 
 	@Override
 	protected void interrupted() {
-		Robot.manipulatorWithKaChunker.setCSpeed(RobotMap.ZERO_SPEED);
+		manipulatorWithKaChunker.setCSpeed(RobotMap.ZERO_SPEED);
 	}
 }
