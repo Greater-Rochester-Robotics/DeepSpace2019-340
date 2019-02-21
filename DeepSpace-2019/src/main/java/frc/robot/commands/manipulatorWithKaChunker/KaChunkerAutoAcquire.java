@@ -10,24 +10,19 @@ package frc.robot.commands.manipulatorWithKaChunker;
 import edu.wpi.first.wpilibj.command.Command;
 import static frc.robot.Robot.manipulatorWithKaChunker;
 
-public class KaChunkerAutoHandler extends Command {
-	private boolean startingStatus = false; //True if sensor button starts pressed
-	private double timeout;
+public class KaChunkerAutoAcquire extends Command {
 
 	/**
 	 * Handles the ka-chunker with masterful accuracy. Maybe.
 	 */
-	public KaChunkerAutoHandler(double timeout) {
+	public KaChunkerAutoAcquire() {
 		requires(manipulatorWithKaChunker);
-		this.timeout = timeout;
 	}
 
 	@Override
 	protected void initialize() {
-		startingStatus = manipulatorWithKaChunker.hasHatch();
 		manipulatorWithKaChunker.setWristDown();
 		manipulatorWithKaChunker.setKachunkerDrop();
-		setTimeout(timeout); //When trying to drop a hatch, give the machine .15 seconds to finish dropping
 	}
 
 	/**
@@ -38,16 +33,11 @@ public class KaChunkerAutoHandler extends Command {
 	 */
 	@Override
 	protected boolean isFinished() {
-		if(startingStatus != manipulatorWithKaChunker.hasHatch()) {
-			return isTimedOut();
-		} else {
-			return false;
-		}
+		return manipulatorWithKaChunker.hasHatch();
 	}
 
 	@Override
 	protected void end() {
 		manipulatorWithKaChunker.setKachunkerGrab();
-		startingStatus = manipulatorWithKaChunker.hasHatch();
 	}
 }

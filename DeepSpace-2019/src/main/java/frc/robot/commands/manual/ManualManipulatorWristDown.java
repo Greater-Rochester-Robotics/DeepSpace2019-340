@@ -11,41 +11,31 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class ManualManipulatorWristDown extends Command {
-  public ManualManipulatorWristDown() {
-	  requires(Robot.manipulatorWithKaChunker);
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
-  }
+	public ManualManipulatorWristDown() {
+		requires(Robot.manipulatorWithKaChunker);
+		// Use requires() here to declare subsystem dependencies
+		// eg. requires(chassis);
+	}
 
-  // Called just before this Command runs the first time
-  @Override
-  protected void initialize() {
-	  Robot.manipulatorWithKaChunker.setWristDown();
-	  System.out.println("[" + getClass().getName() + "] -Initialize-");
-	  System.out.println("[" + getClass().getName() + "] -WristDown-");
-  }
-  
-  // Called repeatedly when this Command is scheduled to run
-  @Override
-  protected void execute() {
-	  System.out.println("[" + getClass().getName() + "] -Execute-");
-	  System.out.println("[" + getClass().getName() + "] -WristDown- " + Robot.manipulatorWithKaChunker.isWristDown());
-  }
+	// Called just before this Command runs the first time
+	@Override
+	protected void initialize() {
+		Robot.manipulatorWithKaChunker.setWristDown();
+		// System.out.println("[" + getClass().getName() + "] -Initialize-");
+		// System.out.println("[" + getClass().getName() + "] -WristDown-");
+	}
 
-  // Make this return true when this Command no longer needs to run execute()
-  @Override
-  protected boolean isFinished() {
-    return true;
-  }
+	// Called repeatedly when this Command is scheduled to run
+	@Override
+	protected void execute() {
+		// System.out.println("[" + getClass().getName() + "] -Execute-");
+		// System.out.println("[" + getClass().getName() + "] -WristDown- " +
+		// Robot.manipulatorWithKaChunker.isWristDown());
+	}
 
-  // Called once after isFinished returns true
-  @Override
-  protected void end() {
-  }
-
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
-  @Override
-  protected void interrupted() {
-  }
+	// Make this return true when this Command no longer needs to run execute()
+	@Override
+	protected boolean isFinished() {
+		return true;
+	}
 }
