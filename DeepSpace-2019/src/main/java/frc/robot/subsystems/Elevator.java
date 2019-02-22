@@ -138,30 +138,22 @@ public class Elevator extends Subsystem {
 		//Slows the elevator down before it breaks everything.
 		//Cutoff is intentionally smaller than OI, to prevent double issues
 		if(speed < -0.05) {
-			System.out.println("Speed < -.05");
 			if(getRawPos() < RobotMap.ELEVATOR_BOTTOM_LOWER_SLOW) {
-				System.out.println("Elevator vv low");
 				speed *= 0.1;
 			} else if(getRawPos() < RobotMap.ELEVATOR_BOTTOM_UPPER_SLOW) {
-				System.out.println("Elevator v low");
 				speed *= 0.3;
 			}
 		} else if(speed > 0.05) {
-			System.out.println("Speed > .05");
 			if(getRawPos() > RobotMap.ELEVATOR_TOP_UPPER_SLOW) {
-				System.out.println("Elevator vv high");
 				speed = 0.05;
 			} else if(getRawPos() > RobotMap.ELEVATOR_TOP_LOWER_SLOW) {
-				System.out.println("Elevator v high");
 				speed *= 0.25;
 			}
 		} else {
-			System.out.println("Zeroing speed");
 			speed = RobotMap.ZERO_SPEED;
 		}
 
 		setSpeed(speed);
-		System.out.println("Speed at " + speed);
 	}
 
 	/**
