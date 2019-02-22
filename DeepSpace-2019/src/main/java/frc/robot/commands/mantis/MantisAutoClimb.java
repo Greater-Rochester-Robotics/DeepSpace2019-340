@@ -13,18 +13,17 @@ import frc.robot.RobotMap;
 
 import static frc.robot.Robot.mantis;
 
-public class MantisClimb extends Command {
-	public MantisClimb() {
+/**
+ * No bueno!!!
+ */
+public class MantisAutoClimb extends Command {
+	public MantisAutoClimb() {
 		requires(mantis);
 	}
 
 	@Override
 	protected void initialize() {
 		mantis.setStinger(true); //fire stinger
-	}
-
-	@Override
-	protected void execute() {
 		mantis.setArmSpeed(RobotMap.MANTIS_ARM_DOWN_SPEED); //start raising the front, too
 	}
 

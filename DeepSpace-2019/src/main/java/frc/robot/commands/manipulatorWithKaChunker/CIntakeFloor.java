@@ -28,31 +28,21 @@ public class CIntakeFloor extends Command {
 
 	@Override
 	protected void initialize() {
-		manipulatorWithKaChunker.setWristDown();
+		manipulatorWithKaChunker.setWristDown(); //Wrist tips down if not already
 		manipulatorWithKaChunker.setCSpeed(RobotMap.C_INTAKE_SPEED); //Roll wheels inward the instant this command begins
-	}
-
-	//Will this work? :thonk:
-	@Override
-	protected void execute() {
-		if(manipulatorWithKaChunker.hasCargo()) {
-			setTimeout(.1 + timeSinceInitialized());
-		}
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return manipulatorWithKaChunker.hasCargo() && isTimedOut(); //Continue rolling until interrupt or cargo acquisition
+		return manipulatorWithKaChunker.hasCargo(); //Continue rolling until acquisition complete
 	}
 
 	@Override
 	protected void end() {
-		manipulatorWithKaChunker.setCSpeed(RobotMap.ZERO_SPEED); //On interrupt or cargo acquisition, stop the wheels
+		manipulatorWithKaChunker.setCSpeed(RobotMap.C_STALL_SPEED); //On interrupt or cargo acquisition, stall the wheels
 		manipulatorWithKaChunker.setWristUp();
 	}
 
 	@Override
-	protected void interrupted() {
-		manipulatorWithKaChunker.setCSpeed(RobotMap.ZERO_SPEED);
-	}
+	protected void interrupted() {} //Do nothing on interrupt
 }

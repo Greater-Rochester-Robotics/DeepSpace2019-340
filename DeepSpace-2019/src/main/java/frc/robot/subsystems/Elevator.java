@@ -32,7 +32,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
  * TODO: make this <i>much</i> more sophisticated
  */
 public class Elevator extends Subsystem {
-	private static Solenoid discBrake;
+	private static Solenoid discBrake; //True moving, false stopping
 	private static DoubleSolenoid tilt;
 	private static CANSparkMax elevatorA, elevatorB, elevatorC;
 	private static CANDigitalInput elevatorBottomLimit;
@@ -43,7 +43,9 @@ public class Elevator extends Subsystem {
 	private static double kP = (RobotMap.ELEVATOR_SPEED_MULTIPLIER / (RobotMap.ELEVATOR_MAX_HEIGHT * 0.2));
 	private static double kI = kP * 0.01;
 
-	private static CANPIDController pidController;
+	private static CANPIDController pidControllerA;
+	private static CANPIDController pidControllerB;
+	private static CANPIDController pidControllerC;
 
 	@Deprecated private double offset = 0; //Adjusts for encoder drift
 
@@ -73,9 +75,15 @@ public class Elevator extends Subsystem {
 		//Invert direction
 		elevatorA.setInverted(true);
 
-		pidController = elevatorA.getPIDController();
-		pidController.setP(kP);
-		pidController.setI(kI);
+		pidControllerA = elevatorA.getPIDController();
+		pidControllerA.setP(kP);
+		pidControllerA.setI(kI);
+		pidControllerB = elevatorB.getPIDController();
+		pidControllerB.setP(kP);
+		pidControllerB.setI(kI);
+		pidControllerC = elevatorC.getPIDController();
+		pidControllerC.setP(kP);
+		pidControllerC.setI(kI);
 		// pidController.setReference(1, ControlType.kPosition);
 	}
 
@@ -130,29 +138,38 @@ public class Elevator extends Subsystem {
 		//Slows the elevator down before it breaks everything.
 		//Cutoff is intentionally smaller than OI, to prevent double issues
 		if(speed < -0.05) {
-			if(getPos() < RobotMap.ELEVATOR_BOTTOM_LOWER_SLOW) {
+			System.out.println("Speed < -.05");
+			if(getRawPos() < RobotMap.ELEVATOR_BOTTOM_LOWER_SLOW) {
+				System.out.println("Elevator vv low");
 				speed *= 0.1;
-			} else if(getPos() < RobotMap.ELEVATOR_BOTTOM_UPPER_SLOW) {
+			} else if(getRawPos() < RobotMap.ELEVATOR_BOTTOM_UPPER_SLOW) {
+				System.out.println("Elevator v low");
 				speed *= 0.3;
 			}
 		} else if(speed > 0.05) {
-			if(getPos() > RobotMap.ELEVATOR_TOP_UPPER_SLOW) {
+			System.out.println("Speed > .05");
+			if(getRawPos() > RobotMap.ELEVATOR_TOP_UPPER_SLOW) {
+				System.out.println("Elevator vv high");
 				speed = 0.05;
-			} else if(getPos() > RobotMap.ELEVATOR_TOP_LOWER_SLOW) {
-				speed *= 0.4;
+			} else if(getRawPos() > RobotMap.ELEVATOR_TOP_LOWER_SLOW) {
+				System.out.println("Elevator v high");
+				speed *= 0.25;
 			}
 		} else {
+			System.out.println("Zeroing speed");
 			speed = RobotMap.ZERO_SPEED;
 		}
 
 		setSpeed(speed);
+		System.out.println("Speed at " + speed);
 	}
 
 	/**
 	 * Cut the motor
 	 */
 	public void stop() {
-		pidController.setReference(0, ControlType.kDutyCycle);
+		pidControllerA.setReference(0, ControlType.kDutyCycle);
+		discBrake.set(false);
 		elevatorA.stopMotor();
 	}
 
@@ -206,7 +223,14 @@ public class Elevator extends Subsystem {
 	 * @param pos height to go to, in motor rotations
 	 */
 	public void goToPos(double pos) {
-		pidController.setReference(pos, ControlType.kPosition);
+		pidControllerA.setP((RobotMap.ELEVATOR_SPEED_MULTIPLIER / (pos * 0.2)) * .1);
+		pidControllerA.setI(pidControllerA.getP() * .01);
+
+		discBrake.set(true);
+
+		pidControllerA.setReference(pos, ControlType.kPosition);
+		// pidControllerB.setReference(pos, ControlType.kPosition);
+		// pidControllerC.setReference(pos, ControlType.kPosition);
 	}
 
 	/**

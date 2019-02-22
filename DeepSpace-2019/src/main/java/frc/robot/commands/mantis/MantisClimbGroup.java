@@ -9,11 +9,11 @@ package frc.robot.commands.mantis;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-public class MantisClimbing extends CommandGroup {
+public class MantisClimbGroup extends CommandGroup {
   /**
    * Add your docs here.
    */
-  public MantisClimbing() {
+  public MantisClimbGroup() {
     // Add Commands here:
     // e.g. addSequential(new Command1());
     // addSequential(new Command2());

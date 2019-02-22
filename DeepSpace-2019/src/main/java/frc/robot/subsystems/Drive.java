@@ -246,13 +246,36 @@ public class Drive extends Subsystem {
 		    }
 		}
 
-		if(!Robot.isFrontHigh() && !Robot.isBackHigh()) {
-			setMantisBoth(0, 0);
-			setDriveBoth(leftSpeed, rightSpeed);
+		setDriveBoth(leftSpeed, rightSpeed);
+	}
+
+	/**
+     * One joystick drive mode. One stick axis speeds forward/backwards, the other adds rotation on robot yaw axis<br>
+	 * This one also controls mantis banebot wheels
+     * @param moveValue forward/backward speed, as a percentage of max forward speed
+     * @param rotateValue rotation speed, as a percentage of max rightward rotation speed
+     */
+    public void arcadeDriveWithMantis(double moveValue, double rotateValue) {
+		if(moveValue > 0.0) {
+		    if(rotateValue > 0.0) {
+		    	leftSpeed = moveValue - rotateValue;
+		    	rightSpeed = Math.max(moveValue, rotateValue);
+		    } else {
+		    	leftSpeed = Math.max(moveValue, -rotateValue);
+		    	rightSpeed = moveValue + rotateValue;
+		    }
 		} else {
-			setMantisBoth(leftSpeed, rightSpeed);
-			setDriveBoth(leftSpeed, rightSpeed);
+		    if(rotateValue > 0.0) {
+		    	leftSpeed = -Math.max(-moveValue, rotateValue);
+		    	rightSpeed = moveValue + rotateValue;
+		    } else {
+		    	leftSpeed = moveValue - rotateValue;
+		    	rightSpeed = -Math.max(-moveValue, -rotateValue);
+		    }
 		}
+
+		setMantisBoth(leftSpeed, rightSpeed);
+		setDriveBoth(leftSpeed, rightSpeed);
 	}
 
 	/**

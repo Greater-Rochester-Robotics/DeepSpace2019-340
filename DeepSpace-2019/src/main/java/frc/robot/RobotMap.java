@@ -39,7 +39,8 @@ public class RobotMap {
 	public static final int MANIPULATOR_HATCH_SENSOR_PORT = 2;
 	public static final int MANIPULATOR_CARGO_LEFT_SENSOR_PORT = 1;
 	public static final int MANIPULATOR_CARGO_RIGHT_SENSOR_PORT = 0;
-	public static final int FRONT_DOWN_CHANNEL = 4; //Might be eliminated; depending on USonic. For now, cargo right  4
+	public static final int FRONT_DOWN_CHANNEL = 4;
+	
 	public static final int BACK_DOWN_CHANNEL = 5;
 	public static final int MANTIS_ARM_DOWN_SWITCH = 3;
 
@@ -84,16 +85,17 @@ public class RobotMap {
 	///////////////
 
 	/* C speed */
-	public static final double C_INTAKE_SPEED = -1.0;
+	public static final double C_INTAKE_SPEED = -.6;
 	public static final double C_OUTTAKE_SPEED = 1.0;
-	
+	public static final double C_STALL_SPEED = -.15;
+
 	/* Elevator speed */
 	public static final double ELEVATOR_SPEED_MULTIPLIER = .75; //Also used as max up speed for manual overrides and kP
 	public static final double ELEVATOR_MAX_DOWN_SPEED = -.55;
 	
 
 	/* Mantis speed */
-	public static final double MANTIS_ARM_DOWN_SPEED = .5; //Positive down
+	public static final double MANTIS_ARM_DOWN_SPEED = .8; //Positive down
 	public static final double MANTIS_ARM_UP_SPEED = -.5; //Negative up
 	public static final double MANTIS_WHEELS_FORWARD_SPEED = 1.0;
 	public static final double MANTIS_WHEELS_BACKWARDS_SPEED = -1.0;
@@ -107,11 +109,14 @@ public class RobotMap {
 
 	/* Elevator heights */
 	//All currently temporary
-	public static final double ELEVATOR_MAX_HEIGHT = 46; //57.09 at first, now 48-ish
-	public static final double ELEVATOR_LEVEL_2_HEIGHT = 23;
+	//All built around hatches
+	public static final double ELEVATOR_MAX_HEIGHT = 45;
 
-	public static final double ELEVATOR_TOP_UPPER_SLOW = 42;
-	public static final double ELEVATOR_TOP_LOWER_SLOW = 38;
-	public static final double ELEVATOR_BOTTOM_UPPER_SLOW = 10;
-	public static final double ELEVATOR_BOTTOM_LOWER_SLOW = 5;
+	public static final double ELEVATOR_LEVEL_2_HEIGHT = 9.214322090148926 + 8.875;
+	public static final double ELEVATOR_CLIMB_HEIGHT = 13.42069;
+
+	public static final double ELEVATOR_TOP_UPPER_SLOW = 44;
+	public static final double ELEVATOR_TOP_LOWER_SLOW = 35;
+	public static final double ELEVATOR_BOTTOM_UPPER_SLOW = 6;
+	public static final double ELEVATOR_BOTTOM_LOWER_SLOW = 2;
 }

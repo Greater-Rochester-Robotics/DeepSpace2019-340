@@ -5,39 +5,42 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.manipulatorWithKaChunker;
+package frc.robot.commands.mantis;
 
 import edu.wpi.first.wpilibj.command.Command;
+import static frc.robot.Robot.mantis;
 import frc.robot.RobotMap;
-
 import static frc.robot.Robot.manipulatorWithKaChunker;
 
-public class CIntakeWall extends Command {
+/**
+ * TODO: add elevator height for climbing<br>
+ * Might need to move this to a commandgroup?
+ */
+public class MantisSemiAutoClimb extends Command {
+	private boolean flag = false;
 
-	/**
-	 * Step 1: intake
-	 * Step 2: stop intaking when sensors get vv upset
-	 */
-	public CIntakeWall() {
+	public MantisSemiAutoClimb() {
+		requires(mantis);
 		requires(manipulatorWithKaChunker);
 	}
 
 	@Override
 	protected void initialize() {
-		manipulatorWithKaChunker.setWristUp(); //Wrist tips up if not already
-		manipulatorWithKaChunker.setCSpeed(RobotMap.C_INTAKE_SPEED); //Spin wheels as soon as command starts
+		mantis.setArmSpeed(RobotMap.MANTIS_ARM_DOWN_SPEED);
+		manipulatorWithKaChunker.setWristUp();
+		setTimeout(1.7);
+	}
+
+	@Override
+	protected void execute() {
+		if(isTimedOut()) {
+			mantis.setStinger(true);
+			flag = true;
+		}
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return manipulatorWithKaChunker.hasCargo(); //Continue rolling until acquisition complete
+		return flag;
 	}
-
-	@Override
-	protected void end() {
-		manipulatorWithKaChunker.setCSpeed(RobotMap.C_STALL_SPEED); //Stall the wheels when done
-	}
-
-	@Override
-	protected void interrupted() {} //Do nothing on interrupt
 }

@@ -11,10 +11,16 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.manipulatorWithKaChunker.CIntakeWall;
+import frc.robot.commands.DriveXOne;
+import frc.robot.commands.DriveXOneWithMantis;
+import frc.robot.commands.ElevatorStick;
+import frc.robot.commands.ElevatorToPosition;
 import frc.robot.commands.manipulatorWithKaChunker.CIntakeFloor;
 import frc.robot.commands.manipulatorWithKaChunker.CRocketRelease;
 import frc.robot.commands.manipulatorWithKaChunker.CShipRelease;
 import frc.robot.commands.manipulatorWithKaChunker.KaChunkerAutoAcquire;
+import frc.robot.commands.mantis.MantisSemiAutoClimb;
+import frc.robot.commands.mantis.MantisStopClimb;
 import frc.robot.commands.manual.ManualCIntakeStop;
 import frc.robot.commands.manual.ManualElevatorTiltBack;
 import frc.robot.commands.manual.ManualElevatorTiltForward;
@@ -24,8 +30,6 @@ import frc.robot.commands.manual.ManualManipulatorWristDown;
 import frc.robot.commands.manual.ManualManipulatorWristUp;
 import frc.robot.commands.manual.ManualMantisArmDown;
 import frc.robot.commands.manual.ManualMantisArmStop;
-import frc.robot.commands.manual.ManualMantisStingerDown;
-import frc.robot.commands.manual.ManualMantisStingerUp;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -86,18 +90,21 @@ public class OI {
 		driverRB.whenReleased(new ManualKaChunkerGrab());
 		driverLB.whenPressed(new ManualKaChunkerRelease());
 		driverLB.whenPressed(new ManualKaChunkerGrab());
-
 		driverDDown.whenPressed(new ManualManipulatorWristDown());
 		driverDUp.whenPressed(new ManualManipulatorWristUp());
 
+		driverDLeft.whenPressed(new DriveXOneWithMantis()); //For some odd reason, D-Left and D-Right are switched. IDFK
+		driverDRight.whenPressed(new DriveXOne());
+
 		//TBD
+		coDriverA.whenPressed(new ManualMantisArmDown());
+		coDriverA.whenReleased(new ManualMantisArmStop());
+		coDriverB.whenPressed(new ElevatorToPosition(RobotMap.ELEVATOR_LEVEL_2_HEIGHT));
+		coDriverX.whenPressed(new ElevatorStick());
 		coDriverLB.whenPressed(new ManualElevatorTiltBack());
 		coDriverRB.whenPressed(new ManualElevatorTiltForward());
-		coDriverY.whenPressed(new ManualMantisStingerUp());
-		coDriverA.whenPressed(new ManualMantisStingerDown());
-		// coDriverDDown.whenPressed(new MantisClimb());
-		coDriverDDown.whenPressed(new ManualMantisArmDown());
-		coDriverDDown.whenReleased(new ManualMantisArmStop());
+		coDriverDDown.whenPressed(new MantisSemiAutoClimb());
+		coDriverDDown.whenReleased(new MantisStopClimb());
 	}
 
 	public enum Axis {
