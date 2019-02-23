@@ -11,9 +11,8 @@ import com.analog.adis16448.frc.ADIS16448_IMU;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.DriveXOne;
 
@@ -27,11 +26,11 @@ public class Drive extends Subsystem {
 
 	private static ADIS16448_IMU imu;
 	private static Encoder encLeft, encRight; //TODO: adjust for circumference
-	private static Talon talonLeft, talonRight;
+	private static Spark driveLeft, driveRight;
 	private static TalonSRX mantisLeft, mantisRight;
 
 	/**
-	 * Set up the Talons and encoders with the ports specified
+	 * Set up the Sparks and encoders with the ports specified
 	 * in {@link RobotMap}, and the IMU with the Y-axis as yaw
 	 */
 	public Drive() {
@@ -40,10 +39,10 @@ public class Drive extends Subsystem {
 		encLeft = new Encoder(RobotMap.DRIVE_ENCODER_LEFT_CHANNEL_A, RobotMap.DRIVE_ENCODER_LEFT_CHANNEL_B);
 		encRight = new Encoder(RobotMap.DRIVE_ENCODER_RIGHT_CHANNEL_A, RobotMap.DRIVE_ENCODER_RIGHT_CHANNEL_B);
 
-		talonLeft = new Talon(RobotMap.DRIVE_TALON_LEFT_CHANNEL);
-		talonRight = new Talon(RobotMap.DRIVE_TALON_RIGHT_CHANNEL);
+		driveLeft = new Spark(RobotMap.DRIVE_SPARK_LEFT_CHANNEL);
+		driveRight = new Spark(RobotMap.DRIVE_SPARK_RIGHT_CHANNEL);
 
-		talonLeft.setInverted(true); //Negate all speeds to the left side to account for mirrored axes
+		driveLeft.setInverted(true); //Negate all speeds to the left side to account for mirrored axes
 
 		mantisLeft = new TalonSRX(RobotMap.DRIVE_MANTIS_SRX_LEFT_ID);
 		mantisRight = new TalonSRX(RobotMap.DRIVE_MANTIS_SRX_RIGHT_ID);
@@ -131,7 +130,7 @@ public class Drive extends Subsystem {
 			speed = 1;
 		}
 
-		talonLeft.set(speed);
+		driveLeft.set(speed);
 	}
 
 	/**
@@ -145,7 +144,7 @@ public class Drive extends Subsystem {
 			speed = 1;
 		}
 
-		talonRight.set(speed);
+		driveRight.set(speed);
 	}
 
 	/**
