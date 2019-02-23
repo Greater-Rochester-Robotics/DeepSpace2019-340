@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -55,10 +56,11 @@ public class Robot extends TimedRobot {
 		mantis = new Mantis();
 		compressor = new Compressor(RobotMap.SECONDARY_PCM_ID);
 		oi = new OI();
-		SmartDashboard.putData("Ball", manipulatorWithKaChunker);
 		m_chooser.setDefaultOption("Default Auto", new DriveXOne()); //I suppose that's one way to do it
 		// chooser.addOption("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);
+
+		CameraServer.getInstance().startAutomaticCapture();
 	}
 
 	/**
