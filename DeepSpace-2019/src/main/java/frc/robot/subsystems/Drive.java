@@ -19,7 +19,9 @@ import frc.robot.commands.DriveXOne;
 /**
  * <h1>Drive</h1>
  * Moves the robot between two places. Always uses the Xbox ONE controller
- * command unless explicitly told otherwise
+ * command unless explicitly told otherwise<br>
+ * <br>
+ * Overall gear ratio: 44/5
  */
 public class Drive extends Subsystem {
 	private double leftSpeed, rightSpeed; //Makes math easier for fancy drive
@@ -38,6 +40,13 @@ public class Drive extends Subsystem {
 
 		encLeft = new Encoder(RobotMap.DRIVE_ENCODER_LEFT_CHANNEL_A, RobotMap.DRIVE_ENCODER_LEFT_CHANNEL_B);
 		encRight = new Encoder(RobotMap.DRIVE_ENCODER_RIGHT_CHANNEL_A, RobotMap.DRIVE_ENCODER_RIGHT_CHANNEL_B);
+
+		//256 ticks to 6pi inches = .0234375pi inches per tick
+		encLeft.setDistancePerPulse(.0234375 * Math.PI);
+		encRight.setDistancePerPulse(.0234375 * Math.PI);
+
+		encLeft.setReverseDirection(true);
+		encRight.setReverseDirection(true);
 
 		driveLeft = new Spark(RobotMap.DRIVE_SPARK_LEFT_CHANNEL);
 		driveRight = new Spark(RobotMap.DRIVE_SPARK_RIGHT_CHANNEL);

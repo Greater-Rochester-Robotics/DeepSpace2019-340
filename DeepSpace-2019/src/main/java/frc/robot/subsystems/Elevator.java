@@ -41,7 +41,7 @@ public class Elevator extends Subsystem {
 	// kP = ((maxSpeed) / (maxPosition * %from max position to start slowing down))
 	// kI ~ kP * 0.01
 	private static double kP = (RobotMap.ELEVATOR_SPEED_MULTIPLIER / (RobotMap.ELEVATOR_MAX_HEIGHT * 0.2));
-	private static double kI = kP * 0.01;
+	// private static double kI = kP * 0.01;
 
 	private static CANPIDController pidControllerA;
 	private static CANPIDController pidControllerB;
@@ -77,13 +77,13 @@ public class Elevator extends Subsystem {
 
 		pidControllerA = elevatorA.getPIDController();
 		pidControllerA.setP(kP);
-		pidControllerA.setI(kI);
-		pidControllerB = elevatorB.getPIDController();
-		pidControllerB.setP(kP);
-		pidControllerB.setI(kI);
-		pidControllerC = elevatorC.getPIDController();
-		pidControllerC.setP(kP);
-		pidControllerC.setI(kI);
+		// pidControllerA.setI(kI);
+		// pidControllerB = elevatorB.getPIDController();
+		// pidControllerB.setP(kP);
+		// pidControllerB.setI(kI);
+		// pidControllerC = elevatorC.getPIDController();
+		// pidControllerC.setP(kP);
+		// pidControllerC.setI(kI);
 		// pidController.setReference(1, ControlType.kPosition);
 	}
 
@@ -136,7 +136,7 @@ public class Elevator extends Subsystem {
 	public void setSpeedScaled(double speed) {
 		
 		//Slows the elevator down before it breaks everything.
-		//Cutoff is intentionally smaller than OI, to prevent double issues
+		//Deadzones don't need to be here but whatever
 		if(speed < -0.05) {
 			if(getRawPos() < RobotMap.ELEVATOR_BOTTOM_LOWER_SLOW) {
 				speed *= 0.1;
@@ -215,8 +215,8 @@ public class Elevator extends Subsystem {
 	 * @param pos height to go to, in motor rotations
 	 */
 	public void goToPos(double pos) {
-		pidControllerA.setP((RobotMap.ELEVATOR_SPEED_MULTIPLIER / (pos * 0.2)) * .1);
-		pidControllerA.setI(pidControllerA.getP() * .01);
+		pidControllerA.setP((RobotMap.ELEVATOR_SPEED_MULTIPLIER / (pos * 0.15)));
+		// pidControllerA.setI(pidControllerA.getP() * .01);
 
 		discBrake.set(true);
 

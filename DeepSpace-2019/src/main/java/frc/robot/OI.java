@@ -21,6 +21,7 @@ import frc.robot.commands.manipulatorWithKaChunker.CShipRelease;
 import frc.robot.commands.manipulatorWithKaChunker.KaChunkerAutoAcquire;
 import frc.robot.commands.mantis.MantisSemiAutoClimb;
 import frc.robot.commands.mantis.MantisStopClimb;
+import frc.robot.commands.manual.ManualCIntakeIn;
 import frc.robot.commands.manual.ManualCIntakeStop;
 import frc.robot.commands.manual.ManualElevatorTiltBack;
 import frc.robot.commands.manual.ManualElevatorTiltForward;
@@ -30,6 +31,7 @@ import frc.robot.commands.manual.ManualManipulatorWristDown;
 import frc.robot.commands.manual.ManualManipulatorWristUp;
 import frc.robot.commands.manual.ManualMantisArmDown;
 import frc.robot.commands.manual.ManualMantisArmStop;
+import frc.robot.commands.pathing.groups.Testing;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -92,6 +94,11 @@ public class OI {
 		driverLB.whenPressed(new ManualKaChunkerGrab());
 		driverDDown.whenPressed(new ManualManipulatorWristDown());
 		driverDUp.whenPressed(new ManualManipulatorWristUp());
+
+		// driverRS.whenPressed(new ManualCIntakeIn());
+		// driverRS.whenReleased(new ManualCIntakeStop());
+		driverRS.whenPressed(new Testing());
+		driverRS.whenReleased(new DriveXOne());
 
 		driverDLeft.whenPressed(new DriveXOneWithMantis()); //For some odd reason, D-Left and D-Right are switched. IDFK
 		driverDRight.whenPressed(new DriveXOne());
