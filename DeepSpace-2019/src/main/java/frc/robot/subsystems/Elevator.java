@@ -165,6 +165,14 @@ public class Elevator extends Subsystem {
 		elevatorA.stopMotor();
 	}
 
+	public void disengageBrake() {
+		discBrake.set(true);
+	}
+
+	public void engageBrake() {
+		discBrake.set(false);
+	}
+
 	/**
 	 * @return the elevator's height traveled, offset included, based on motor rotations
 	 * FIXME: check if we have to <i>adjust</i> or <i>redefine</i> the offset

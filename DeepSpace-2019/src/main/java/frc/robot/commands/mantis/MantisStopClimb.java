@@ -11,10 +11,12 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.RobotMap;
 
 import static frc.robot.Robot.mantis;
+import static frc.robot.Robot.elevator;
 
 public class MantisStopClimb extends Command {
 	public MantisStopClimb() {
 		requires(mantis);
+		requires(elevator);
 	}
 
 	/**
@@ -23,11 +25,11 @@ public class MantisStopClimb extends Command {
 	@Override
 	protected void initialize() {
 		mantis.setArmSpeed(RobotMap.ZERO_SPEED);
-		// mantis.setStinger(false);
+		elevator.engageBrake();
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return false;
+		return true;
 	}
 }
