@@ -23,11 +23,11 @@ public class MantisStopClimb extends Command {
 	@Override
 	protected void initialize() {
 		mantis.setArmSpeed(RobotMap.ZERO_SPEED);
-		mantis.setStinger(false);
+		// mantis.setStinger(false);
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return true;
+		return false;
 	}
 }

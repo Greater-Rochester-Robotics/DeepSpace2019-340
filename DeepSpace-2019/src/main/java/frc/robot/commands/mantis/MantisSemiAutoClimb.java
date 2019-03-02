@@ -21,26 +21,32 @@ public class MantisSemiAutoClimb extends Command {
 
 	public MantisSemiAutoClimb() {
 		requires(mantis);
-		requires(manipulatorWithKaChunker);
+		// requires(manipulatorWithKaChunker);
 	}
 
 	@Override
 	protected void initialize() {
-		mantis.setArmSpeed(RobotMap.MANTIS_ARM_DOWN_SPEED);
-		manipulatorWithKaChunker.setWristUp();
+		// manipulatorWithKaChunker.setWristUp();
 		setTimeout(1.7);
 	}
 
 	@Override
 	protected void execute() {
+		//From here on out, lets never put a motor set that is not zero in initialize
+		if(mantis.isDown()){
+			mantis.setArmSpeed(RobotMap.MANTIS_ARM_DOWN_SPEED);
+		}else{
+			mantis.setArmSpeed(0.0);	
+		}
+
 		if(isTimedOut()) {
 			mantis.setStinger(true);
-			flag = true;
+			// flag = true;
 		}
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return flag;
+		return false;
 	}
 }

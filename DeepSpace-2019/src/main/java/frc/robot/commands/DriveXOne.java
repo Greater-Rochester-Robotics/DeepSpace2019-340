@@ -27,6 +27,8 @@ public class DriveXOne extends Command {
 	@Override
 	protected void execute() {
 		Robot.drive.arcadeDrive(Robot.oi.getDriverAxis(Axis.LEFT_Y), Robot.oi.getDriverAxis(Axis.LEFT_X)); //Poll driver's left axes to drive
+
+		System.out.println(Robot.drive.getRotation());
 	}
 
 	@Override

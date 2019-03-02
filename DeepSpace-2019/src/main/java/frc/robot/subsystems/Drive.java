@@ -37,6 +37,8 @@ public class Drive extends Subsystem {
 	 */
 	public Drive() {
 		imu = new ADIS16448_IMU(ADIS16448_IMU.Axis.kZ); //The parameter here is the axis the IMU interprets as being yaw. This will depend on how the RIO is oriented
+		// imu.calibrate();
+		imu.reset();
 
 		encLeft = new Encoder(RobotMap.DRIVE_ENCODER_LEFT_CHANNEL_A, RobotMap.DRIVE_ENCODER_LEFT_CHANNEL_B);
 		encRight = new Encoder(RobotMap.DRIVE_ENCODER_RIGHT_CHANNEL_A, RobotMap.DRIVE_ENCODER_RIGHT_CHANNEL_B);
@@ -185,7 +187,7 @@ public class Drive extends Subsystem {
 	 * Get the robot's yaw angle
 	 */
 	public double getRotation() {
-		return imu.getYaw();
+		return imu.getAngleZ();
 	}
 
 	/**

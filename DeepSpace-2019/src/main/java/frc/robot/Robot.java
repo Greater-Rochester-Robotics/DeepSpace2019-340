@@ -56,6 +56,10 @@ public class Robot extends TimedRobot {
 		mantis = new Mantis();
 		compressor = new Compressor(RobotMap.SECONDARY_PCM_ID);
 		oi = new OI();
+		SmartDashboard.putData(drive);
+		SmartDashboard.putData(elevator);
+		SmartDashboard.putData(manipulatorWithKaChunker);
+		SmartDashboard.putData(mantis);
 		m_chooser.setDefaultOption("Default Auto", new DriveXOne()); //I suppose that's one way to do it
 		// chooser.addOption("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);

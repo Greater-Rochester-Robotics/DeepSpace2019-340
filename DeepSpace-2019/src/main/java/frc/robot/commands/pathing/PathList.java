@@ -22,8 +22,8 @@ public class PathList {
 			, 188));
 		
 		public static final Path CURVE_TEST = new Path(new PathSegment( 
-			/* {"start":{"x":74,"y":229},"mid1":{"x":101,"y":229},"mid2":{"x":148,"y":224},"end":{"x":154,"y":174}} */
-			new Vec2(74, 229), new Vec2(101, 229), new Vec2(148, 224), new Vec2(154, 174) 
-			, 110));
+			/* {"start":{"x":74,"y":229},"mid1":{"x":101,"y":229},"mid2":{"x":148,"y":234},"end":{"x":154,"y":284}} */
+			new Vec2(74, 229), new Vec2(101, 229), new Vec2(148, 234), new Vec2(154, 284) 
+			, 109));
 	}
 }

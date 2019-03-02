@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.manipulatorWithKaChunker.CIntakeWall;
 import frc.robot.commands.DriveXOne;
+import frc.robot.commands.DriveIMUReset;
 import frc.robot.commands.DriveXOneWithMantis;
 import frc.robot.commands.ElevatorStick;
 import frc.robot.commands.ElevatorToPosition;
@@ -31,6 +32,7 @@ import frc.robot.commands.manual.ManualManipulatorWristDown;
 import frc.robot.commands.manual.ManualManipulatorWristUp;
 import frc.robot.commands.manual.ManualMantisArmDown;
 import frc.robot.commands.manual.ManualMantisArmStop;
+import frc.robot.commands.manual.ManualMantisStingerUp;
 import frc.robot.commands.pathing.groups.Testing;
 
 /**
@@ -94,6 +96,7 @@ public class OI {
 		driverLB.whenPressed(new ManualKaChunkerGrab());
 		driverDDown.whenPressed(new ManualManipulatorWristDown());
 		driverDUp.whenPressed(new ManualManipulatorWristUp());
+		// driverDLeft.whenPressed(new DriveIMUReset());
 
 		// driverRS.whenPressed(new ManualCIntakeIn());
 		// driverRS.whenReleased(new ManualCIntakeStop());
@@ -112,6 +115,7 @@ public class OI {
 		coDriverRB.whenPressed(new ManualElevatorTiltForward());
 		coDriverDDown.whenPressed(new MantisSemiAutoClimb());
 		coDriverDDown.whenReleased(new MantisStopClimb());
+		coDriverDUp.whenPressed(new ManualMantisStingerUp());
 	}
 
 	public enum Axis {

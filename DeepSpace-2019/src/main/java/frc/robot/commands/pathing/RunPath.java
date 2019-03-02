@@ -52,8 +52,6 @@ public class RunPath extends CommandGroup {
 	}
 
 	// public RunPath(Path path, Function<Double, Double> speed, Animation animation) {
-	// 	// Use requires() here to declare subsystem dependencies
-	// 	// eg. requires(chassis);
 	// 	requires(Robot.drive);
 	// 	this.path = path;
 	// 	this.speed = speed;
@@ -87,10 +85,8 @@ public class RunPath extends CommandGroup {
 
 		double angle = Math.atan((nextSlope - currentSlope) / (1 + currentSlope * nextSlope)) * 180 / Math.PI;
 
-		// System.out.println("m1: " + currentSlope + " m2: " + nextSlope + " dTheta: "
-		// + angle);
-		// System.out.println("Encoder: " + getDistance() + " dydx: " +
-		// dydx(getDistance()));
+		System.out.println("m1: " + currentSlope + " m2: " + nextSlope + " dTheta: " + angle);
+		System.out.println("Encoder: " + getDistance() + " dydx: " + dydx(getDistance()));
 		return angle;
 	}
 
@@ -105,12 +101,16 @@ public class RunPath extends CommandGroup {
 
 		leftSpeed = speed();
 		rightSpeed = speed();
-
 		// System.out.println("error: " + error);
 		if (Math.abs(getDistance()) > 3) {
 			double speed = leftSpeed;
+
+			double ls = (leftSpeed + ((error) / (arcDivisor / Math.abs(speed))));
+			double rs = (rightSpeed - (((error) / (arcDivisor / Math.abs(speed)))));
 			Robot.drive.setDriveBoth((leftSpeed + ((error) / (arcDivisor / Math.abs(speed)))),
 					(rightSpeed - (((error) / (arcDivisor / Math.abs(speed))))));
+
+			System.out.println("RSpeed: " + rs + ", LSpeed: " + ls);
 
 			// animate based off of distance, from 0.0 to 1.0
 			// if (animation != null) {
