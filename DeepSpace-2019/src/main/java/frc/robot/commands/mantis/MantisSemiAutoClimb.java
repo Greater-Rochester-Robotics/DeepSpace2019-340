@@ -26,6 +26,7 @@ public class MantisSemiAutoClimb extends Command {
 	@Override
 	protected void initialize() {
 		setTimeout(1.7);
+		elevator.disengageBrake();
 	}
 
 	@Override
@@ -40,7 +41,6 @@ public class MantisSemiAutoClimb extends Command {
 
 		if(isTimedOut()) {
 			mantis.setStinger(true);
-			elevator.disengageBrake();
 		}
 	}
 
