@@ -61,6 +61,7 @@ public class OI {
 	private Button driverDDown = new DPad(driver, DPad.Direction.DOWN);
 	private Button driverDLeft = new DPad(driver, DPad.Direction.LEFT);
 	private Button driverDRight = new DPad(driver, DPad.Direction.RIGHT);
+	private Button driverLTButton = new JoyTriggerButton(driver, .3, Axis.LEFT_TRIGGER);
 
 	///////////////////////
 	// CO-DRIVER BUTTONS //
@@ -96,13 +97,7 @@ public class OI {
 		driverLB.whenPressed(new ManualKaChunkerGrab());
 		driverDDown.whenPressed(new ManualManipulatorWristDown());
 		driverDUp.whenPressed(new ManualManipulatorWristUp());
-		// driverDLeft.whenPressed(new DriveIMUReset());
-
-		// driverRS.whenPressed(new ManualCIntakeIn());
-		// driverRS.whenReleased(new ManualCIntakeStop());
-		driverRS.whenPressed(new Testing());
-		driverRS.whenReleased(new DriveXOne());
-
+		driverLTButton.whenPressed(new ManualCIntakeIn());
 		driverDLeft.whenPressed(new DriveXOneWithMantis()); //For some odd reason, D-Left and D-Right are switched. IDFK
 		driverDRight.whenPressed(new DriveXOne());
 
@@ -131,16 +126,17 @@ public class OI {
 		private Axis(int axis) {
 			this.axis = axis;
 		}
-		public int getAxis() {
+
+		public int getAxisNumber() {
 			return axis;
 		}
 	}
 
 	public double getDriverAxis(Axis axis) {
-		return (driver.getRawAxis(axis.getAxis()) < -.1 || driver.getRawAxis(axis.getAxis()) > .1 ) ? driver.getRawAxis(axis.getAxis()) : 0;
+		return (driver.getRawAxis(axis.getAxisNumber()) < -.1 || driver.getRawAxis(axis.getAxisNumber()) > .1 ) ? driver.getRawAxis(axis.getAxisNumber()) : 0;
 	}
 
 	public double getCoDriverAxis(Axis axis) {
-		return (coDriver.getRawAxis(axis.getAxis()) < -.1 || coDriver.getRawAxis(axis.getAxis()) > .1 ) ? coDriver.getRawAxis(axis.getAxis()) : 0;
+		return (coDriver.getRawAxis(axis.getAxisNumber()) < -.1 || coDriver.getRawAxis(axis.getAxisNumber()) > .1 ) ? coDriver.getRawAxis(axis.getAxisNumber()) : 0;
 	}
 }
