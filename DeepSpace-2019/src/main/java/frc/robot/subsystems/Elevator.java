@@ -44,8 +44,8 @@ public class Elevator extends Subsystem {
 	// private static double kI = kP * 0.01;
 
 	private static CANPIDController pidControllerA;
-	private static CANPIDController pidControllerB;
-	private static CANPIDController pidControllerC;
+	// private static CANPIDController pidControllerB;
+	// private static CANPIDController pidControllerC;
 
 	@Deprecated private double offset = 0; //Adjusts for encoder drift
 

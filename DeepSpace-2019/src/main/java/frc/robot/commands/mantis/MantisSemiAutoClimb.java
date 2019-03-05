@@ -14,7 +14,6 @@ import static frc.robot.Robot.elevator;
 import frc.robot.RobotMap;
 
 /**
- * TODO: add elevator height for climbing<br>
  * Might need to move this to a commandgroup?
  */
 public class MantisSemiAutoClimb extends Command {
