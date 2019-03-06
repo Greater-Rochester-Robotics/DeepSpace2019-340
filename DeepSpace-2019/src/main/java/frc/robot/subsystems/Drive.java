@@ -10,9 +10,13 @@ package frc.robot.subsystems;
 import com.analog.adis16448.frc.ADIS16448_IMU;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
 import frc.robot.RobotMap;
 import frc.robot.commands.DriveXOne;
 
@@ -26,7 +30,9 @@ import frc.robot.commands.DriveXOne;
 public class Drive extends Subsystem {
 	private double leftSpeed, rightSpeed; //Makes math easier for fancy drive
 
-	private static ADIS16448_IMU imu;
+	//RIP IMU
+	// private static ADIS16448_IMU imu;
+	private static ADXRS450_Gyro gyro;
 	private static Encoder encLeft, encRight; //TODO: adjust for circumference
 	private static Spark driveLeft, driveRight;
 	private static TalonSRX mantisLeft, mantisRight;
@@ -36,9 +42,12 @@ public class Drive extends Subsystem {
 	 * in {@link RobotMap}, and the IMU with the Y-axis as yaw
 	 */
 	public Drive() {
-		imu = new ADIS16448_IMU(ADIS16448_IMU.Axis.kZ); //The parameter here is the axis the IMU interprets as being yaw. This will depend on how the RIO is oriented
+		// imu = new ADIS16448_IMU(ADIS16448_IMU.Axis.kZ); //The parameter here is the axis the IMU interprets as being yaw. This will depend on how the RIO is oriented
 		// imu.calibrate();
-		imu.reset();
+		// imu.reset();
+
+		gyro = new ADXRS450_Gyro();
+		gyro.calibrate();
 
 		encLeft = new Encoder(RobotMap.DRIVE_ENCODER_LEFT_CHANNEL_A, RobotMap.DRIVE_ENCODER_LEFT_CHANNEL_B);
 		encRight = new Encoder(RobotMap.DRIVE_ENCODER_RIGHT_CHANNEL_A, RobotMap.DRIVE_ENCODER_RIGHT_CHANNEL_B);
@@ -187,14 +196,16 @@ public class Drive extends Subsystem {
 	 * Get the robot's yaw angle
 	 */
 	public double getRotation() {
-		return imu.getAngleZ();
+		// return imu.getAngleZ();
+		return gyro.getAngle();
 	}
 
 	/**
 	 * Zero the IMU
 	 */
 	public void imuReset() {
-		imu.reset();
+		// imu.reset();
+		gyro.reset();
 	}
 
 	/**
