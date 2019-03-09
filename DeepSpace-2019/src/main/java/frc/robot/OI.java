@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.manipulatorWithKaChunker.CIntakeWall;
 import frc.robot.commands.DriveXOne;
-import frc.robot.commands.DriveIMUReset;
+import frc.robot.commands.DriveGyroReset;
 import frc.robot.commands.DriveXOneWithMantis;
 import frc.robot.commands.ElevatorStick;
 import frc.robot.commands.ElevatorToPosition;
@@ -33,7 +33,7 @@ import frc.robot.commands.manual.ManualManipulatorWristUp;
 import frc.robot.commands.manual.ManualMantisArmDown;
 import frc.robot.commands.manual.ManualMantisArmStop;
 import frc.robot.commands.manual.ManualMantisStingerUp;
-import frc.robot.commands.pathing.groups.Testing;
+import frc.robot.commands.pathing.groups.PathTestingCommandGroup;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -81,6 +81,7 @@ public class OI {
 	private Button coDriverDDown = new DPad(coDriver, DPad.Direction.DOWN);
 	private Button coDriverDLeft = new DPad(coDriver, DPad.Direction.LEFT);
 	private Button coDriverDRight = new DPad(coDriver, DPad.Direction.RIGHT);
+	private Button coDriverLTButton = new JoyTriggerButton(coDriver, .7, Axis.LEFT_TRIGGER);
 
 	public OI() {
 		//Creation of Driver Buttons Commands
@@ -108,11 +109,14 @@ public class OI {
 		coDriverA.whenReleased(new ManualMantisArmStop());
 		coDriverB.whenPressed(new ElevatorToPosition(RobotMap.ELEVATOR_LEVEL_2_HEIGHT));
 		coDriverX.whenPressed(new ElevatorStick());
+		coDriverY.whenPressed(new ElevatorToPosition(RobotMap.ELEVATOR_LEVEL_3_HEIGHT));
 		coDriverLB.whenPressed(new ManualElevatorTiltBack());
 		coDriverRB.whenPressed(new ManualElevatorTiltForward());
 		coDriverDDown.whenPressed(new MantisSemiAutoClimb());
 		coDriverDDown.whenReleased(new MantisStopClimb());
 		coDriverDUp.whenPressed(new ManualMantisStingerUp());
+		coDriverLTButton.whenPressed(new PathTestingCommandGroup());
+		coDriverLTButton.whenReleased(new DriveXOne());
 	}
 
 	public enum Axis {

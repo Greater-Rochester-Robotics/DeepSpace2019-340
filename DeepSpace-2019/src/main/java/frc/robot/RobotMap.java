@@ -113,6 +113,7 @@ public class RobotMap {
 	public static final double ELEVATOR_MAX_HEIGHT = 45;
 
 	public static final double ELEVATOR_LEVEL_2_HEIGHT = 9.214322090148926 + 8.875 + 6.842069666;
+	public static final double ELEVATOR_LEVEL_3_HEIGHT = 43.023406982421875;
 	public static final double ELEVATOR_CLIMB_HEIGHT = 13.42069;
 
 	public static final double ELEVATOR_TOP_UPPER_SLOW = 44;

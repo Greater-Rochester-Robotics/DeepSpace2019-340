@@ -64,6 +64,9 @@ public class Robot extends TimedRobot {
 		// chooser.addOption("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);
 
+		drive.gyroCalibrate();
+		drive.gyroReset();
+
 		CameraServer.getInstance().startAutomaticCapture();
 	}
 

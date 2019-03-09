@@ -10,8 +10,8 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class DriveIMUReset extends Command {
-  public DriveIMUReset() {
+public class DriveGyroReset extends Command {
+  public DriveGyroReset() {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.drive);
   }
@@ -24,7 +24,7 @@ public class DriveIMUReset extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-	  Robot.drive.imuReset();
+	  Robot.drive.gyroReset();
 	 }
 
   // Make this return true when this Command no longer needs to run execute()

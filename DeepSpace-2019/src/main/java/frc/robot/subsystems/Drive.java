@@ -199,11 +199,18 @@ public class Drive extends Subsystem {
 	}
 
 	/**
-	 * Zero the IMU
+	 * Zero the gyro
 	 */
-	public void imuReset() {
+	public void gyroReset() {
 		// imu.reset();
 		gyro.reset();
+	}
+
+	/**
+	 * Calibrate the gyro
+	 */
+	public void gyroCalibrate() {
+		gyro.calibrate();
 	}
 
 	/**

@@ -71,7 +71,7 @@ public class RunPath extends CommandGroup {
 	protected void initialize() {
 		Robot.drive.setDriveBoth(leftSpeed, rightSpeed);
 		Robot.drive.resetBothEncoders();
-		Robot.drive.imuReset();
+		Robot.drive.gyroReset();
 		System.out.println("RUNPATH INIT");
 	}
 
@@ -98,6 +98,7 @@ public class RunPath extends CommandGroup {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		double error = -deltaAngle(Robot.drive.getRotation());
+		System.out.println("ERROR: " + error);
 
 		leftSpeed = speed();
 		rightSpeed = speed();
@@ -109,8 +110,6 @@ public class RunPath extends CommandGroup {
 			double rs = (rightSpeed - (((error) / (arcDivisor / Math.abs(speed)))));
 			Robot.drive.setDriveBoth((leftSpeed + ((error) / (arcDivisor / Math.abs(speed)))),
 					(rightSpeed - (((error) / (arcDivisor / Math.abs(speed))))));
-
-			System.out.println("RSpeed: " + rs + ", LSpeed: " + ls);
 
 			// animate based off of distance, from 0.0 to 1.0
 			// if (animation != null) {
