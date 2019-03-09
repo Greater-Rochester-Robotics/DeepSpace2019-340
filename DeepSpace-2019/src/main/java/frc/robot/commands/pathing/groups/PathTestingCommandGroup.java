@@ -17,16 +17,6 @@ public class PathTestingCommandGroup extends CommandGroup {
 	 * Add your docs here.
 	 */
 	public PathTestingCommandGroup() {
-		// addSequential(new RunPath(PathList.LEFT_ROCKET.TWO_HATCH_INITIAL_TESTING, x -> .5));
-		addSequential(new RunPath(PathList.RIGHT_ROCKET.ONE_HATCH_INITIAL_TESTING, x -> {
-			if(x < .1) {
-				return .3;
-			} else if(x < .85) {
-				return .7;
-			} else {
-				return .3;
-			}
-		}));
-		// addSequential(new RunPath(new Path(new PathSegment(t -> 0.0, 20)), x -> .7));
+		addSequential(new RunPath(PathList.LEFT_ROCKET.CLOSE_HATCH, x -> .4));
 	}
 }

@@ -98,7 +98,6 @@ public class RunPath extends CommandGroup {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		double error = -deltaAngle(Robot.drive.getRotation());
-		System.out.println("ERROR: " + error);
 
 		leftSpeed = speed();
 		rightSpeed = speed();
