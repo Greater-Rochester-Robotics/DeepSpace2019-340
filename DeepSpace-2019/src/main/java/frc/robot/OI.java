@@ -83,6 +83,7 @@ public class OI {
 	private Button coDriverDRight = new DPad(coDriver, DPad.Direction.RIGHT);
 
 	public OI() {
+		//Creation of Driver Buttons Commands
 		driverA.whenPressed(new CIntakeFloor());
 		driverA.whenReleased(new ManualCIntakeStop());
 		driverB.whenPressed(new CRocketRelease());
@@ -98,10 +99,11 @@ public class OI {
 		driverDDown.whenPressed(new ManualManipulatorWristDown());
 		driverDUp.whenPressed(new ManualManipulatorWristUp());
 		driverLTButton.whenPressed(new ManualCIntakeIn());
-		driverDLeft.whenPressed(new DriveXOneWithMantis()); //For some odd reason, D-Left and D-Right are switched. IDFK
+		driverDLeft.whenPressed(new DriveXOneWithMantis()); //For some odd reason, D-Left and D-Right are switched
+		//the POVHat directionality was 'corrected' this year so that 0 is forward and all positive angles move up as they go clockwise, this is oposite of math
 		driverDRight.whenPressed(new DriveXOne());
 
-		//TBD
+		//Creation of CoDriver Buttons Commands
 		coDriverA.whenPressed(new ManualMantisArmDown());
 		coDriverA.whenReleased(new ManualMantisArmStop());
 		coDriverB.whenPressed(new ElevatorToPosition(RobotMap.ELEVATOR_LEVEL_2_HEIGHT));

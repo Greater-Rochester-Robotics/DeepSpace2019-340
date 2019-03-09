@@ -30,6 +30,7 @@ public class ElevatorStick extends Command {
 
 	@Override
 	protected void execute() {
+		//In case we reach the bottom of the elevator, reset the encoder
 		if(Robot.elevator.isAtBottom()) {
 			Robot.elevator.resetEncoder();
 		}
@@ -39,7 +40,7 @@ public class ElevatorStick extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		return false; //Never finish. Why would we?
+		return false; //Never finish. This command ends only when interupted.
 	}
 
 	@Override

@@ -87,17 +87,17 @@ public class Elevator extends Subsystem {
 		// pidController.setReference(1, ControlType.kPosition);
 	}
 
+	@Override
+	public void initDefaultCommand() {
+		setDefaultCommand(new ElevatorStick());
+	}
+	
 	/**
 	 * @return the current offset. Duh.
 	 */
 	@Deprecated
 	public double getEncoderOffset() {
 		return offset;
-	}
-
-	@Override
-	public void initDefaultCommand() {
-		setDefaultCommand(new ElevatorStick());
 	}
 
 	/**
@@ -133,6 +133,16 @@ public class Elevator extends Subsystem {
 		elevatorA.set(spd);
 	}
 
+	/**
+	 * Set the elevator to move up or down based on
+	 *  the given speed param. This function contains
+	 *  a deadzone feature to compensate for an
+	 *  uncentered joystick axis, and those ignored
+	 *  values would not really drive the elevator up
+	 *  or down. This function also limits the top
+	 *  speed of the elevator based on its position.
+	 * @param speed
+	 */
 	public void setSpeedScaled(double speed) {
 		
 		//Slows the elevator down before it breaks everything.
@@ -157,7 +167,10 @@ public class Elevator extends Subsystem {
 	}
 
 	/**
-	 * Cut the motor
+	 * Set the pidcontroller on the elevator to basic 
+	 *  precent voltage control mode, set motors for 
+	 *  the elevator to an output of zero. and engage 
+	 *  the brake. The goal is to stop the elevator in place.
 	 */
 	public void stop() {
 		pidControllerA.setReference(0, ControlType.kDutyCycle);
@@ -165,10 +178,21 @@ public class Elevator extends Subsystem {
 		elevatorA.stopMotor();
 	}
 
+	/**
+	 * Function to release the brake annd allow 
+	 *  the elevator to move. This should be a 
+	 *  true to a signle action pneumatic solenoid 
+	 *  valve.
+	 */
 	public void disengageBrake() {
 		discBrake.set(true);
 	}
 
+	/**
+	 * Function to engage the elevator brake, 
+	 *  this should be a false to a single action 
+	 *  pneumatic solenoid valve.
+	 */
 	public void engageBrake() {
 		discBrake.set(false);
 	}
