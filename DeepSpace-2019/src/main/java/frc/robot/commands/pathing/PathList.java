@@ -9,38 +9,40 @@ import frc.robot.commands.pathing.PathSegment.Vec2;
  */
 public class PathList {
 
-	//Close hatch good-ish enough
+	//Close hatch good
+	//Far hatch GOD-TIER
 	public static final class LEFT_ROCKET {
 
 		/* x -> .4 */
 		public static final Path CLOSE_HATCH = new Path(new PathSegment( 
-			/* {"start":{"x":68,"y":116},"mid1":{"x":182,"y":118},"mid2":{"x":146,"y":64},"end":{"x":181,"y":55}} */
-			new Vec2(68, 116), new Vec2(182, 118), new Vec2(146, 64), new Vec2(181, 55) 
-			, 140));
+			/* {"start":{"x":68,"y":116},"mid1":{"x":182,"y":118},"mid2":{"x":159,"y":68},"end":{"x":181,"y":60}} */
+			new Vec2(68, 116), new Vec2(182, 118), new Vec2(159, 68), new Vec2(181, 60) 
+			, 137));
 
-		/* x -> x < .8 ? .55 : .2 */
+		/* x -> x < .8 ? x < .125 ? .35 : .55 : .2 */
 		public static final Path FAR_HATCH = new Path(new PathSegment( 
-			/* {"start":{"x":68,"y":207},"mid1":{"x":182,"y":205},"mid2":{"x":353,"y":165},"end":{"x":286,"y":137}} */
-			new Vec2(68, 207), new Vec2(182, 205), new Vec2(353, 165), new Vec2(286, 137) 
-			, 268));
+			/* {"start":{"x":68,"y":207},"mid1":{"x":118,"y":210},"mid2":{"x":305,"y":176},"end":{"x":277,"y":142}} */
+			new Vec2(68, 207), new Vec2(118, 210), new Vec2(305, 176), new Vec2(277, 142) 
+			, 234));
 	}
 
-	//Close hatch might be good?
+	//Neither good. At all
 	public static final class RIGHT_ROCKET {
 		
 		/* x -> .4 */
 		public static final Path CLOSE_HATCH = new Path(new PathSegment( 
-			/* {"start":{"x":68,"y":207},"mid1":{"x":159,"y":205},"mid2":{"x":137,"y":259},"end":{"x":165,"y":277}} */
-			new Vec2(68, 207), new Vec2(159, 205), new Vec2(137, 259), new Vec2(165, 277) 
-			, 132));
+			/* {"start":{"x":68,"y":207},"mid1":{"x":188,"y":209},"mid2":{"x":163,"y":248},"end":{"x":180,"y":268}} */
+			new Vec2(68, 207), new Vec2(188, 209), new Vec2(163, 248), new Vec2(180, 268) 
+			, 142));
 		
 		/* x -> x < .8 ? .55 : .2 */
 		public static final Path FAR_HATCH = new Path(new PathSegment( 
-			/* {"start":{"x":68,"y":207},"mid1":{"x":182,"y":209},"mid2":{"x":353,"y":249},"end":{"x":286,"y":277}} */
-			new Vec2(68, 207), new Vec2(182, 209), new Vec2(353, 249), new Vec2(286, 277) 
-			, 268));
+			/* {"start":{"x":68,"y":207},"mid1":{"x":129,"y":211},"mid2":{"x":338,"y":263},"end":{"x":290,"y":283}} */
+			new Vec2(68, 207), new Vec2(129, 211), new Vec2(338, 263), new Vec2(290, 283) 
+			, 254));
 	}
 
+	//Muchos bueno
 	public static final class LEFT_CARGO {
 
 		/* x -> x < .75 ? .55 : .2 */
@@ -55,8 +57,8 @@ public class PathList {
 
 		/* x -> x < .75 ? .55 : .2 */
 		public static final Path FIRST_SLOT = new Path(new PathSegment( 
-			/* {"start":{"x":68,"y":207},"mid1":{"x":182,"y":209},"mid2":{"x":242,"y":273},"end":{"x":253,"y":234}} */
-			new Vec2(68, 207), new Vec2(182, 209), new Vec2(242, 273), new Vec2(253, 234) 
-			, 197));
+			/* {"start":{"x":68,"y":207},"mid1":{"x":182,"y":209},"mid2":{"x":255,"y":280},"end":{"x":259,"y":235}} */
+			new Vec2(68, 207), new Vec2(182, 209), new Vec2(255, 280), new Vec2(259, 235) 
+			, 207));
 	}
 }
