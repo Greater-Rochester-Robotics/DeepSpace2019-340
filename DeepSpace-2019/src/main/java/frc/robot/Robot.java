@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.DriveXOne;
-import frc.robot.commands.pathing.groups.AutoSequence;
+import frc.robot.commands.pathing.groups.AutoSequenceLeft;
 import frc.robot.subsystems.ManipulatorWithKaChunker;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Elevator;
@@ -57,11 +57,13 @@ public class Robot extends TimedRobot {
 		mantis = new Mantis();
 		compressor = new Compressor(RobotMap.SECONDARY_PCM_ID);
 		oi = new OI();
-		SmartDashboard.putData(drive);
-		SmartDashboard.putData(elevator);
-		SmartDashboard.putData(manipulatorWithKaChunker);
-		SmartDashboard.putData(mantis);
-		m_chooser.setDefaultOption("Default Auto", new AutoSequence()); //I suppose that's one way to do it
+		// SmartDashboard.putData(drive);
+		// SmartDashboard.putData(elevator);
+		// SmartDashboard.putData(manipulatorWithKaChunker);
+		// SmartDashboard.putData(mantis);
+		SmartDashboard.putData("leftenc",  drive.lenc());
+		SmartDashboard.putData("rightenc", drive.renc());
+		m_chooser.setDefaultOption("Default Auto", new AutoSequenceLeft()); //I suppose that's one way to do it
 		// chooser.addOption("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);
 
@@ -149,6 +151,8 @@ public class Robot extends TimedRobot {
 		if (m_autonomousCommand != null && !(m_autonomousCommand instanceof DriveXOne)) { //Keep driving if that's our auto
 			m_autonomousCommand.cancel();
 		}
+
+		// new AutoSequence().start(); //start autos
 	}
 
 	/**

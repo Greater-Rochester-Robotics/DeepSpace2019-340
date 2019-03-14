@@ -24,7 +24,7 @@ public class MantisSemiAutoClimb extends Command {
 
 	@Override
 	protected void initialize() {
-		setTimeout(.69);
+		setTimeout(.5069);
 		elevator.disengageBrake();
 	}
 

@@ -73,6 +73,14 @@ public class Drive extends Subsystem {
 		setDefaultCommand(new DriveXOne());
 	}
 
+	public Encoder lenc() {
+		return encLeft;
+	}
+
+	public Encoder renc() {
+		return encRight;
+	}
+
 	/**
 	 * @return left encoder raw count
 	 */

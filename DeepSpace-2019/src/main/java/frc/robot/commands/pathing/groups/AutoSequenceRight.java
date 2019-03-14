@@ -14,10 +14,10 @@ import frc.robot.commands.manual.ManualManipulatorWristDown;
 import frc.robot.commands.pathing.PathList;
 import frc.robot.commands.pathing.RunPath;
 
-public class AutoSequence extends CommandGroup {
+public class AutoSequenceRight extends CommandGroup {
 
-	public AutoSequence() {
-		addParallel(new RunPath(PathList.RIGHT_ROCKET.FAR_HATCH, x -> x < .8 ? .55 : .2));
+	public AutoSequenceRight() {
+		addParallel(new RunPath(PathList.RIGHT_ROCKET.CLOSE_HATCH_LEFT_BASED, x -> .4));
 		addParallel(new ManualManipulatorWristDown());
 		addSequential(new ManualElevatorTiltForward());
 		addSequential(new ElevatorToBottom());

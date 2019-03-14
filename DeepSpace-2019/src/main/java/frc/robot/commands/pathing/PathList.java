@@ -35,11 +35,23 @@ public class PathList {
 			new Vec2(68, 207), new Vec2(188, 209), new Vec2(163, 248), new Vec2(180, 268) 
 			, 142));
 		
+		/* x -> .4 */
+		public static final Path CLOSE_HATCH_LEFT_BASED = new Path(new PathSegment( 
+			/* {"start":{"x":68,"y":116},"mid1":{"x":182,"y":114},"mid2":{"x":159,"y":164},"end":{"x":181,"y":172}} */
+			new Vec2(68, 116), new Vec2(182, 114), new Vec2(159, 164), new Vec2(181, 172) 
+			, 137));
+		
 		/* x -> x < .8 ? .55 : .2 */
 		public static final Path FAR_HATCH = new Path(new PathSegment( 
 			/* {"start":{"x":68,"y":207},"mid1":{"x":129,"y":211},"mid2":{"x":338,"y":263},"end":{"x":290,"y":283}} */
 			new Vec2(68, 207), new Vec2(129, 211), new Vec2(338, 263), new Vec2(290, 283) 
 			, 254));
+		
+		/* x -> x < .8 ? x < .125 ? .35 : .55 : .2 */
+		public static final Path FAR_HATCH_LEFT_BASED = new Path(new PathSegment( 
+			/* {"start":{"x":68,"y":207},"mid1":{"x":118,"y":204},"mid2":{"x":305,"y":238},"end":{"x":277,"y":272}} */
+			new Vec2(68, 207), new Vec2(118, 204), new Vec2(305, 238), new Vec2(277, 272) 
+			, 234));
 	}
 
 	//Muchos bueno

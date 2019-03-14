@@ -85,7 +85,7 @@ public class RobotMap {
 	///////////////
 
 	/* C speed */
-	public static final double C_INTAKE_SPEED = -.6;
+	public static final double C_INTAKE_SPEED = -.8;
 	public static final double C_OUTTAKE_SPEED = 1.0;
 	public static final double C_STALL_SPEED = -.15;
 

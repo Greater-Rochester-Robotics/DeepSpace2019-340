@@ -32,7 +32,8 @@ import frc.robot.commands.manual.ManualManipulatorWristUp;
 import frc.robot.commands.manual.ManualMantisArmDown;
 import frc.robot.commands.manual.ManualMantisArmStop;
 import frc.robot.commands.manual.ManualMantisStingerUp;
-import frc.robot.commands.pathing.groups.AutoSequence;
+import frc.robot.commands.pathing.groups.AutoSequenceLeft;
+import frc.robot.commands.pathing.groups.AutoSequenceRight;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -81,7 +82,8 @@ public class OI {
 	private Button coDriverDLeft = new DPad(coDriver, DPad.Direction.LEFT);
 	private Button coDriverDRight = new DPad(coDriver, DPad.Direction.RIGHT);
 	private Button coDriverLTButton = new JoyTriggerButton(coDriver, .7, Axis.LEFT_TRIGGER);
-
+	private Button coDriverRTButton = new JoyTriggerButton(coDriver, .7, Axis.RIGHT_TRIGGER);
+	
 	public OI() {
 		//Creation of Driver Buttons Commands
 		driverA.whenPressed(new CIntakeFloor());
@@ -114,8 +116,10 @@ public class OI {
 		coDriverDDown.whenPressed(new MantisSemiAutoClimb());
 		coDriverDDown.whenReleased(new MantisStopClimb());
 		coDriverDUp.whenPressed(new ManualMantisStingerUp());
-		coDriverLTButton.whenPressed(new AutoSequence());
+		coDriverLTButton.whenPressed(new AutoSequenceLeft());
 		coDriverLTButton.whenReleased(new DriveXOne());
+		coDriverRTButton.whenPressed(new AutoSequenceRight());
+		coDriverRTButton.whenReleased(new DriveXOne());
 	}
 
 	public enum Axis {
