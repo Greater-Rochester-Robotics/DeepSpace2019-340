@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.DriveXOne;
+import frc.robot.commands.pathing.groups.AutoSequence;
 import frc.robot.subsystems.ManipulatorWithKaChunker;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Elevator;
@@ -60,7 +61,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putData(elevator);
 		SmartDashboard.putData(manipulatorWithKaChunker);
 		SmartDashboard.putData(mantis);
-		m_chooser.setDefaultOption("Default Auto", new DriveXOne()); //I suppose that's one way to do it
+		m_chooser.setDefaultOption("Default Auto", new AutoSequence()); //I suppose that's one way to do it
 		// chooser.addOption("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);
 

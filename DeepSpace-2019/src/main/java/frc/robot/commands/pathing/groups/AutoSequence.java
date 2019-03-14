@@ -8,15 +8,18 @@
 package frc.robot.commands.pathing.groups;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import frc.robot.commands.ElevatorToBottom;
+import frc.robot.commands.manual.ManualElevatorTiltForward;
+import frc.robot.commands.manual.ManualManipulatorWristDown;
 import frc.robot.commands.pathing.PathList;
 import frc.robot.commands.pathing.RunPath;
 
-public class PathTestingCommandGroup extends CommandGroup {
+public class AutoSequence extends CommandGroup {
 
-	/**
-	 * Add your docs here.
-	 */
-	public PathTestingCommandGroup() {
-		addSequential(new RunPath(PathList.LEFT_ROCKET.CLOSE_HATCH, x -> .4));
+	public AutoSequence() {
+		addParallel(new RunPath(PathList.RIGHT_ROCKET.FAR_HATCH, x -> x < .8 ? .55 : .2));
+		addParallel(new ManualManipulatorWristDown());
+		addSequential(new ManualElevatorTiltForward());
+		addSequential(new ElevatorToBottom());
 	}
 }

@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.manipulatorWithKaChunker.CIntakeWall;
 import frc.robot.commands.DriveXOne;
-import frc.robot.commands.DriveGyroReset;
 import frc.robot.commands.DriveXOneWithMantis;
 import frc.robot.commands.ElevatorStick;
 import frc.robot.commands.ElevatorToPosition;
@@ -33,7 +32,7 @@ import frc.robot.commands.manual.ManualManipulatorWristUp;
 import frc.robot.commands.manual.ManualMantisArmDown;
 import frc.robot.commands.manual.ManualMantisArmStop;
 import frc.robot.commands.manual.ManualMantisStingerUp;
-import frc.robot.commands.pathing.groups.PathTestingCommandGroup;
+import frc.robot.commands.pathing.groups.AutoSequence;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -115,7 +114,7 @@ public class OI {
 		coDriverDDown.whenPressed(new MantisSemiAutoClimb());
 		coDriverDDown.whenReleased(new MantisStopClimb());
 		coDriverDUp.whenPressed(new ManualMantisStingerUp());
-		coDriverLTButton.whenPressed(new PathTestingCommandGroup());
+		coDriverLTButton.whenPressed(new AutoSequence());
 		coDriverLTButton.whenReleased(new DriveXOne());
 	}
 
