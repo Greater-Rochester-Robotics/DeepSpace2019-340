@@ -38,14 +38,23 @@ public class DPad extends Button {
 	 * up out-of-the-blue, so don't touch them!
 	 */
 	public enum Direction {
+		// UP(0),
+		// UP_LEFT(45),
+		// LEFT(90),
+		// DOWN_LEFT(135),
+		// DOWN(180),
+		// DOWN_RIGHT(225),
+		// RIGHT(270),
+		// UP_RIGHT(315);
+
 		UP(0),
-		UP_LEFT(45),
-		LEFT(90),
-		DOWN_LEFT(135),
+		UP_RIGHT(45),
+		RIGHT(90),
+		DOWN_RIGHT(135),
 		DOWN(180),
-		DOWN_RIGHT(225),
-		RIGHT(270),
-		UP_RIGHT(315);
+		DOWN_LEFT(225),
+		LEFT(270),
+		UP_LEFT(315);
 		
 		private int dir;
 		

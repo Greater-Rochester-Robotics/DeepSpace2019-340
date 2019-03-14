@@ -100,9 +100,9 @@ public class OI {
 		driverDDown.whenPressed(new ManualManipulatorWristDown());
 		driverDUp.whenPressed(new ManualManipulatorWristUp());
 		driverLTButton.whenPressed(new ManualCIntakeIn());
-		driverDLeft.whenPressed(new DriveXOneWithMantis()); //For some odd reason, D-Left and D-Right are switched
-		//the POVHat directionality was 'corrected' this year so that 0 is forward and all positive angles move up as they go clockwise, this is oposite of math
-		driverDRight.whenPressed(new DriveXOne());
+		driverDRight.whenPressed(new DriveXOneWithMantis()); //For some odd reason, D-Left and D-Right are switched
+		//the POVHat directionality was 'corrected' this year so that 0 is forward and all positive angles move up as they go clockwise; this is oposite of math
+		driverDLeft.whenPressed(new DriveXOne());
 
 		//Creation of CoDriver Buttons Commands
 		coDriverA.whenPressed(new ManualMantisArmDown());
