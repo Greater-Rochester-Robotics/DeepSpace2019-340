@@ -17,7 +17,7 @@ import frc.robot.commands.pathing.RunPath;
 public class AutoSequenceLeft extends CommandGroup {
 
 	public AutoSequenceLeft() {
-		addParallel(new RunPath(PathList.LEFT_ROCKET.FAR_HATCH, x -> x < .8 ? x < .125 ? .35 : .55 : .2));
+		addParallel(new RunPath(PathList.LEFT_ROCKET.CLOSE_HATCH, x -> .4));
 		addParallel(new ManualManipulatorWristDown());
 		addSequential(new ManualElevatorTiltForward());
 		addSequential(new ElevatorToBottom());

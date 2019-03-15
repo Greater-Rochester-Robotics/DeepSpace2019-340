@@ -31,6 +31,7 @@ import frc.robot.commands.manual.ManualManipulatorWristDown;
 import frc.robot.commands.manual.ManualManipulatorWristUp;
 import frc.robot.commands.manual.ManualMantisArmDown;
 import frc.robot.commands.manual.ManualMantisArmStop;
+import frc.robot.commands.manual.ManualMantisArmUp;
 import frc.robot.commands.manual.ManualMantisStingerUp;
 import frc.robot.commands.pathing.groups.AutoSequenceLeft;
 import frc.robot.commands.pathing.groups.AutoSequenceRight;
@@ -116,6 +117,7 @@ public class OI {
 		coDriverDDown.whenPressed(new MantisSemiAutoClimb());
 		coDriverDDown.whenReleased(new MantisStopClimb());
 		coDriverDUp.whenPressed(new ManualMantisStingerUp());
+		coDriverLB.whenPressed(new ManualMantisArmUp());
 		coDriverLTButton.whenPressed(new AutoSequenceLeft());
 		coDriverLTButton.whenReleased(new DriveXOne());
 		coDriverRTButton.whenPressed(new AutoSequenceRight());
