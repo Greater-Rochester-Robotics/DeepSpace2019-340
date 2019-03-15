@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.manipulatorWithKaChunker.CIntakeWall;
+import frc.robot.commands.DriveSlowXOne;
 import frc.robot.commands.DriveXOne;
 import frc.robot.commands.DriveXOneWithMantis;
 import frc.robot.commands.ElevatorStick;
@@ -105,6 +106,8 @@ public class OI {
 		driverDRight.whenPressed(new DriveXOneWithMantis()); //For some odd reason, D-Left and D-Right are switched
 		//the POVHat directionality was 'corrected' this year so that 0 is forward and all positive angles move up as they go clockwise; this is oposite of math
 		driverDLeft.whenPressed(new DriveXOne());
+		driverStart.whenPressed(new DriveSlowXOne());
+		driverBack.whenPressed(new DriveXOne());
 
 		//Creation of CoDriver Buttons Commands
 		coDriverA.whenPressed(new ManualMantisArmDown());
@@ -117,7 +120,8 @@ public class OI {
 		coDriverDDown.whenPressed(new MantisSemiAutoClimb());
 		coDriverDDown.whenReleased(new MantisStopClimb());
 		coDriverDUp.whenPressed(new ManualMantisStingerUp());
-		coDriverLB.whenPressed(new ManualMantisArmUp());
+		coDriverDLeft.whenPressed(new ManualMantisArmUp());
+		coDriverDLeft.whenReleased(new ManualMantisArmStop());
 		coDriverLTButton.whenPressed(new AutoSequenceLeft());
 		coDriverLTButton.whenReleased(new DriveXOne());
 		coDriverRTButton.whenPressed(new AutoSequenceRight());
