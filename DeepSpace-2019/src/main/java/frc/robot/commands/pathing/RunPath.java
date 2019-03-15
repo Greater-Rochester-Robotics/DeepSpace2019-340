@@ -105,7 +105,7 @@ public class RunPath extends CommandGroup {
 		if (Math.abs(getDistance()) > 3) {
 			double speed = leftSpeed;
 
-			double ls = (leftSpeed + ((error) / (arcDivisor / Math.abs(speed))));
+			// double ls = (leftSpeed + ((error) / (arcDivisor / Math.abs(speed))));
 			double rs = (rightSpeed - (((error) / (arcDivisor / Math.abs(speed)))));
 			Robot.drive.setDriveBoth((leftSpeed + ((error) / (arcDivisor / Math.abs(speed)))),
 					(rightSpeed - (((error) / (arcDivisor / Math.abs(speed))))));

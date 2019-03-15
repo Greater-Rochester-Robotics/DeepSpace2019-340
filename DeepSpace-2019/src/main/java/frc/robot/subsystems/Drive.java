@@ -13,7 +13,8 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.Spark;
+// import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.commands.DriveXOne;
@@ -32,7 +33,7 @@ public class Drive extends Subsystem {
 	// private static ADIS16448_IMU imu;
 	private static ADXRS450_Gyro gyro;
 	private static Encoder encLeft, encRight; //TODO: adjust for circumference
-	private static Spark driveLeft, driveRight;
+	private static Talon driveLeft, driveRight;
 	private static TalonSRX mantisLeft, mantisRight;
 
 	/**
@@ -57,8 +58,8 @@ public class Drive extends Subsystem {
 		encLeft.setReverseDirection(true);
 		encRight.setReverseDirection(true);
 
-		driveLeft = new Spark(RobotMap.DRIVE_SPARK_LEFT_CHANNEL);
-		driveRight = new Spark(RobotMap.DRIVE_SPARK_RIGHT_CHANNEL);
+		driveLeft = new Talon(RobotMap.DRIVE_SPARK_LEFT_CHANNEL);
+		driveRight = new Talon(RobotMap.DRIVE_SPARK_RIGHT_CHANNEL);
 
 		driveLeft.setInverted(true); //Negate all speeds to the left side to account for mirrored axes
 
@@ -71,14 +72,6 @@ public class Drive extends Subsystem {
 	@Override
 	public void initDefaultCommand() {
 		setDefaultCommand(new DriveXOne());
-	}
-
-	public Encoder lenc() {
-		return encLeft;
-	}
-
-	public Encoder renc() {
-		return encRight;
 	}
 
 	/**

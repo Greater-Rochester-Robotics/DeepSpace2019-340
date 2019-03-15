@@ -16,7 +16,6 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.DriveXOne;
-import frc.robot.commands.pathing.groups.AutoSequenceLeft;
 import frc.robot.subsystems.ManipulatorWithKaChunker;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Elevator;
@@ -61,9 +60,7 @@ public class Robot extends TimedRobot {
 		// SmartDashboard.putData(elevator);
 		// SmartDashboard.putData(manipulatorWithKaChunker);
 		// SmartDashboard.putData(mantis);
-		SmartDashboard.putData("leftenc",  drive.lenc());
-		SmartDashboard.putData("rightenc", drive.renc());
-		m_chooser.setDefaultOption("Default Auto", new AutoSequenceLeft()); //I suppose that's one way to do it
+		m_chooser.setDefaultOption("Default Auto", new DriveXOne()); //I suppose that's one way to do it
 		// chooser.addOption("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);
 
@@ -161,6 +158,9 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		SmartDashboard.putNumber("leftenc",  drive.getLeftDistance());
+		SmartDashboard.putNumber("rightenc", drive.getRightDistance());
+		SmartDashboard.putNumber("yaw", drive.getRotation());
 	}
 
 	/**
