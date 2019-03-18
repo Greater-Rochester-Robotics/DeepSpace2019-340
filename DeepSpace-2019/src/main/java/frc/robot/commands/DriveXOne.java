@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 import frc.robot.OI.Axis;
 
 /**
@@ -24,9 +25,22 @@ public class DriveXOne extends Command {
 		requires(Robot.drive);
 	}
 
+	/**
+	 * Left for full speed, right stick slow stick
+	 */
 	@Override
 	protected void execute() {
 		Robot.drive.arcadeDrive(Robot.oi.getDriverAxis(Axis.LEFT_Y), Robot.oi.getDriverAxis(Axis.LEFT_X)); //Poll driver's left axes to drive
+
+		if(Math.abs(Robot.oi.getDriverAxis(Axis.LEFT_X)) >= .05 ||
+			Math.abs(Robot.oi.getDriverAxis(Axis.LEFT_Y)) >= .05) {
+				Robot.drive.arcadeDrive(Robot.oi.getDriverAxis(Axis.LEFT_Y), Robot.oi.getDriverAxis(Axis.LEFT_X));
+		} else if(Math.abs(Robot.oi.getDriverAxis(Axis.RIGHT_X)) >= .05 ||
+			Math.abs(Robot.oi.getDriverAxis(Axis.RIGHT_Y)) >= .05) {
+				Robot.drive.arcadeDrive(Robot.oi.getDriverAxis(Axis.RIGHT_Y) / 2, Robot.oi.getDriverAxis(Axis.RIGHT_X) / 2);
+		} else {
+			Robot.drive.setDriveBoth(0);
+		}
 
 		// System.out.println(Robot.drive.getRotation());
 	}
@@ -38,6 +52,6 @@ public class DriveXOne extends Command {
 
 	@Override
 	protected void end() {
-		Robot.drive.setDriveBoth(0); //Stop moving if this command ends for some reason (e.g. interrupt for climb)
+		Robot.drive.setDriveBoth(RobotMap.ZERO_SPEED); //Stop moving if this command ends for some reason (e.g. interrupt for climb)
 	}
 }

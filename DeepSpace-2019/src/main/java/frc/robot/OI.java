@@ -106,8 +106,8 @@ public class OI {
 		driverDRight.whenPressed(new DriveXOneWithMantis()); //For some odd reason, D-Left and D-Right are switched
 		//the POVHat directionality was 'corrected' this year so that 0 is forward and all positive angles move up as they go clockwise; this is oposite of math
 		driverDLeft.whenPressed(new DriveXOne());
-		driverStart.whenPressed(new DriveSlowXOne());
-		driverBack.whenPressed(new DriveXOne());
+		// driverStart.whenPressed(new DriveSlowXOne());
+		// driverBack.whenPressed(new DriveXOne());
 
 		//Creation of CoDriver Buttons Commands
 		coDriverA.whenPressed(new ManualMantisArmDown());

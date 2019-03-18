@@ -8,26 +8,34 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Robot;
+import frc.robot.RobotMap;
+import frc.robot.OI.Axis;
 
-import static frc.robot.Robot.elevator;
-
-public class ElevatorToBottom extends Command {
-	public ElevatorToBottom() {
-		requires(elevator);
+public class DriveSlowXOne extends Command {
+	public DriveSlowXOne() {
+		requires(Robot.drive);
 	}
-
+	
+	/**
+	 * Repeatedly arcade drive
+	 */
 	@Override
-	protected void initialize() {
-		elevator.setSpeed(-.3);
+	protected void execute() {
+		Robot.drive.arcadeDrive(Robot.oi.getDriverAxis(Axis.LEFT_Y) / 2, Robot.oi.getDriverAxis(Axis.LEFT_X) / 2);
 	}
 
+	//Never finish
 	@Override
 	protected boolean isFinished() {
-		return elevator.isAtBottom() || elevator.getRawPos() <= 1;
+		return false;
 	}
 
+	/**
+	 * Kill drive on end
+	 */
 	@Override
 	protected void end() {
-		elevator.stop();
+		Robot.drive.setDriveBoth(RobotMap.ZERO_SPEED);
 	}
 }
