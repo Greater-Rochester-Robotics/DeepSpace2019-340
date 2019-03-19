@@ -12,6 +12,12 @@ import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.OI.Axis;
 
+/**
+ * Left stick-based slow drive
+ * @deprecated slow stick has been moved to its dual-stick implementation
+ * in the standard drive code, a la 2018
+ */
+@Deprecated(since = "2019-03-18", forRemoval = true)
 public class DriveSlowXOne extends Command {
 	public DriveSlowXOne() {
 		requires(Robot.drive);

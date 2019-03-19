@@ -26,10 +26,11 @@ public class PathList {
 			, 234));
 	}
 
-	//Neither good. At all
+	//Use the left-based!!! They work!
 	public static final class RIGHT_ROCKET {
 		
 		/* x -> .4 */
+		@Deprecated
 		public static final Path CLOSE_HATCH = new Path(new PathSegment( 
 			/* {"start":{"x":68,"y":207},"mid1":{"x":188,"y":209},"mid2":{"x":163,"y":248},"end":{"x":180,"y":268}} */
 			new Vec2(68, 207), new Vec2(188, 209), new Vec2(163, 248), new Vec2(180, 268) 
@@ -42,6 +43,7 @@ public class PathList {
 			, 137));
 		
 		/* x -> x < .8 ? .55 : .2 */
+		@Deprecated
 		public static final Path FAR_HATCH = new Path(new PathSegment( 
 			/* {"start":{"x":68,"y":207},"mid1":{"x":129,"y":211},"mid2":{"x":338,"y":263},"end":{"x":290,"y":283}} */
 			new Vec2(68, 207), new Vec2(129, 211), new Vec2(338, 263), new Vec2(290, 283) 

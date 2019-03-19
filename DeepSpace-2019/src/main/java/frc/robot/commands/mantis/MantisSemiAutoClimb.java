@@ -35,9 +35,10 @@ public class MantisSemiAutoClimb extends Command {
 		if(mantis.isDown()) {
 			mantis.setArmSpeed(RobotMap.MANTIS_ARM_DOWN_SPEED);
 		} else {
-			mantis.setArmSpeed(RobotMap.ZERO_SPEED);	
+			mantis.setArmSpeed(RobotMap.ZERO_SPEED); //Cut the mantis arms if the lil button guys are pooshed
 		}
 
+		//Pop the stinger after the half second
 		if(isTimedOut()) {
 			mantis.setStinger(true);
 		}

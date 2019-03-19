@@ -35,6 +35,6 @@ public class ManualElevatorTiltForward extends Command {
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-		return timeSinceInitialized() >= 1;
+		return timeSinceInitialized() >= 1; //FIXME: THIS IS A MANOVER, PUT THIS BACK TO TRUE
 	}
 }

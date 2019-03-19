@@ -11,6 +11,9 @@ import edu.wpi.first.wpilibj.command.Command;
 
 import static frc.robot.Robot.elevator;
 
+/**
+ * FIXME: THIS DON'T WORK; WILL MERGE WITH AN ELEVATOR TILT OUT
+ */
 public class ElevatorToBottom extends Command {
 	public ElevatorToBottom() {
 		requires(elevator);
