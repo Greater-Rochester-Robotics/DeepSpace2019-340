@@ -34,7 +34,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 public class Elevator extends Subsystem {
 	private static Solenoid discBrake; //True moving, false stopping
 	private static DoubleSolenoid tilt;
-	private static CANSparkMax elevatorA, elevatorB, elevatorC;
+	private static CANSparkMax elevatorA, elevatorC; //B decommissioned
 	private static CANDigitalInput elevatorBottomLimit;
 	private static CANEncoder enc;
 
@@ -57,19 +57,19 @@ public class Elevator extends Subsystem {
 		tilt = new DoubleSolenoid(RobotMap.ELEVATOR_TILT_SOLENOID_FORWARD_CHANNEL, RobotMap.ELEVATOR_TILT_SOLENOID_BACKWARD_CHANNEL);
 		discBrake = new Solenoid(RobotMap.DISC_BRAKE_SOLENOID_RELEASE_CHANNEL);
 		elevatorA = new CANSparkMax(RobotMap.ELEVATOR_A_MOTOR_CAN_ID, MotorType.kBrushless);
-		elevatorB = new CANSparkMax(RobotMap.ELEVATOR_B_MOTOR_CAN_ID, MotorType.kBrushless);
+		// elevatorB = new CANSparkMax(RobotMap.ELEVATOR_B_MOTOR_CAN_ID, MotorType.kBrushless);
 		elevatorC = new CANSparkMax(RobotMap.ELEVATOR_C_MOTOR_CAN_ID, MotorType.kBrushless);
 
 		elevatorA.restoreFactoryDefaults();
-		elevatorB.restoreFactoryDefaults();
+		// elevatorB.restoreFactoryDefaults();
 		elevatorC.restoreFactoryDefaults();
 
 		elevatorBottomLimit = elevatorA.getForwardLimitSwitch(LimitSwitchPolarity.kNormallyOpen); //Faux reverse limit... Will we use it?
 		elevatorBottomLimit.enableLimitSwitch(true);
 		enc = elevatorA.getEncoder();
 		
-		//Enslave motors B and C to motor A
-		elevatorB.follow(elevatorA);
+		//Enslave motor C (and formerly B) to motor A
+		// elevatorB.follow(elevatorA);
 		elevatorC.follow(elevatorA);
 
 		//Invert direction
