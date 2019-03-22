@@ -16,16 +16,6 @@ package frc.robot;
  * This will eventually be replaced with some kind of scheme relating to auto-detection of comp/prac bot
  */
 public class RobotMap {
-	
-	//////////////////
-	// PWM CHANNELS //
-	//////////////////
-
-	/* Talons */
-	public static final int DRIVE_SPARK_LEFT_CHANNEL_A = 0;
-	public static final int DRIVE_SPARK_LEFT_CHANNEL_B = 2;
-	public static final int DRIVE_SPARK_RIGHT_CHANNEL_A = 1;
-	public static final int DRIVE_SPARK_RIGHT_CHANNEL_B = 3;
 
 	///////////////
 	// DIO PORTS //
@@ -65,19 +55,21 @@ public class RobotMap {
 	/////////////
 
 	/* TalonSRXs */
-
-	//Commented numbers are on prac bot. THEY ARE NOT NOT PERMANENT ON EITHER BOT
-	public static final int DRIVE_MANTIS_SRX_LEFT_ID = 4; //1
-	public static final int DRIVE_MANTIS_SRX_RIGHT_ID = 5; //2
-	public static final int MANIPULATOR_C_SRX_TOP_ID = 1; //4
-	public static final int MANIPULATOR_C_SRX_BOTTOM_ID = 2; //3
-	public static final int MANTIS_ARM_SRX_LEFT_ID = 6; //5
-	public static final int MANTIS_ARM_SRX_RIGHT_ID = 3; //6
+	public static final int DRIVE_MANTIS_SRX_LEFT_ID = 4;
+	public static final int DRIVE_MANTIS_SRX_RIGHT_ID = 5;
+	public static final int MANIPULATOR_C_SRX_TOP_ID = 1;
+	public static final int MANIPULATOR_C_SRX_BOTTOM_ID = 2;
+	public static final int MANTIS_ARM_SRX_LEFT_ID = 6;
+	public static final int MANTIS_ARM_SRX_RIGHT_ID = 3;
 
 	/* Spark MAXes */
 	public static final int ELEVATOR_A_MOTOR_CAN_ID = 13; //mid
-	public static final int ELEVATOR_B_MOTOR_CAN_ID = 12; //left
+	public static final int ELEVATOR_B_MOTOR_CAN_ID = 12; //left - decommissioned
 	public static final int ELEVATOR_C_MOTOR_CAN_ID = 14; //right
+	public static final int DRIVE_SPARK_LEFT_CHANNEL_A = 20; //front-left
+	public static final int DRIVE_SPARK_LEFT_CHANNEL_B = 21; //back-left
+	public static final int DRIVE_SPARK_RIGHT_CHANNEL_A = 22; //back-right
+	public static final int DRIVE_SPARK_RIGHT_CHANNEL_B = 23; //front-right
 
 	/* Compressor/LED PCM */
 	public static final int SECONDARY_PCM_ID = 10;

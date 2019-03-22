@@ -10,11 +10,12 @@ package frc.robot.subsystems;
 // import com.analog.adis16448.frc.ADIS16448_IMU;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.PWMSparkMax;
 import frc.robot.RobotMap;
 import frc.robot.commands.DriveXOne;
 
@@ -32,7 +33,7 @@ public class Drive extends Subsystem {
 	// private static ADIS16448_IMU imu;
 	private static ADXRS450_Gyro gyro;
 	private static Encoder encLeft, encRight;
-	private static PWMSparkMax driveLeftA, driveLeftB, driveRightA, driveRightB;
+	private static CANSparkMax driveLeftA, driveLeftB, driveRightA, driveRightB;
 	private static TalonSRX mantisLeft, mantisRight;
 
 	/**
@@ -57,10 +58,12 @@ public class Drive extends Subsystem {
 		encLeft.setReverseDirection(true);
 		encRight.setReverseDirection(true);
 
-		driveLeftA = new PWMSparkMax(RobotMap.DRIVE_SPARK_LEFT_CHANNEL_A);
-		driveLeftB = new PWMSparkMax(RobotMap.DRIVE_SPARK_LEFT_CHANNEL_B);
-		driveRightA = new PWMSparkMax(RobotMap.DRIVE_SPARK_RIGHT_CHANNEL_A);
-		driveRightB = new PWMSparkMax(RobotMap.DRIVE_SPARK_RIGHT_CHANNEL_B);
+		driveLeftA = new CANSparkMax(RobotMap.DRIVE_SPARK_LEFT_CHANNEL_A, MotorType.kBrushless);
+		driveLeftB = new CANSparkMax(RobotMap.DRIVE_SPARK_LEFT_CHANNEL_B, MotorType.kBrushless);
+		driveRightA = new CANSparkMax(RobotMap.DRIVE_SPARK_RIGHT_CHANNEL_A, MotorType.kBrushless);
+		driveRightB = new CANSparkMax(RobotMap.DRIVE_SPARK_RIGHT_CHANNEL_B, MotorType.kBrushless);
+
+		//TODO: consider enslaving B motors to A motors
 
 		//Negate all speeds to the left side to account for mirrored axes
 		driveLeftA.setInverted(true);
