@@ -32,7 +32,7 @@ public class Drive extends Subsystem {
 	// private static ADIS16448_IMU imu;
 	private static ADXRS450_Gyro gyro;
 	private static Encoder encLeft, encRight;
-	private static PWMSparkMax driveLeft, driveRight;
+	private static PWMSparkMax driveLeftA, driveLeftB, driveRightA, driveRightB;
 	private static TalonSRX mantisLeft, mantisRight;
 
 	/**
@@ -57,10 +57,14 @@ public class Drive extends Subsystem {
 		encLeft.setReverseDirection(true);
 		encRight.setReverseDirection(true);
 
-		driveLeft = new PWMSparkMax(RobotMap.DRIVE_SPARK_LEFT_CHANNEL);
-		driveRight = new PWMSparkMax(RobotMap.DRIVE_SPARK_RIGHT_CHANNEL);
+		driveLeftA = new PWMSparkMax(RobotMap.DRIVE_SPARK_LEFT_CHANNEL_A);
+		driveLeftB = new PWMSparkMax(RobotMap.DRIVE_SPARK_LEFT_CHANNEL_B);
+		driveRightA = new PWMSparkMax(RobotMap.DRIVE_SPARK_RIGHT_CHANNEL_A);
+		driveRightB = new PWMSparkMax(RobotMap.DRIVE_SPARK_RIGHT_CHANNEL_B);
 
-		driveLeft.setInverted(true); //Negate all speeds to the left side to account for mirrored axes
+		//Negate all speeds to the left side to account for mirrored axes
+		driveLeftA.setInverted(true);
+		driveLeftB.setInverted(true);
 
 		mantisLeft = new TalonSRX(RobotMap.DRIVE_MANTIS_SRX_LEFT_ID);
 		mantisRight = new TalonSRX(RobotMap.DRIVE_MANTIS_SRX_RIGHT_ID);
@@ -148,7 +152,8 @@ public class Drive extends Subsystem {
 			speed = 1;
 		}
 
-		driveLeft.set(speed);
+		driveLeftA.set(speed);
+		driveLeftB.set(speed);
 	}
 
 	/**
@@ -162,7 +167,8 @@ public class Drive extends Subsystem {
 			speed = 1;
 		}
 
-		driveRight.set(speed);
+		driveRightA.set(speed);
+		driveRightB.set(speed);
 	}
 
 	/**

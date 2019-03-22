@@ -22,8 +22,10 @@ public class RobotMap {
 	//////////////////
 
 	/* Talons */
-	public static final int DRIVE_SPARK_LEFT_CHANNEL = 0;
-	public static final int DRIVE_SPARK_RIGHT_CHANNEL = 1;
+	public static final int DRIVE_SPARK_LEFT_CHANNEL_A = 0;
+	public static final int DRIVE_SPARK_LEFT_CHANNEL_B = 2;
+	public static final int DRIVE_SPARK_RIGHT_CHANNEL_A = 1;
+	public static final int DRIVE_SPARK_RIGHT_CHANNEL_B = 3;
 
 	///////////////
 	// DIO PORTS //
