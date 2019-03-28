@@ -262,7 +262,7 @@ public class Drive extends Subsystem {
      * @param moveValue forward/backward speed, as a percentage of max forward speed
      * @param rotateValue rotation speed, as a percentage of max rightward rotation speed
      */
-    public void arcadeDrive(double moveValue, double rotateValue, boolean fast) {
+    public void arcadeDrive(double moveValue, double rotateValue) {
 		if(moveValue > 0.0) {
 		    if(rotateValue > 0.0) {
 		    	leftSpeed = moveValue - rotateValue;
@@ -281,7 +281,7 @@ public class Drive extends Subsystem {
 		    }
 		}
 
-		setDriveBoth(fast ? leftSpeed * .6 : leftSpeed * .4, fast ? rightSpeed * .6 : rightSpeed * .4); //This new drivebase is too fast
+		setDriveBoth( leftSpeed , rightSpeed ); //This new drivebase is too fast
 	}
 
 	/**
