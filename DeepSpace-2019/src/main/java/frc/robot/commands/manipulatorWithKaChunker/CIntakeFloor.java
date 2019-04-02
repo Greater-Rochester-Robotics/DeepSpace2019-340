@@ -29,7 +29,7 @@ public class CIntakeFloor extends Command {
 	@Override
 	protected void initialize() {
 		manipulatorWithKaChunker.setWristDown(); //Wrist tips down if not already
-		manipulatorWithKaChunker.setCSpeed(RobotMap.C_INTAKE_SPEED); //Roll wheels inward the instant this command begins
+		manipulatorWithKaChunker.setCSpeed(RobotMap.C_INTAKE_SPEED, false); //Roll wheels inward the instant this command begins
 	}
 
 	@Override
@@ -39,7 +39,7 @@ public class CIntakeFloor extends Command {
 
 	@Override
 	protected void end() {
-		manipulatorWithKaChunker.setCSpeed(RobotMap.C_STALL_SPEED); //On interrupt or cargo acquisition, stall the wheels
+		manipulatorWithKaChunker.setCSpeed(RobotMap.C_STALL_SPEED, true); //On interrupt or cargo acquisition, stall the wheels
 		manipulatorWithKaChunker.setWristUp();
 	}
 

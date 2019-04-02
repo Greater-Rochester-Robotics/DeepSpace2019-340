@@ -12,42 +12,22 @@ import frc.robot.RobotMap;
 
 import static frc.robot.Robot.manipulatorWithKaChunker;
 
-public class CShipRelease extends Command {
-
-	/**
-	 * Step 1: take the C<br>
-	 * Step 2: tilt it down-ish<br>
-	 * Step 3: release<br>
-	 * Step 4: stop release
-	 */
-	public CShipRelease() {
+public class CStall extends Command {
+	public CStall() {
 		requires(manipulatorWithKaChunker);
 	}
 
 	@Override
 	protected void initialize() {
-		if(!manipulatorWithKaChunker.isWristDown()) {
-			manipulatorWithKaChunker.setWristDown();
-			setTimeout(RobotMap.WRIST_TILT_DOWN_TIME_S);
+		if(manipulatorWithKaChunker.hasCargo()) {
+			manipulatorWithKaChunker.setCSpeed(RobotMap.C_STALL_SPEED, true); //Stall, but only if we have cargo
 		} else {
-			setTimeout(0);
-		}
-	}
-
-	@Override
-	protected void execute() {
-		if(isTimedOut()) {
-			manipulatorWithKaChunker.setCSpeed(RobotMap.C_OUTTAKE_SPEED, false);
+			manipulatorWithKaChunker.setCSpeed(RobotMap.ZERO_SPEED, false); //Cut speed to C
 		}
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return false;
-	}
-
-	@Override
-	protected void end() {
-		manipulatorWithKaChunker.setCSpeed(RobotMap.ZERO_SPEED, false);
+		return true;
 	}
 }

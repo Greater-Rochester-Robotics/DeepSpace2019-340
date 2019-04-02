@@ -79,12 +79,12 @@ public class RobotMap {
 	///////////////
 
 	/* C speed */
-	public static final double C_INTAKE_SPEED = -.8;
+	public static final double C_INTAKE_SPEED = -.6;
 	public static final double C_OUTTAKE_SPEED = 1.0;
 	public static final double C_STALL_SPEED = -.3;
 
 	/* Elevator speed */
-	public static final double ELEVATOR_SPEED_MULTIPLIER = .75; //Also used as max up speed for manual overrides and kP
+	public static final double ELEVATOR_SPEED_MULTIPLIER = .8042069; //Also used as max up speed for manual overrides and kP
 	public static final double ELEVATOR_MAX_DOWN_SPEED = -.55;
 	
 

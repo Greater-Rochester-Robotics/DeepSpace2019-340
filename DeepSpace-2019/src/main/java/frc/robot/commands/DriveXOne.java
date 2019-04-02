@@ -36,10 +36,10 @@ public class DriveXOne extends Command {
 		//Gives precedence to LS, runs slower RS otherwise
 		if(Math.abs(Robot.oi.getDriverAxis(Axis.LEFT_X)) >= .05 ||
 			Math.abs(Robot.oi.getDriverAxis(Axis.LEFT_Y)) >= .05) {
-				Robot.drive.arcadeDrive(Robot.oi.getDriverAxis(Axis.LEFT_Y)*.8, Robot.oi.getDriverAxis(Axis.LEFT_X));
-		} else if(Math.abs(Robot.oi.getDriverAxis(Axis.RIGHT_X)) >= .05 ||
-			Math.abs(Robot.oi.getDriverAxis(Axis.RIGHT_Y)) >= .05) {
-				Robot.drive.arcadeDrive(Robot.oi.getDriverAxis(Axis.RIGHT_Y)*.4, Robot.oi.getDriverAxis(Axis.RIGHT_X)*.6);
+				Robot.drive.arcadeDrive(Robot.oi.getDriverAxis(Axis.LEFT_Y)*.65, Robot.oi.getDriverAxis(Axis.LEFT_X)*.7569);
+		} else if(Math.abs(Robot.oi.getDriverAxis(Axis.RIGHT_X)) >= .15 ||
+			Math.abs(Robot.oi.getDriverAxis(Axis.RIGHT_Y)) >= .15) {
+				Robot.drive.arcadeDrive(Robot.oi.getDriverAxis(Axis.RIGHT_Y)*.3, Robot.oi.getDriverAxis(Axis.RIGHT_X)*.45);
 		} else {
 			Robot.drive.setDriveBoth(0);
 		}

@@ -25,7 +25,7 @@ public class CIntakeWall extends Command {
 	@Override
 	protected void initialize() {
 		manipulatorWithKaChunker.setWristUp(); //Wrist tips up if not already
-		manipulatorWithKaChunker.setCSpeed(RobotMap.C_INTAKE_SPEED); //Spin wheels as soon as command starts
+		manipulatorWithKaChunker.setCSpeed(RobotMap.C_INTAKE_SPEED, false); //Spin wheels as soon as command starts
 	}
 
 	@Override
@@ -35,7 +35,7 @@ public class CIntakeWall extends Command {
 
 	@Override
 	protected void end() {
-		manipulatorWithKaChunker.setCSpeed(RobotMap.C_STALL_SPEED); //Stall the wheels when done
+		manipulatorWithKaChunker.setCSpeed(RobotMap.C_STALL_SPEED, true); //Stall the wheels when done
 	}
 
 	@Override

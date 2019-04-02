@@ -18,6 +18,7 @@ import frc.robot.commands.ElevatorToPosition;
 import frc.robot.commands.manipulatorWithKaChunker.CIntakeFloor;
 import frc.robot.commands.manipulatorWithKaChunker.CRocketRelease;
 import frc.robot.commands.manipulatorWithKaChunker.CShipRelease;
+import frc.robot.commands.manipulatorWithKaChunker.CStall;
 import frc.robot.commands.manipulatorWithKaChunker.KaChunkerAutoAcquire;
 import frc.robot.commands.mantis.MantisSemiAutoClimb;
 import frc.robot.commands.mantis.MantisStopClimb;
@@ -88,11 +89,11 @@ public class OI {
 	public OI() {
 		//Creation of Driver Buttons Commands
 		driverA.whenPressed(new CIntakeFloor());
-		driverA.whenReleased(new ManualCIntakeStop());
+		driverA.whenReleased(new CStall());
 		driverB.whenPressed(new CRocketRelease());
 		driverB.whenReleased(new ManualCIntakeStop());
 		driverX.whenPressed(new CIntakeWall());
-		driverX.whenReleased(new ManualCIntakeStop());
+		driverX.whenReleased(new CStall());
 		driverY.whenPressed(new CShipRelease());
 		driverY.whenReleased(new ManualCIntakeStop());
 		driverRB.whenPressed(new KaChunkerAutoAcquire());

@@ -41,7 +41,7 @@ public class CRocketRelease extends Command {
 	@Override
 	protected void execute() {
 		if(isTimedOut()) {
-			manipulatorWithKaChunker.setCSpeed(RobotMap.C_OUTTAKE_SPEED);
+			manipulatorWithKaChunker.setCSpeed(RobotMap.C_OUTTAKE_SPEED, false);
 		}
 	}
 
@@ -52,6 +52,6 @@ public class CRocketRelease extends Command {
 
 	@Override
 	protected void end() {
-		Robot.manipulatorWithKaChunker.setCSpeed(RobotMap.ZERO_SPEED); //On interrupt or cargo acquisition, stop the wheels
+		Robot.manipulatorWithKaChunker.setCSpeed(RobotMap.ZERO_SPEED, false); //On interrupt or cargo acquisition, stop the wheels
 	}
 }

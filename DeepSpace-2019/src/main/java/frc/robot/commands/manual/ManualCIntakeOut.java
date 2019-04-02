@@ -19,7 +19,7 @@ public class ManualCIntakeOut extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-	  Robot.manipulatorWithKaChunker.setCSpeed(RobotMap.C_OUTTAKE_SPEED);
+	  Robot.manipulatorWithKaChunker.setCSpeed(RobotMap.C_OUTTAKE_SPEED, false);
 	  System.out.println("[" + getClass().getName() + "] -Initialize-");
 	  System.out.println("[" + getClass().getName() + "] -CIntakeOut-");
 	  System.out.println("[" + getClass().getName() + "] -CIntakeSensors- " + Robot.manipulatorWithKaChunker.hasCargo());

@@ -21,12 +21,12 @@ public class ElevatorToBottom extends Command {
 
 	@Override
 	protected void initialize() {
-		elevator.setSpeed(-.3);
+		elevator.goToBottom();
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return elevator.isAtBottom() || elevator.getRawPos() <= 1;
+		return elevator.isAtBottom();
 	}
 
 	@Override

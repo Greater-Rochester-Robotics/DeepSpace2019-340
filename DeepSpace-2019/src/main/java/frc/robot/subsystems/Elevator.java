@@ -152,6 +152,8 @@ public class Elevator extends Subsystem {
 				speed *= 0.1;
 			} else if(getRawPos() < RobotMap.ELEVATOR_BOTTOM_UPPER_SLOW) {
 				speed *= 0.3;
+			} else {
+				speed *= .69;
 			}
 		} else if(speed > 0.05) {
 			if(getRawPos() > RobotMap.ELEVATOR_TOP_UPPER_SLOW) {
@@ -272,6 +274,13 @@ public class Elevator extends Subsystem {
 	 */
 	public boolean isAtBottom() {
 		return elevatorBottomLimit.get();
+	}
+
+	/**
+	 * Try to set the elevator to its minimum position
+	 */
+	public void goToBottom() {
+		goToPos(0);
 	}
 
 	/**
