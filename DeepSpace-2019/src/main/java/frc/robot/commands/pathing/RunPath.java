@@ -3,13 +3,9 @@ package frc.robot.commands.pathing;
 import java.util.function.Function;
 
 import frc.robot.Robot;
+import edu.wpi.first.wpilibj.command.Command;
 
-import edu.wpi.first.wpilibj.command.CommandGroup;
-
-/**
- *
- */
-public class RunPath extends CommandGroup {
+public class RunPath extends Command {
 	private final double arcDivisor = 15;
 
 	private double leftSpeed = 0;

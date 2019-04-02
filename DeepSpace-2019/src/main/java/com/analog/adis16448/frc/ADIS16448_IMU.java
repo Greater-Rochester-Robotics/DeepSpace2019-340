@@ -30,7 +30,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
 /**
  * This class is for the ADIS16448 IMU that connects to the RoboRIO MXP port.
  */
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "deprecation", "resource"})
 public class ADIS16448_IMU extends GyroBase implements Gyro, PIDSource, Sendable {
 	private static final double kCalibrationSampleTime = 5.0; // Calibration time in seconds
 	private static final double kDegreePerSecondPerLSB = 1.0/25.0;
