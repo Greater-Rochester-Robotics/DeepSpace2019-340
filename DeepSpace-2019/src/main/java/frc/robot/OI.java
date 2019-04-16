@@ -103,6 +103,7 @@ public class OI {
 		driverDDown.whenPressed(new ManualManipulatorWristDown());
 		driverDUp.whenPressed(new ManualManipulatorWristUp());
 		driverLTButton.whenPressed(new ManualCIntakeIn());
+		//RT button for automated placement
 		driverDRight.whenPressed(new DriveXOneWithMantis());
 		driverDLeft.whenPressed(new DriveXOne());
 
