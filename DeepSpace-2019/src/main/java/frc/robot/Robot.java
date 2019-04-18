@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.DriveXOne;
+import frc.robot.commands.cheeseclimb.Cheeseclimber;
 import frc.robot.subsystems.ManipulatorWithKaChunker;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Elevator;
@@ -31,6 +32,7 @@ import edu.wpi.first.networktables.NetworkTableInstance;
  * project.
  */
 public class Robot extends TimedRobot {
+	public static Cheeseclimber cheeseclimber;
 	public static Drive drive;
 	public static Elevator elevator;
 	public static ManipulatorWithKaChunker manipulatorWithKaChunker;
@@ -52,6 +54,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void robotInit() {
+		cheeseclimber = new Cheeseclimber(0, 1, 2);
 		drive = new Drive();
 		elevator = new Elevator();
 		manipulatorWithKaChunker = new ManipulatorWithKaChunker();
