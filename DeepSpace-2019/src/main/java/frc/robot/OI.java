@@ -8,6 +8,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.manipulatorWithKaChunker.CIntakeWall;
@@ -15,6 +16,7 @@ import frc.robot.commands.DriveXOne;
 import frc.robot.commands.DriveXOneWithMantis;
 import frc.robot.commands.ElevatorStick;
 import frc.robot.commands.ElevatorToPosition;
+import frc.robot.commands.DriveAutoAlign;
 import frc.robot.commands.manipulatorWithKaChunker.CIntakeFloor;
 import frc.robot.commands.manipulatorWithKaChunker.CRocketRelease;
 import frc.robot.commands.manipulatorWithKaChunker.CShipRelease;
@@ -64,6 +66,7 @@ public class OI {
 	private Button driverDLeft = new DPad(driver, DPad.Direction.LEFT);
 	private Button driverDRight = new DPad(driver, DPad.Direction.RIGHT);
 	private Button driverLTButton = new JoyTriggerButton(driver, .3, Axis.LEFT_TRIGGER);
+	private Button driverRTButton = new JoyTriggerButton(driver, .3, Axis.RIGHT_TRIGGER);
 
 	///////////////////////
 	// CO-DRIVER BUTTONS //
@@ -102,8 +105,11 @@ public class OI {
 		driverLB.whenPressed(new ManualKaChunkerGrab());
 		driverDDown.whenPressed(new ManualManipulatorWristDown());
 		driverDUp.whenPressed(new ManualManipulatorWristUp());
-		driverLTButton.whenPressed(new ManualCIntakeIn());
-		//RT button for automated placement
+		driverLTButton.whenPressed(new DriveAutoAlign());
+		driverLTButton.whenReleased(new DriveXOne());
+		// driverRTButton.whenPressed(new ManualCIntakeIn());
+		
+
 		driverDRight.whenPressed(new DriveXOneWithMantis());
 		driverDLeft.whenPressed(new DriveXOne());
 
@@ -145,10 +151,29 @@ public class OI {
 		}
 	}
 
+	/**
+	 * 
+	 * @param axis
+	 * @return
+	 */
 	public double getDriverAxis(Axis axis) {
 		return (driver.getRawAxis(axis.getAxisNumber()) < -.1 || driver.getRawAxis(axis.getAxisNumber()) > .1 ) ? driver.getRawAxis(axis.getAxisNumber()) : 0;
 	}
 
+	/**
+	 * Accessor method to set driver rumble function
+	 * @param leftRumble
+	 * @param rightRumble
+	 */
+	public void setDriverRumble (double leftRumble, double rightRumble){
+		driver.setRumble(RumbleType.kLeftRumble, leftRumble);
+		driver.setRumble(RumbleType.kRightRumble, rightRumble);
+	}
+	/**
+	 * 
+	 * @param axis
+	 * @return
+	 */
 	public double getCoDriverAxis(Axis axis) {
 		return (coDriver.getRawAxis(axis.getAxisNumber()) < -.1 || coDriver.getRawAxis(axis.getAxisNumber()) > .1 ) ? coDriver.getRawAxis(axis.getAxisNumber()) : 0;
 	}

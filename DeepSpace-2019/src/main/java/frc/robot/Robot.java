@@ -20,7 +20,9 @@ import frc.robot.subsystems.ManipulatorWithKaChunker;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Mantis;
-
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the TimedRobot
@@ -68,6 +70,8 @@ public class Robot extends TimedRobot {
 		drive.gyroReset();
 
 		CameraServer.getInstance().startAutomaticCapture();
+		NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(0);
+		NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(3);
 	}
 
 	/**
