@@ -24,7 +24,7 @@ public class DriveAutoAlign extends Command {
 	public DriveAutoAlign() {
 		requires (Robot.drive);
 		/**
-		 * step 1: right trigger is pressed
+		 * step 1: left trigger is pressed
 		 * step 2: robot uses data from limelight to drive forward and adjust as needed
 		 * setp 3: stops when trigger is released or in position to score
 		 */
@@ -38,8 +38,9 @@ public class DriveAutoAlign extends Command {
 	  //get starting point (or set)
 	  //set pipeline as zeor woowo
 	  //add as needed
+	  System.out.println("DriveAutoAlign Started");
 	  NetworkTableInstance.getDefault().getTable("limelight").getEntry("pipeline").setNumber(0); //set pipeline to zero
-	  NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(3); //turns on limelight led boi
+	 
 	  NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(0); //makes sure that its in robot looks around mode
 
   }
@@ -47,14 +48,14 @@ public class DriveAutoAlign extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+	  NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(3); //turns on limelight led boi
 	  // drive forward constnagt slow speed 
 	  // adjust angle robot is at as needed
 	  double haveTarget = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0);
 	  if(haveTarget == 0 && hadTarget == 0) {
 		//Rumble soft if NO target
-		Robot.oi.setDriverRumble(0, 1);
+		Robot.oi.setDriverRumble(0.7, 0);
 		
-		// controller.disable();
 		//Allow driver control and drive until target discovered
 		if(Math.abs(Robot.oi.getDriverAxis(Axis.LEFT_X)) >= .05 ||
 			Math.abs(Robot.oi.getDriverAxis(Axis.LEFT_Y)) >= .05) {
@@ -66,39 +67,43 @@ public class DriveAutoAlign extends Command {
 			Robot.drive.setDriveBoth(0);
 		}
 	  } else { 
-		//   if(NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0)>=17.75){
-		// 	Robot.oi.setDriverRumble(1, 0);
-		//   }else{
-		// 	Robot.oi.setDriverRumble(0, 0);
-		//   }
+		//Stop rumble if there is a target
+		Robot.oi.setDriverRumble(0, 0);
+		
+		// //get forward speed from driver
+		double moveValue=-.2;
+		// if(	Math.abs(Robot.oi.getDriverAxis(Axis.LEFT_Y)) >= .05) {
+		// 	moveValue = Robot.oi.getDriverAxis(Axis.LEFT_Y)*.3;
+		// } else if(Math.abs(Robot.oi.getDriverAxis(Axis.RIGHT_Y)) >= .15) {
+		// 	moveValue = Robot.oi.getDriverAxis(Axis.RIGHT_Y)*.3;
+		// }
+		
 		double rotateValue=0;
 		double angleToTarget=NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
 		// write a function for rotateValue, so that it is driven by angleToTarget
-		if (Math.abs(angleToTarget) < .75){
+		if (Math.abs(angleToTarget) < .5){
 			rotateValue = 0;
 		}else{
-			rotateValue = (angleToTarget/35)*.29;//*12.5/ControllerPower.getInputVoltage();
-			if(Math.abs(rotateValue) < .07){
-				if(rotateValue > 0){
-					rotateValue = .07;
-				}
-				else{
-					rotateValue = -.07;
-				}
-			}
+			rotateValue = ((angleToTarget-1)/35)*(moveValue+.45);//*12.5/ControllerPower.getInputVoltage();
+			// if(Math.abs(rotateValue) < .07){
+			// 	if(rotateValue > 0){
+			// 		rotateValue = .07;
+			// 	}
+			// 	else{
+			// 		rotateValue = -.07;
+			// 	}
+			// }
 		}
-		// hi limit speed to .7 or something for rotating thanks dont destroy the robot
-		// minimum speed for rotating is like .15 rob says we  can experiment bro
+		
+		double rightSpeed = moveValue + rotateValue;
+		double leftSpeed = moveValue - rotateValue;
+		// System.out.println("Right speed: " +rightSpeed);
+		// System.out.println("Left speed: " +leftSpeed);
+		Robot.drive.setDriveLeft(leftSpeed);
+		Robot.drive.setDriveRight(rightSpeed);
 		
 		// COMPARE CORNERS TO ELIMINATE FALSE TARGETS
 
-		if(	Math.abs(Robot.oi.getDriverAxis(Axis.LEFT_Y)) >= .05) {
-				Robot.drive.arcadeDrive(Robot.oi.getDriverAxis(Axis.LEFT_Y)*.65, rotateValue);
-		} else if(Math.abs(Robot.oi.getDriverAxis(Axis.RIGHT_Y)) >= .15) {
-				Robot.drive.arcadeDrive(Robot.oi.getDriverAxis(Axis.RIGHT_Y)*.3, rotateValue);
-		} else {
-			Robot.drive.arcadeDrive(0, rotateValue);	
-		}
 	  }
 	  hadTarget = haveTarget;
   }
@@ -111,12 +116,14 @@ public class DriveAutoAlign extends Command {
 
   // Called once after isFinished returns true
   @Override
-  protected void end() { //deprecated (idk where this goes)
+  protected void end() { 
+	  System.out.println("DriveAutoAlign Ended");
 	Robot.oi.setDriverRumble(0, 0);
 	// NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(1);
 	  //when right trigger is released
 	  //or when ready to score
 	  //turn off led (no blindness please)
+
 	NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1); //turns off limelight led boi
   }
 }

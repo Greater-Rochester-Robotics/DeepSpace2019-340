@@ -22,6 +22,7 @@ import frc.robot.commands.manipulatorWithKaChunker.CRocketRelease;
 import frc.robot.commands.manipulatorWithKaChunker.CShipRelease;
 import frc.robot.commands.manipulatorWithKaChunker.CStall;
 import frc.robot.commands.manipulatorWithKaChunker.KaChunkerAutoAcquire;
+import frc.robot.commands.manipulatorWithKaChunker.KaChunkerVisionAcquire;
 import frc.robot.commands.mantis.MantisSemiAutoClimb;
 import frc.robot.commands.mantis.MantisStopClimb;
 import frc.robot.commands.manual.ManualCIntakeIn;
@@ -38,7 +39,7 @@ import frc.robot.commands.manual.ManualMantisArmUp;
 import frc.robot.commands.manual.ManualMantisStingerUp;
 import frc.robot.commands.pathing.groups.AutoSequenceLeft;
 import frc.robot.commands.pathing.groups.AutoSequenceRight;
-
+import frc.robot.commands.manipulatorWithKaChunker.KaChunkerPathingAcquire;
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
@@ -107,7 +108,9 @@ public class OI {
 		driverDUp.whenPressed(new ManualManipulatorWristUp());
 		driverLTButton.whenPressed(new DriveAutoAlign());
 		driverLTButton.whenReleased(new DriveXOne());
-		// driverRTButton.whenPressed(new ManualCIntakeIn());
+		driverRTButton.whenPressed(new KaChunkerPathingAcquire());
+		driverRTButton.whenReleased(new DriveXOne());
+
 		
 
 		driverDRight.whenPressed(new DriveXOneWithMantis());
