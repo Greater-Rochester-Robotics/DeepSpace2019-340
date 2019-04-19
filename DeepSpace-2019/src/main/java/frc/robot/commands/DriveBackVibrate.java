@@ -22,13 +22,13 @@ public class DriveBackVibrate extends Command {
 	  System.out.println("DriveBackVibrate Started");
 	Robot.oi.setDriverRumble(0, 1);
 	
-	setTimeout(1);
+	setTimeout(.5);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-	Robot.drive.setDriveBoth(.5,.5);
+	Robot.drive.setDriveBoth(.35,.35);
   }
 
   // Make this return true when this Command no longer needs to run execute()

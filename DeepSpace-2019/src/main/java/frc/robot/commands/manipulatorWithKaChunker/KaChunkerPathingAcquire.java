@@ -7,12 +7,13 @@
 
 package frc.robot.commands.manipulatorWithKaChunker;
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.WaitCommand;
 import frc.robot.commands.DriveAutoAlign;
 import frc.robot.commands.manipulatorWithKaChunker.KaChunkerVisionAcquire;
 import frc.robot.commands.DriveBackVibrate;
 public class KaChunkerPathingAcquire extends CommandGroup {
   /**
-   * Add your docs here.
+   * Needs a rename BAD
    */
   public KaChunkerPathingAcquire() {
     // Add Commands here:
@@ -21,6 +22,7 @@ public class KaChunkerPathingAcquire extends CommandGroup {
     // these will run in order.
 	addParallel(new DriveAutoAlign()); //Drives robot into position to acquire hatch
 	addSequential(new KaChunkerVisionAcquire()); //Acquires hatch when robot is within range
+	addSequential(new WaitCommand(.1));//make sure the hatch is picked up before we backup
 	addSequential(new DriveBackVibrate()); //Backs away with hatch 
 	
 	// To run multiple commands at the same time,
