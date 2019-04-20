@@ -65,7 +65,7 @@ public class RunPath extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		Robot.drive.setDriveBoth(leftSpeed * .69, rightSpeed * .69);
+		Robot.drive.setDriveBoth(leftSpeed *.15, rightSpeed *.15);
 		Robot.drive.resetBothEncoders();
 		Robot.drive.gyroReset();
 		System.out.println("RUNPATH INIT");
@@ -103,8 +103,8 @@ public class RunPath extends Command {
 
 			// double ls = (leftSpeed + ((error) / (arcDivisor / Math.abs(speed))));
 			// double rs = (rightSpeed - (((error) / (arcDivisor / Math.abs(speed)))));
-			Robot.drive.setDriveBoth((leftSpeed + ((error) / (arcDivisor / Math.abs(speed)))) * .69,
-					(rightSpeed - (((error) / (arcDivisor / Math.abs(speed))))) * .69);
+			Robot.drive.setDriveBoth((leftSpeed + ((error) / (arcDivisor / Math.abs(speed)))) *.69,
+					(rightSpeed - (((error) / (arcDivisor / Math.abs(speed))))) *.69);
 
 			// animate based off of distance, from 0.0 to 1.0
 			// if (animation != null) {
@@ -116,7 +116,7 @@ public class RunPath extends Command {
 			// }
 
 		} else {
-			Robot.drive.setDriveBoth(leftSpeed * .69, rightSpeed * .69);
+			Robot.drive.setDriveBoth(leftSpeed *.69, rightSpeed *.69);
 		}
 	}
 

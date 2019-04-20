@@ -73,7 +73,6 @@ public class Robot extends TimedRobot {
 		drive.gyroReset();
 
 		CameraServer.getInstance().startAutomaticCapture();
-		NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(0);
 		NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(3);
 	}
 
@@ -122,6 +121,7 @@ public class Robot extends TimedRobot {
 		m_autonomousCommand = m_chooser.getSelected();
 
 		compressor.start();
+		NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(1);
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector", "Default");

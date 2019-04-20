@@ -16,6 +16,7 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.ControllerPower;
+import edu.wpi.first.wpilibj.DriverStation;
 
 public class DriveAutoAlign extends Command {
 	
@@ -71,12 +72,12 @@ public class DriveAutoAlign extends Command {
 		Robot.oi.setDriverRumble(0, 0);
 		
 		// //get forward speed from driver
-		double moveValue=-.2;
-		// if(	Math.abs(Robot.oi.getDriverAxis(Axis.LEFT_Y)) >= .05) {
-		// 	moveValue = Robot.oi.getDriverAxis(Axis.LEFT_Y)*.3;
-		// } else if(Math.abs(Robot.oi.getDriverAxis(Axis.RIGHT_Y)) >= .15) {
-		// 	moveValue = Robot.oi.getDriverAxis(Axis.RIGHT_Y)*.3;
-		// }
+		double moveValue=0;//-.2;
+		if(	Math.abs(Robot.oi.getDriverAxis(Axis.LEFT_Y)) >= .05) {
+			moveValue = Robot.oi.getDriverAxis(Axis.LEFT_Y)*.4;
+		} else if(Math.abs(Robot.oi.getDriverAxis(Axis.RIGHT_Y)) >= .15) {
+			moveValue = Robot.oi.getDriverAxis(Axis.RIGHT_Y)*.3;
+		}
 		
 		double rotateValue=0;
 		double angleToTarget=NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
@@ -119,7 +120,11 @@ public class DriveAutoAlign extends Command {
   protected void end() { 
 	  System.out.println("DriveAutoAlign Ended");
 	Robot.oi.setDriverRumble(0, 0);
-	// NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(1);
+	
+	//return visual to driver camera if autonomous
+	if(DriverStation.getInstance().isAutonomous()){
+		NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(1);
+	}
 	  //when right trigger is released
 	  //or when ready to score
 	  //turn off led (no blindness please)

@@ -21,9 +21,9 @@ public class PathList {
 
 		/* x -> x < .8 ? x < .125 ? .35 : .55 : .2 */
 		public static final Path FAR_HATCH = new Path(new PathSegment( 
-			/* {"start":{"x":68,"y":207},"mid1":{"x":118,"y":210},"mid2":{"x":305,"y":176},"end":{"x":277,"y":142}} */
-			new Vec2(68, 207), new Vec2(118, 210), new Vec2(305, 176), new Vec2(277, 142) 
-			, 234));
+			/* {"start":{"x":69,"y":117},"mid1":{"x":123,"y":120},"mid2":{"x":357,"y":105},"end":{"x":309,"y":64}} */
+			new Vec2(69, 117), new Vec2(123, 120), new Vec2(357, 105), new Vec2(309, 64) 
+			, 270));
 	}
 
 	//Use the left-based!!! They work!
@@ -72,7 +72,7 @@ public class PathList {
 		/* x -> x < .75 ? .55 : .2 */
 		public static final Path FIRST_SLOT = new Path(new PathSegment( 
 			/* {"start":{"x":68,"y":207},"mid1":{"x":182,"y":209},"mid2":{"x":255,"y":280},"end":{"x":259,"y":235}} */
-			new Vec2(68, 207), new Vec2(182, 209), new Vec2(255, 280), new Vec2(259, 235) 
-			, 207));
+			new Vec2(68, 207), new Vec2(167, 205), new Vec2(274, 277), new Vec2(273, 246) 
+			, 217));
 	}
 }
