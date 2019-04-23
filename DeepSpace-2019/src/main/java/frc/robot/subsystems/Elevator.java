@@ -277,13 +277,6 @@ public class Elevator extends Subsystem {
 	}
 
 	/**
-	 * Try to set the elevator to its minimum position
-	 */
-	public void goToBottom() {
-		goToPos(0);
-	}
-
-	/**
 	 * @return {@code true} if the elevator is at least at its
 	 * max height. The encoder returns motor rotations, but this
 	 * value is scaled via the MAX to centimeters. Hopefully.

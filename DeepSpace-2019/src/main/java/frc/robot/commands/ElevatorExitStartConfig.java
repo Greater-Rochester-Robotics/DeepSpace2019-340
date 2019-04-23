@@ -22,17 +22,21 @@ public class ElevatorExitStartConfig extends Command {
 	}
 
 	@Override
+	protected void execute() {
+		if(timeSinceInitialized() >= 1 && !elevator.isAtBottom()) {
+			elevator.setSpeed(-.4);
+		} else {
+			elevator.stop();
+		}
+	}
+
+	@Override
 	protected boolean isFinished() {
-		return timeSinceInitialized() >= 1; //Not sure how well I trust setting timeout in initialize, soooo
+		return elevator.isAtBottom(); //Not sure how well I trust setting timeout in initialize, soooo
 	}
 
 	@Override
 	protected void end() {
-		elevator.goToBottom();
-	}
-
-	@Override
-	protected void interrupted() {
 		elevator.stop();
 	}
 }
