@@ -101,10 +101,10 @@ public class RunPath extends Command {
 		if (Math.abs(getDistance()) > 3) {
 			double speed = leftSpeed;
 
-			// double ls = (leftSpeed + ((error) / (arcDivisor / Math.abs(speed))));
-			// double rs = (rightSpeed - (((error) / (arcDivisor / Math.abs(speed)))));
-			Robot.drive.setDriveBoth((leftSpeed + ((error) / (arcDivisor / Math.abs(speed)))) *.69,
-					(rightSpeed - (((error) / (arcDivisor / Math.abs(speed))))) *.69);
+			double ls = (leftSpeed + ((error) / (arcDivisor / Math.abs(speed))));
+			double rs = (rightSpeed - (((error) / (arcDivisor / Math.abs(speed)))));
+			Robot.drive.setDriveBoth(ls *.69 < .15 ? .15 : ls *.69,
+					rs *.69 < .15 ? .15 : rs *.69);
 
 			// animate based off of distance, from 0.0 to 1.0
 			// if (animation != null) {
@@ -116,7 +116,7 @@ public class RunPath extends Command {
 			// }
 
 		} else {
-			Robot.drive.setDriveBoth(leftSpeed *.69, rightSpeed *.69);
+			Robot.drive.setDriveBoth(leftSpeed *.69 < .15 ? .15 : leftSpeed *.69, rightSpeed *.69 < .15 ? .15 : rightSpeed *.69);
 		}
 	}
 
