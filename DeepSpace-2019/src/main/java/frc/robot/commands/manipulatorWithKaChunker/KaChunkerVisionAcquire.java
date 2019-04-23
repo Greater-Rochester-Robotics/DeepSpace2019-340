@@ -43,7 +43,7 @@ public class KaChunkerVisionAcquire extends Command {
 		double[] defaultValue = new double[0];
 		//pull the x corner coodinate of every contour corner
 		double[] tcornx = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tcornx").getDoubleArray(defaultValue);
-		double total = 0;
+		// double total = 0; TODO: UNUSED
 		//find average of all x corners
 		double cornAverage = getAverage(tcornx);
 

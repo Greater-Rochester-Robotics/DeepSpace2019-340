@@ -22,10 +22,8 @@ import frc.robot.commands.manipulatorWithKaChunker.CRocketRelease;
 import frc.robot.commands.manipulatorWithKaChunker.CShipRelease;
 import frc.robot.commands.manipulatorWithKaChunker.CStall;
 import frc.robot.commands.manipulatorWithKaChunker.KaChunkerAutoAcquire;
-import frc.robot.commands.manipulatorWithKaChunker.KaChunkerVisionAcquire;
 import frc.robot.commands.mantis.MantisSemiAutoClimb;
 import frc.robot.commands.mantis.MantisStopClimb;
-import frc.robot.commands.manual.ManualCIntakeIn;
 import frc.robot.commands.manual.ManualCIntakeStop;
 import frc.robot.commands.manual.ManualElevatorTiltBack;
 import frc.robot.commands.manual.ManualElevatorTiltForward;
@@ -106,12 +104,10 @@ public class OI {
 		driverLB.whenPressed(new ManualKaChunkerGrab());
 		driverDDown.whenPressed(new ManualManipulatorWristDown());
 		driverDUp.whenPressed(new ManualManipulatorWristUp());
-		driverLTButton.whenPressed(new DriveAutoAlign());
+		driverLTButton.whenPressed(new DriveAutoAlign()); //Auto-aligns to score hatches. Scoring still RB/LB
 		driverLTButton.whenReleased(new DriveXOne());
-		driverRTButton.whenPressed(new KaChunkerPathingAcquire());
+		driverRTButton.whenPressed(new KaChunkerPathingAcquire()); //Auto-aligns and grabs hatch. No other buttons needed
 		driverRTButton.whenReleased(new DriveXOne());
-
-		
 
 		driverDRight.whenPressed(new DriveXOneWithMantis());
 		driverDLeft.whenPressed(new DriveXOne());
@@ -129,9 +125,9 @@ public class OI {
 		coDriverDUp.whenPressed(new ManualMantisStingerUp());
 		coDriverDLeft.whenPressed(new ManualMantisArmUp());
 		coDriverDLeft.whenReleased(new ManualMantisArmStop());
-		coDriverLTButton.whenPressed(new AutoSequenceLeft());
+		coDriverLTButton.whenPressed(new AutoSequenceLeft()); //Do left-side pathing
 		coDriverLTButton.whenReleased(new DriveXOne());
-		coDriverRTButton.whenPressed(new AutoSequenceRight());
+		coDriverRTButton.whenPressed(new AutoSequenceRight()); //Do right-side pathing
 		coDriverRTButton.whenReleased(new DriveXOne());
 	}
 
