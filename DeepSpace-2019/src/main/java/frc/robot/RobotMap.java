@@ -50,6 +50,9 @@ public class RobotMap {
 	public static final int ELEVATOR_TILT_SOLENOID_FORWARD_CHANNEL = 4; //2
 	public static final int ELEVATOR_TILT_SOLENOID_BACKWARD_CHANNEL = 3; //6
 
+	/* LEDs */
+	public static final int LED_PCM_CHANNEL = 0;
+
 	/////////////
 	// CAN IDs //
 	/////////////

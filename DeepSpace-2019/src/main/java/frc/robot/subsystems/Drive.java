@@ -16,6 +16,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.PCM_LED;
 import frc.robot.RobotMap;
 import frc.robot.commands.DriveXOne;
 
@@ -35,6 +36,7 @@ public class Drive extends Subsystem {
 	private static Encoder encLeft, encRight;
 	private static CANSparkMax driveLeftA, driveLeftB, driveRightA, driveRightB;
 	private static TalonSRX mantisLeft, mantisRight;
+	private static PCM_LED led;
 
 	/**
 	 * Set up the Sparks and encoders with the ports specified
@@ -62,6 +64,8 @@ public class Drive extends Subsystem {
 		driveLeftB = new CANSparkMax(RobotMap.DRIVE_SPARK_LEFT_CHANNEL_B, MotorType.kBrushless);
 		driveRightA = new CANSparkMax(RobotMap.DRIVE_SPARK_RIGHT_CHANNEL_A, MotorType.kBrushless);
 		driveRightB = new CANSparkMax(RobotMap.DRIVE_SPARK_RIGHT_CHANNEL_B, MotorType.kBrushless);
+
+		led = new PCM_LED(RobotMap.SECONDARY_PCM_ID, RobotMap.LED_PCM_CHANNEL);
 
 		//TODO: consider enslaving B motors to A motors
 
@@ -255,6 +259,14 @@ public class Drive extends Subsystem {
 	public void setMantisBoth(double lSpeed, double rSpeed) {
 		setMantisLeft(lSpeed);
 		setMantisRight(rSpeed);
+	}
+
+	/**
+	 * Turns the LEDs on/off (for Limelight assitance)
+	 * @param isOn {@code true} to turn them on, {@code false} to turn them off
+	 */
+	public void setLEDs(boolean isOn) {
+		led.set(isOn);
 	}
 
 	/**

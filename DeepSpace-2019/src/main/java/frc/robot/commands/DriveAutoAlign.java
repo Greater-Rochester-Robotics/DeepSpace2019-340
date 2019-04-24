@@ -46,6 +46,7 @@ public class DriveAutoAlign extends Command {
   @Override
   protected void execute() {
 	  NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(3); //turns on limelight led boi
+	  Robot.drive.setLEDs(true); //also turn on PCM LEDs
 	  // drive forward constnagt slow speed 
 	  // adjust angle robot is at as needed
 	  double haveTarget = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0);
@@ -126,5 +127,6 @@ public class DriveAutoAlign extends Command {
 	  //turn off led (no blindness please)
 
 	NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1); //turns off limelight led boi
+	Robot.drive.setLEDs(false); //also turn off PCM LEDs
   }
 }
