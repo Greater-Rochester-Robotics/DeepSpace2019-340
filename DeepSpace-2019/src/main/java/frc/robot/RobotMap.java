@@ -51,7 +51,7 @@ public class RobotMap {
 	public static final int ELEVATOR_TILT_SOLENOID_BACKWARD_CHANNEL = 3; //6
 
 	/* LEDs */
-	public static final int LED_PCM_CHANNEL = 0;
+	public static final int LED_PCM_CHANNEL = 7;
 
 	/////////////
 	// CAN IDs //
@@ -107,7 +107,7 @@ public class RobotMap {
 	/* Elevator heights */
 	//All currently temporary
 	//All built around hatches
-	public static final double ELEVATOR_MAX_HEIGHT = 45;
+	public static final double ELEVATOR_MAX_HEIGHT = 47.2;
 
 	public static final double ELEVATOR_LEVEL_2_HEIGHT = 9.214322090148926 + 8.875 + 6.842069666;
 	public static final double ELEVATOR_LEVEL_3_HEIGHT = 43.023406982421875; //Sometimes too low?

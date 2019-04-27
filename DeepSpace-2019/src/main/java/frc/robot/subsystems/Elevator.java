@@ -13,6 +13,7 @@ import com.revrobotics.ControlType;
 import com.revrobotics.CANDigitalInput.LimitSwitchPolarity;
 import com.revrobotics.CANDigitalInput;
 import com.revrobotics.CANEncoder;
+import com.revrobotics.CANError;
 import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -90,6 +91,10 @@ public class Elevator extends Subsystem {
 	@Override
 	public void initDefaultCommand() {
 		setDefaultCommand(new ElevatorStick());
+	}
+
+	public CANError remindFollow() {
+		return elevatorC.follow(elevatorA);
 	}
 	
 	/**

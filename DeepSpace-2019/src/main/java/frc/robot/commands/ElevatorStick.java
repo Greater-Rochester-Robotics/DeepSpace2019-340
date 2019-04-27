@@ -29,6 +29,11 @@ public class ElevatorStick extends Command {
 	}
 
 	@Override
+	protected void initialize() {
+		Robot.elevator.remindFollow();
+	}
+
+	@Override
 	protected void execute() {
 		//In case we reach the bottom of the elevator, reset the encoder
 		if(Robot.elevator.isAtBottom()) {

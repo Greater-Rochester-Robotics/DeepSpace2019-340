@@ -72,6 +72,7 @@ public class Robot extends TimedRobot {
 
 		CameraServer.getInstance().startAutomaticCapture();
 		NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(3);
+		NetworkTableInstance.getDefault().getTable("limelight").getEntry("stream").setNumber(2);
 	}
 
 	/**

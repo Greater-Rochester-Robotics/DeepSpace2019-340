@@ -40,7 +40,6 @@ public class PathList {
 			, 270));
 	}
 
-	//Muchos bueno
 	public static final class LEFT_CARGO {
 
 		/* x -> x < .75 ? .55 : .2 */
@@ -50,7 +49,6 @@ public class PathList {
 			, 213));
 	}
 
-	//All good
 	public static final class RIGHT_CARGO {
 
 		/* x -> x < .75 ? .55 : .2 */

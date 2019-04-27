@@ -24,7 +24,7 @@ public class ElevatorExitStartConfig extends Command {
 	@Override
 	protected void execute() {
 		if(timeSinceInitialized() >= 1 && !elevator.isAtBottom()) {
-			elevator.setSpeed(-.4);
+			elevator.setSpeed(-.25);
 		} else {
 			elevator.stop();
 		}
