@@ -8,16 +8,19 @@
 package frc.robot.commands.pathing.groups;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.WaitForChildren;
+import frc.robot.commands.DriveAutoAlign;
 import frc.robot.commands.ElevatorExitStartConfig;
 import frc.robot.commands.manual.ManualManipulatorWristDown;
 import frc.robot.commands.pathing.PathList;
 import frc.robot.commands.pathing.RunPath;
 
 public class AutoSequenceLeft extends CommandGroup {
-
 	public AutoSequenceLeft() {
-		addParallel(new RunPath(PathList.LEFT_ROCKET.CLOSE_HATCH, x -> .4));
+		addParallel(new RunPath(PathList.LEFT_CARGO.FIRST_SLOT, x -> x < .75 ? .55 : .2));
 		addParallel(new ManualManipulatorWristDown());
-		addParallel(new ElevatorExitStartConfig());
+		addSequential(new ElevatorExitStartConfig());
+		addSequential(new WaitForChildren());
+		addSequential(new DriveAutoAlign());
 	}
 }
