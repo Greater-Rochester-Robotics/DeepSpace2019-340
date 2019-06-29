@@ -43,6 +43,10 @@ public class RunPath extends Command {
 		// this.setInterruptible(false);
 	}
 
+	public RunPath(Path path) {
+		this(path, path.getSpeed());
+	}
+
 	public RunPath(Path path, SpeedGenerator speedGenerator) {
 		this(path, speedGenerator.getSpeedFunction(path));
 	}

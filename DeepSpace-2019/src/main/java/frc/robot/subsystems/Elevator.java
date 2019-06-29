@@ -162,7 +162,7 @@ public class Elevator extends Subsystem {
 			}
 		} else if(speed > 0.05) {
 			if(getRawPos() > RobotMap.ELEVATOR_TOP_UPPER_SLOW) {
-				speed = 0.05;
+				speed = 0.2;
 			} else if(getRawPos() > RobotMap.ELEVATOR_TOP_LOWER_SLOW) {
 				speed *= 0.25;
 			}

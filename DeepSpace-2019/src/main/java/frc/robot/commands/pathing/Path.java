@@ -2,12 +2,19 @@ package frc.robot.commands.pathing;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.function.Function;
 
 public class Path extends ArrayList<PathSegment> {
 	public static final long serialVersionUID = 340; // Because why not?
+	private Function<Double, Double> speedFunction = x -> .4; //Function defining speed based on percent of curve. Defaults to 40% everywhere
 
 	public Path(PathSegment... paths) {
 		super(Arrays.asList(paths));
+	}
+
+	public Path(Function<Double, Double> speedFunction, PathSegment... paths) {
+		this(paths);
+		this.speedFunction = speedFunction;
 	}
 
 	public double getTotalLength() {
@@ -41,5 +48,9 @@ public class Path extends ArrayList<PathSegment> {
 		}
 
 		return this.get(i - 1);
+	}
+
+	public Function<Double, Double> getSpeed() {
+		return speedFunction;
 	}
 }
